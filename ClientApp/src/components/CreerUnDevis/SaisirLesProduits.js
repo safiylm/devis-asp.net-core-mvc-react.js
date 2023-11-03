@@ -1,16 +1,17 @@
 ﻿import React, {  Component } from 'react';
 import PorgressBarCreationDevis from './PorgressBarCreationDevis';
 import FormAjouterUnProduit from './FormAjouterUnProduit'; 
+import '../../styles/formCreationDevis.css';
 
 class SaisirLesProduits extends Component {
 
-
     constructor(props) {
         super(props);
+
         this.state = { currentCount: 1, tab: [0] };
         this.incrementCounter = this.incrementCounter.bind(this);
         this.incrementTab = this.incrementTab.bind(this);
-
+       
     }
 
     incrementTab() {
@@ -27,13 +28,14 @@ class SaisirLesProduits extends Component {
         this.incrementTab();
 
     }
-
+   
 
     render() {
         return (
-            <div>
+            <div className="formCreationDevis">
 
-                <PorgressBarCreationDevis/>
+
+                <PorgressBarCreationDevis numEtape={3} />
 
                 <p>Liste des produits</p>
                 {this.state.currentCount}
@@ -43,7 +45,7 @@ class SaisirLesProduits extends Component {
                     <FormAjouterUnProduit />
                 ))}
 
-
+                <br/>
                 <button className="btn btn-primary" onClick={this.incrementCounter}>Ajouter un produit </button>
 
                 <p>Montant Total : </p>

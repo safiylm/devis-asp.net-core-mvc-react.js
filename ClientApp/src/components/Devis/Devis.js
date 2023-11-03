@@ -1,6 +1,6 @@
 ﻿import React, { useState } from "react"
 import { useParams } from "react-router-dom";
-
+ 
 
 const Devis = () => {
 
@@ -26,6 +26,7 @@ const Devis = () => {
                 )) :
                 <div>Loading ...</div>
             }
+         
         </div>
     );
 }

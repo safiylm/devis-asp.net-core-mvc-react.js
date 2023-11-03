@@ -1,12 +1,17 @@
 ﻿import React, { Component } from 'react';
+import PorgressBarCreationDevis from './PorgressBarCreationDevis';
 
 
-export class SaisirUnClient extends Component {
-
+export class Apercu extends Component {
+    constructor(props) {
+        super(props);
+     
+    }
     render() {
         return (
-            <div>
-             
+            <div className="formCreationDevis">
+
+                <PorgressBarCreationDevis numEtape={4} />
             </div>
         );
     }
@@ -14,4 +19,4 @@ export class SaisirUnClient extends Component {
 
 
 
-export default SaisirUnClient;
+export default Apercu;

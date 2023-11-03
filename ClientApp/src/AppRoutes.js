@@ -14,7 +14,7 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter/:id',
+    path: '/counter',
     element: <Counter />
     },
     {
@@ -22,19 +22,19 @@ const AppRoutes = [
         element: < ListeDB />
     },
     {
-        path: '/Devis/CreerUnDevis/SaisirUnAuteur',
+        path: '/CreerUnDevis/SaisirUnAuteur',
         element: < SaisirUnAuteur />
     },
     {
-        path: '/Devis/CreerUnDevis/SaisirUnClient',
+        path: '/CreerUnDevis/SaisirUnClient',
         element: < SaisirUnClient />
     },
     {
-        path: '/Devis/CreerUnDevis/SaisirLesProduits',
+        path: '/CreerUnDevis/SaisirLesProduits',
         element: < SaisirLesProduits />
     },
     {
-        path: '/Devis/CreerUnDevis/Apercu',
+        path: '/CreerUnDevis/Apercu',
         element: < Apercu />
     },
     {

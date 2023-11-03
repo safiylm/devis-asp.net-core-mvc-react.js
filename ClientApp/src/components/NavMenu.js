@@ -53,7 +53,7 @@ export class NavMenu extends Component {
               </NavItem>
 
              <NavItem>
-                 <NavLink tag={Link} className="text-dark" to="/Devis/CreerUnDevis/SaisirUnAuteur">Créer un devis</NavLink>
+                 <NavLink tag={Link} className="text-dark" to="/CreerUnDevis/SaisirUnAuteur">Créer un devis</NavLink>
              </NavItem>
 
             <NavItem>

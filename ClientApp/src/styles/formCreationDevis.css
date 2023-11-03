@@ -1,0 +1,47 @@
+﻿.formCreationDevis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.formCreationDevis form{
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   justify-content:center;
+   padding:30px;
+   margin:10px;
+   width : 800px;
+}
+
+    .formCreationDevis form input {
+        padding: 5px 2px;
+        margin: 5px 0;
+        height: 43px !important;
+    }
+
+
+
+    .formCreationDevis form button[type="button"],
+    .formCreationDevis form button[type="submit"] {
+        margin: 6px 0;
+        font-size: 17px;
+        height: 43px !important;
+    }
+    
+    .div-ajouter-un-produit{
+    display:flex;
+    flex-direction:row;
+    width: 750px;
+    
+}
+
+.div-ajouter-un-produit input {
+    flex:24%;
+    margin : 6px;
+}
+
+        .div-ajouter-un-produit * {
+            height: 43px !important;
+            margin: 6px 0;
+        }
