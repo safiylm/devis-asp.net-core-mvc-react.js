@@ -7,7 +7,6 @@
      const [clients, setClient] = useState([]);
      const [devis, setDevis] = useState([]);
      const [users, setUser] = useState([]);
-    
 
 
      //fetch('http://localhost:44453/Auteur/getAll')
@@ -39,9 +38,7 @@
                  produits.map((item) => (
                      <li key={item.id}>
                        
-                       {JSON.stringify(item, null, 2)}     
-                        var myObject = JSON.parse(item);
-
+                      {JSON.stringify(item)}  
                      </li>
                  )):
                  <div>Loading ...</div>

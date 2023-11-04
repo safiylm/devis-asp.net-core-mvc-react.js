@@ -37,32 +37,32 @@ const ListeDevis = () => {
                     </tr>
                 </thead>
                 <tbody>
-                   
-                    {deviss.map( devis => (
-                  <tr  key={devis.id}>
-                            <td>{devis.id}</td>
+                    {(deviss.length > 0 && clients.length > 0 &&
+                        deviss.map(devis => (
+                            <tr key={devis.id}>
+                                <td>{devis.id}</td>
 
-                            {clients.map(client => (
-                                <td key={client.id}> {client.prenom} {client.nom} </td>
-                            ))}
-                         
-                            <td>
-                               200$
-                            </td>
+                                {clients.map(client => (
+                                    <td key={client.id}> {client.prenom} {client.nom} </td>
+                                ))}
 
-                            <td>
-                                220$
-                            </td>
-                            <td>
-                                <a> {devis.dateCreation} </a>
-                            </td>
-                            <td>
-                               Devis / Bon de commande 
-                            </td>
-                    </tr>
+                                <td>
+                                    200$
+                                </td>
 
-                    ))}
+                                <td>
+                                    220$
+                                </td>
+                                <td>
+                                    <a> {devis.dateCreation} </a>
+                                </td>
+                                <td>
+                                    Devis / Bon de commande
+                                </td>
+                            </tr>
 
+                        )))}
+                      
                   
                 </tbody>
             </table>
