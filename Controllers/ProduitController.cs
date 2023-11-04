@@ -74,7 +74,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         }
 
         [HttpGet ("{id:int}")]
-        public IActionResult GetById(int? id)//Identifiant du devis 
+        public IActionResult GetByDevisId(int? id)//Identifiant du devis 
         {
             return Json(_context.ProduitModel.Where((prod)=>prod.Id==id).ToList());
         }

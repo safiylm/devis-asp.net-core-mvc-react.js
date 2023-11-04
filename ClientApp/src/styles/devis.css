@@ -1,0 +1,54 @@
+﻿.div-devis{
+    width:800px;
+    min-height:1000px;
+    margin:20px auto;
+    border : 0.2px solid gray;
+}
+
+.div-container-auteur-client {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.div-auteur, .div-client{
+    padding: 15px;
+}
+
+.div-auteur p, .div-client p{
+    line-height:12px;
+}
+.div-container-devis {
+    width: 100%;
+    margin: 20px auto;
+    padding: 15px;
+}
+
+    .div-container-devis table {
+        width: 100%;
+    }
+
+        .div-container-devis table thead tr,
+        .div-container-devis table tbody tr {
+            width: 100%;
+        }
+
+        .div-container-devis table thead {
+            background-color: #6664de;
+            color:white
+        }
+
+        .div-container-devis table tbody tr {
+            border: 0.3px solid grey;
+            border-top: none;
+            padding: 8px 0;
+        }
+
+        .div-container-devis table tbody td {
+            border-right: 0.3px solid grey;
+        }
+
+            th, td {
+    padding: 8px 0;
+}
