@@ -1,0 +1,32 @@
+﻿.div-liste-devis
+{
+    margin: 20px auto;
+}
+
+.div-liste-devis h1 {
+   font-size:22px;
+   font-family:Tahoma;
+   font-weight:200;
+   margin:25px 0;
+   
+}
+
+    .div-liste-devis table  {
+        width: 100%;
+    }
+    .div-liste-devis table thead tr,
+    .div-liste-devis table tbody tr{
+        width:100%;
+    }
+
+    .div-liste-devis table thead {
+        background-color:whitesmoke;
+    }
+
+        .div-liste-devis table tbody tr {
+            border-bottom: 0.3px solid grey;
+            padding: 8px 0;
+        }
+   th, td{
+       padding:8px 0;
+   }
