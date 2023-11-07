@@ -1,7 +1,18 @@
-﻿.div-liste-devis
-{
-    margin: 20px auto;
+﻿.page-liste-devis {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
 }
+
+    .page-liste-devis .div-liste-devis {
+        flex: 80%;
+        margin: -16px 12px;
+        padding : 50px;
+    }
+
+
+
 
 .div-liste-devis h1 {
    font-size:22px;
@@ -14,10 +25,11 @@
     .div-liste-devis table  {
         width: 100%;
     }
-    .div-liste-devis table thead tr,
-    .div-liste-devis table tbody tr{
-        width:100%;
-    }
+        .div-liste-devis table thead tr,
+        .div-liste-devis table tbody tr {
+            width: 100%;
+            max-height: 40px !important;
+        }
 
     .div-liste-devis table thead {
         background-color:whitesmoke;
@@ -29,4 +41,5 @@
         }
    th, td{
        padding:8px 0;
+       max-height:40px;
    }

@@ -1,4 +1,19 @@
-﻿.div-devis{
+﻿.page-devis {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.page-devis .div-devis {
+    flex: 80%;
+    margin: -16px 12px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.div-devis2{
     width:800px;
     min-height:1000px;
     margin:20px auto;
@@ -6,7 +21,7 @@
     padding:40px;
 }
 
-    .div-devis h1 {
+    .div-devis2 h1 {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 22px;
         font-weight : 500;

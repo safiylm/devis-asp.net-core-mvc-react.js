@@ -59,19 +59,19 @@
         font-weight: bold;
     }
 
-    .stepper-item.completed .step-counter {
-        background-color: #4bb543;
-    }
+        .stepper-item.completed .step-counter {
+            background-color: #6664de;
+        }
 
-    .stepper-item.completed::after {
-        position: absolute;
-        content: "";
-        border-bottom: 2px solid #4bb543;
-        width: 100%;
-        top: 20px;
-        left: 50%;
-        z-index: 3;
-    }
+        .stepper-item.completed::after {
+            position: absolute;
+            content: "";
+            border-bottom: 2px solid #6664de;
+            width: 100%;
+            top: 20px;
+            left: 50%;
+            z-index: 3;
+        }
 
     .stepper-item:first-child::before {
         content: none;

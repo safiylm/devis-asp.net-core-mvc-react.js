@@ -1,0 +1,46 @@
+﻿.page-mes-donnees-perso {
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    width : 100%;
+}
+
+    .page-mes-donnees-perso .div-mes-donnees-perso {
+        flex: 80%;
+        margin: -16px 12px;
+        display: flex;
+        justify-content: center;
+
+    }
+
+
+
+.div-mes-donnees-perso .div1 {
+    padding: 20px;
+    border: 5px solid #152e31;
+    border-radius: 20px;
+    width: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 35px 0;
+}
+
+    .div-mes-donnees-perso .div1 input {
+        width: 600px;
+        margin: 10px;
+        border: 0.5px solid #152e31;
+    }
+
+    .div-mes-donnees-perso .div1 label {
+    margin-left : 10px;}
+
+.div-mes-donnees-perso button {
+    border: none;
+    border-radius: 6px;
+    background-color: #152e31;
+    color: white;
+    padding: 6px 9px;
+    margin: 10px 0;
+}

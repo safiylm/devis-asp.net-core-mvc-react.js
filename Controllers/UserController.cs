@@ -24,6 +24,14 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return Json(_context.UserModel.ToList());
         }
 
+       
+        public IActionResult GetById([FromQuery] int id)//Identifiant du devis 
+        {
+            return Json(_context.UserModel.Where((u) => u.Id == id).ToList());
+        }
+
+
+
         // GET: User
         public async Task<IActionResult> Index()
         {

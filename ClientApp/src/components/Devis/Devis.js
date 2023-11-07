@@ -1,6 +1,7 @@
 ﻿import React, { useState } from "react"
 import { useParams } from "react-router-dom";
 import "../../styles/devis.css"
+import MenuVerticale from '../MenuVerticale/MenuVerticale.js'
 
 const Devis = () => {
 
@@ -27,8 +28,11 @@ const Devis = () => {
 
 
     return (
+        <div className="page-devis">
+            <MenuVerticale />
 
-        <div className="div-devis">
+            <div className="div-devis">
+                <div className="div-devis2">
             <h1>Devis N° : </h1>
 
             {(produits.length > 0 && clients.length > 0 && deviss.length > 0) &&
@@ -116,6 +120,8 @@ const Devis = () => {
             </div>
               </div>
          }
+                </div>
+            </div>
         </div>
     );
 }

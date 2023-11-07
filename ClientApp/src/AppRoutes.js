@@ -7,6 +7,9 @@ import SaisirLesProduits from './components/CreerUnDevis/SaisirLesProduits';
 import ListeDevis from './components/ListeDevis/ListeDevis';
 import Devis from './components/Devis/Devis';
 import Apercu from './components/CreerUnDevis/Apercu';
+import Inscription from './components/Auth/Inscription'
+import Connexion from './components/Auth/Connexion';
+import MesDonneesPersonnelles from './components/MonCompte/MesDonneesPersonnelles';
 
 const AppRoutes = [
   {
@@ -16,6 +19,18 @@ const AppRoutes = [
   {
     path: '/counter',
     element: <Counter />
+    },
+    {
+        path: '/Auth/Inscription',
+        element: < Inscription />
+    },
+    {
+        path: '/Auth/Connexion',
+        element: < Connexion />
+    },
+    {
+        path: '/MonCompte/MesDonneesPersonnelles',
+        element: < MesDonneesPersonnelles />
     },
     {
       path: '/ListeDB',

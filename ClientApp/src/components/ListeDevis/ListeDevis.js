@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
 import '../../styles/listedevis.css';
+import MenuVerticale from '../MenuVerticale/MenuVerticale.js'
 
 const ListeDevis = () => {
     const [deviss, setDevis] = useState([]);
@@ -20,10 +21,14 @@ const ListeDevis = () => {
 
 
     return (
-
+        <div className="page-liste-devis">
+            <MenuVerticale/>
         <div className="div-liste-devis">
-            <h1>Liste de Devis </h1>
+              
 
+
+                {(deviss.length > 0 && clients.length > 0 ?
+                    
             <table>
                 <thead>
                     <tr>
@@ -37,35 +42,40 @@ const ListeDevis = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {(deviss.length > 0 && clients.length > 0 &&
-                        deviss.map(devis => (
-                            <tr key={devis.id}>
-                                <td>{devis.id}</td>
+                    
+                            {deviss.map(devis => (
+                                <tr key={devis.id}>
+                                    <td>{devis.id}</td>
 
-                                {clients.map(client => (
-                                    <td key={client.id}> {client.prenom} {client.nom} </td>
-                                ))}
+                                    {clients.map(client => (
+                                        <td key={client.id}> {client.prenom} {client.nom} </td>
+                                    ))}
 
-                                <td>
-                                    200$
-                                </td>
+                                    <td>
+                                        200$
+                                    </td>
 
-                                <td>
-                                    220$
-                                </td>
-                                <td>
-                                    <a> {devis.dateCreation} </a>
-                                </td>
-                                <td>
-                                    Devis / Bon de commande
-                                </td>
-                            </tr>
+                                    <td>
+                                        220$
+                                    </td>
+                                    <td>
+                                        <a> {devis.dateCreation} </a>
+                                    </td>
+                                    <td>
+                                        Devis / Bon de commande
+                                    </td>
+                                </tr>
 
-                        )))}
+                            ))}
+                            
+                           
                       
                   
                 </tbody>
-            </table>
+                    </table>
+
+                    : <p>Chargement en cours ... </p>)}
+        </div>
         </div>
     );
 

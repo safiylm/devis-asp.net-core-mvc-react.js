@@ -8,7 +8,7 @@ export class PorgressBarCreationDevis extends Component {
         super(props);
         
         this.state = { numEtapee: props.numEtape };
-        console.log(this.state.numEtapee);
+       
 
     }
     render(){

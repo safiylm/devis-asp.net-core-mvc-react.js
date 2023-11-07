@@ -31,7 +31,7 @@ export class NavMenu extends Component {
       return (
         <div>
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
+                  <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
           <NavbarBrand tag={Link} to="/"> Devis </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
@@ -48,19 +48,24 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/ListeDB">Liste DB</NavLink>
               </NavItem>
 
-              <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/ListeDevis">Liste de devis</NavLink>
-              </NavItem>
+              {/*<NavItem>*/}
+              {/*    <NavLink tag={Link} className="text-dark" to="/ListeDevis">Liste de devis</NavLink>*/}
+              {/*</NavItem>*/}
+
+            <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/CreerUnDevis/SaisirUnAuteur">Créer un devis</NavLink>
+            </NavItem>
 
              <NavItem>
-                 <NavLink tag={Link} className="text-dark" to="/CreerUnDevis/SaisirUnAuteur">Créer un devis</NavLink>
+               <NavLink tag={Link} className="text-dark" to="/Auth/Connexion">Connexion</NavLink>
              </NavItem>
+
 
             <NavItem>
                  <NavLink tag={Link} className="text-dark" to={{
                           pathname: "/Devis",
                           search: "?id=1"
-                      }} >devis</NavLink>
+                                  }} >devis                                   </NavLink>
                         </NavItem>
                        
 

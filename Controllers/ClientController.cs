@@ -26,6 +26,13 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         }
 
+        public IActionResult GetById([FromQuery] int id)//Identifiant du devis 
+        {
+            return Json(_context.ClientModel.Where(client => client.Id == id).ToList());
+        }
+
+
+
         // GET: Client
         public async Task<IActionResult> Index()
         {
@@ -52,27 +59,38 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(clientModel);
         }
 
-        // GET: Client/Create
-        public IActionResult Create()
+        //, string Prenom, string Email, string Adresse , int CodePostale, string Ville, int Telephone
+        [HttpGet]
+        public IActionResult Create([FromQuery] string nom)//Identifiant du devis 
         {
-            return View();
+            ClientModel person = new ClientModel
+            {
+                Nom = nom,
+                Prenom = "Wewh",
+                Email = "Wewh@gmail.com",
+                Adresse = "9 rue Casip",
+                CodePostale = 1200,
+                Ville = "Reims",
+                Telephone = 011111111,
+                DateCreation = DateTime.Now
+            };
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: Client/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Email,Adresse,CodePostale,Ville,Telephone,DateCreation,DevisId")] ClientModel clientModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(clientModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(clientModel);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(/*[Bind("Id,Nom,Prenom,Email,Adresse,CodePostale,Ville,Telephone,DateCreation,DevisId")] ClientModel clientModel*/)
+        //{
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    //    _context.Add(clientModel);
+        //    //    await _context.SaveChangesAsync();
+        //    //    return RedirectToAction(nameof(Index));
+        //    //}
+        //    Console.WriteLine(HttpContext.Request.Body);
+        //    return View();
+        //}
 
         // GET: Client/Edit/5
         public async Task<IActionResult> Edit(int? id)

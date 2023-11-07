@@ -1,17 +1,19 @@
 ﻿import React, { Component } from 'react';
-import PorgressBarCreationDevis from './PorgressBarCreationDevis';
-import '../../styles/formCreationDevis.css';
+import "../../styles/auth.css"
 
-export class SaisirUnAuteur extends Component {
+
+export class Inscription extends Component {
+
     constructor(props) {
         super(props);
-       
+      
     } 
+
 
     render() {
         return (
-            <div className="formCreationDevis">
-                <PorgressBarCreationDevis numEtape={1} />
+            <div className="container-auth">
+              <h1>S'inscrire </h1>
                 <form>
                     <input type="text" className="form-control" name="Nom" placeholder="Nom" />
                     <input type="text" className="form-control" name="Prenom" placeholder="Prenom" />
@@ -21,9 +23,9 @@ export class SaisirUnAuteur extends Component {
                     <input type="text" name="Ville" className="form-control" placeholder="Ville" />
                     <input name="Telephone" className="form-control" placeholder="Telephone" />
                     <input type="text" name="SiteInternet" className="form-control" placeholder="SiteInternet" />
-                <input name="UserId" type="hidden" value="1" />
+                    <input name="UserId" type="hidden" value="1" />
 
-                    <button className="btn btn-primary" type="button">Créer </button>
+                    <button className="btn btn-primary" type="button">S'inscrire </button>
                 </form>
 
             </div>
@@ -33,4 +35,4 @@ export class SaisirUnAuteur extends Component {
 
 
 
-export default SaisirUnAuteur;
+export default Inscription;
