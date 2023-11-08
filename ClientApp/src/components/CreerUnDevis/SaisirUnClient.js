@@ -5,7 +5,11 @@ import '../../styles/formCreationDevis.css';
 const SaisirUnClient  = () => {
 
    
-    
+    const [client, setClient] = useState({ id : 9, 
+        nom: "hadi", prenom: "zhadiii", email: "safinaz@gmail.com",
+        adresse: "8 rue Jean Pascal", codePostale: 54300, ville: "Nancy", telephone: 444 , dateCreation
+            : Date.now, devisId : 1 });
+  
     const [Nom, setNom] = useState("Yilmaz");
     const [Prenom, setPrenom] = useState("Safinaz");
     const [Email, setEmail] = useState("safinaz@gmail.com");
@@ -18,49 +22,49 @@ const SaisirUnClient  = () => {
 
     const handleClick = (event) => {
         //Send Post 
-        //event.preventDefault();
-        //   var request;
-        //   if (window.XMLHttpRequest) {
-        //       //New browsers.
-        //      request = new XMLHttpRequest();
-        //   }
-        //   else if (window.ActiveXObject) {
-        //       //Old IE Browsers.
-        //      request = new ActiveXObject("Microsoft.XMLHTTP");
-        //   }
-        //   if (request != null) {
 
-        //       request.open("POST", "Client/Create", false);
+        let formData = new FormData();
+        Object.keys(client).forEach(function (key) {
+            formData.append(key, client[key]);
+        });
 
-        //     //  var params = "{Nom: 'Safinaz', Prenom: 'yilmaz', Email:'safinaz@fmike.com', Adresse :'9 rue xwxw',  CodePostale: 65000,  Ville:'Vienne',  Telephone:06455555444}"
+        event.preventDefault();
+           var request;
+           if (window.XMLHttpRequest) {
+               //New browsers.
+              request = new XMLHttpRequest();
+           }
+           else if (window.ActiveXObject) {
+               //Old IE Browsers.
+              request = new ActiveXObject("Microsoft.XMLHTTP");
+           }
+           if (request != null) {
 
-        //       var params =  { nom: 'Safinaz' };
+               request.open("POST", "Client/Create", false);
 
-        //       request.onload = function () {
-        //           if (request.readyState == 4 && request.status == 200) {
-        //               var response = JSON.parse(request.responseText);
-        //               console.log(response);
-        //               alert("Hello: " + response.prenom + " .\n et le reste : " + response);
-        //               setMessage("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
-        //           }
-        //       }.bind(this);
-        //       request.send(params);
-        // }
-        //alert('A name was submitted: ' + Nom + ' ' + Prenom + " " + Email + " " + Adresse + " " + CodePostale + " " + Ville + " " + Telephone);
+         
+                      request.onload = function () {
+                   if (request.readyState == 4 && request.status == 200) {
+                      var response = JSON.parse(request.responseText);
+                       console.log(response);
+                      alert("Hello: " + response.prenom + " .\n et le reste : " + response);
+                       setMessage("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                   }
+               }.bind(this);
+              // request.send(JSON.stringify(client));
+               request.send(formData);
+         }
+        alert('A name was submitted: ' + Nom + ' ' + Prenom + " " + Email + " " + Adresse + " " + CodePostale + " " + Ville + " " + Telephone);
      }
 
-    const handleSubmit = () => {
-        fetch('http://localhost:44453/Client/Create?nom=' + Nom)
-            
-    }
   
    
     return (
         <div className="formCreationDevis">
           
-            <form onSubmit={handleSubmit}>
-                <input type="text" className="form-control" refs="Nom" onChange={(e)=>setNom(e.target.value)} placeholder="Nom" />
-                <input type="text" className="form-control" refs="Prenom" onChange={(e) => setPrenom(e.target.value)} placeholder="Prenom" />
+            <form onSubmit={handleClick}>
+                <input type="text" className="form-control" name="nom" onChange={(e)=>setNom(e.target.value)} placeholder="Nom" />
+                <input type="text" className="form-control" name="prenom" onChange={(e) => setPrenom(e.target.value)} placeholder="Prenom" />
                 <input type="email" className="form-control" refs="Email" onChange={(e) => setEmail(e.target.value)} placeholder="Adresse Email" />
                 <input type="text" className="form-control" refs="Adresse" onChange={(e) => setAdresse(e.target.value)} placeholder="Adresse" />
                 <input refs="CodePostale" className="form-control" onChange={(e) => setCodePostale(e.target.value)} placeholder="CodePostale" />

@@ -24,11 +24,12 @@
     .div-devis2 h1 {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 22px;
-        font-weight : 500;
-        border-bottom: 3px solid #6664de;
-        color: #6664de;
-/*        padding: 15px;
-*/    }
+        font-weight: 500;
+        border-bottom: 3px solid #152e31;
+        color: #152e31;
+        /*        padding: 15px;
+*/
+    }
 
 .div-container-auteur-client {
     display: flex;
@@ -75,8 +76,9 @@
         }
 
         .div-container-devis table thead {
-            background-color: #6664de;
-            color:white
+            background-color: #152e31;
+          
+            color: white
         }
 
         .div-container-devis table tbody tr {

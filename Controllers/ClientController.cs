@@ -59,24 +59,18 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(clientModel);
         }
 
-        //, string Prenom, string Email, string Adresse , int CodePostale, string Ville, int Telephone
-        [HttpGet]
-        public IActionResult Create([FromQuery] string nom)//Identifiant du devis 
-        {
-            ClientModel person = new ClientModel
-            {
-                Nom = nom,
-                Prenom = "Wewh",
-                Email = "Wewh@gmail.com",
-                Adresse = "9 rue Casip",
-                CodePostale = 1200,
-                Ville = "Reims",
-                Telephone = 011111111,
-                DateCreation = DateTime.Now
-            };
+   
 
-            return RedirectToAction(nameof(Index));
+        [HttpPost]
+        [Route("Client/Create")]
+        public object Create([FromHeader] string token, [FromForm] ClientModel data)
+        {
+            // check token
+            // do something with data
+            return Json(data);
         }
+
+
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
