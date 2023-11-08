@@ -11,7 +11,7 @@ export class SaisirUnAuteur extends Component {
     render() {
         return (
             <div className="formCreationDevis">
-                <PorgressBarCreationDevis numEtape={1} />
+        
                 <form>
                     <input type="text" className="form-control" name="Nom" placeholder="Nom" />
                     <input type="text" className="form-control" name="Prenom" placeholder="Prenom" />

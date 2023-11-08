@@ -1,53 +1,49 @@
-﻿import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+﻿import React from 'react';
 import '../../styles/PorgressBarCreationDevis.css'
 
-export class PorgressBarCreationDevis extends Component {
+function PorgressBarCreationDevis({ numEtapee, changeNumEtape }) {
 
-    constructor(props) {
-        super(props);
-        
-        this.state = { numEtapee: props.numEtape };
-       
+   
+        return (
 
-    }
-    render(){
-    return (
-        <div class="stepper-wrapper">
-
-            <div className={`${this.state.numEtapee === 1 ? "stepper-item active completed" : "stepper-item"}`} >
-                <Link to="/CreerUnDevis/SaisirUnAuteur">
-                    <div className="step-counter">1</div>
-                    <div className="step-name">Ajouter un auteur</div>
-                </Link >
-            </div>
-
-            <div 
-                className={`${this.state.numEtapee === 2 ? "stepper-item active completed" : "stepper-item"}`}>
+            <div>
                
-                <Link to="/CreerUnDevis/SaisirUnClient">
-                    <div className="step-counter">2</div>
-                    <div className="step-name">Ajouter un client</div>
-                </Link >
-            </div>
-            <div className="stepper-item"   
-                className={`${this.state.numEtapee === 3 ? "stepper-item active completed" : "stepper-item"}`}  >
+                <div class="stepper-wrapper">
+
+                    <div className={`${numEtapee === 1 ? "stepper-item active completed" : "stepper-item"}`} >
+                        <button onClick={() => changeNumEtape(1)} >
+                            <div className="step-counter">1</div>
+                            <div className="step-name">Ajouter un auteur</div>
+                        </button >
+                    </div>
+
+                    <div 
+                        className={`${numEtapee === 2 ? "stepper-item active completed" : "stepper-item"}`}>
                
-                <Link to="/CreerUnDevis/SaisirLesProduits">
-                    <div className="step-counter">3</div>
-                    <div className="step-name">Ajouter les produits</div>
-                </Link >
-            </div>
-            <div className={`${this.state.numEtapee === 4 ? "stepper-item active completed" : "stepper-item"}`}>
-                <Link to="/CreerUnDevis/Apercu">
-                    <div className="step-counter">4</div>
-                    <div className="step-name">Aperçu</div>
-                </Link >
-            </div>
-        </div>)
+                        <button onClick={() => changeNumEtape(2)} >
+                            <div className="step-counter">2</div>
+                            <div className="step-name">Ajouter un client</div>
+                        </button >
+                    </div>
+                    <div className="stepper-item"   
+                        className={`${numEtapee === 3 ? "stepper-item active completed" : "stepper-item"}`}  >
+               
+                        <button onClick={() => changeNumEtape(3)}>
+                            <div className="step-counter">3</div>
+                            <div className="step-name">Ajouter les produits</div>
+                        </button >
+                    </div>
+                    <div className={`${numEtapee === 4 ? "stepper-item active completed" : "stepper-item"}`}>
+                        <button onClick={() => changeNumEtape(4)}>
+                            <div className="step-counter">4</div>
+                            <div className="step-name">Aperçu</div>
+                        </button >
+                    </div>
+
+                </div>
+               
+            </div>)
+
 
 }
-
-}
-
 export default PorgressBarCreationDevis;

@@ -18,9 +18,70 @@ export class Home extends Component {
           <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
           <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
           <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
+            </ul>
+            <a to="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.adgensee.com%2Fgestion-ventes-equipes-commerciales&psig=AOvVaw155kwrbEXGl6CrwRNLJg3D&ust=1699177686856000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCPCh1aaIqoIDFQAAAAAdAAAAABBr">
+                Modele
+            </a>
         <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
+            <fieldset>
+                <legend>Devis app features:</legend>
+
+              
+
+
+                <h4>Front end </h4>
+
+                <div>
+                    <input type="checkbox" id="" name="z" check />
+                    <label for="z">Ajouter Auteur </label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="" name="z" check />
+                    <label for="z">Ajouter Client </label>
+                </div>
+
+
+                <div>
+                    <input type="checkbox" id="" name="z" check />
+                    <label for="z">Ajouter Les Produits </label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="" name="z" check />
+                    <label for="z">Ajouter Les Produits / Supprimer element in list of produit   </label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="" name="z"  />
+                    <label for="z">Apercu Devis </label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="" name="z"  />
+                    <label for="z">Display Devis </label>
+                </div>
+
+                <h4>Back end </h4>
+
+                <div>
+                    <input type="checkbox" id="" name="z"  />
+                    <label for="z">Ajouter Auteur </label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="" name="z"  />
+                    <label for="z">Ajouter Client </label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="" name="z"  />
+                    <label for="z">Ajouter Les Produits </label>
+                </div>
+
+            </fieldset>
+
+        </div>
     );
   }
 }

@@ -11,7 +11,7 @@ export class Apercu extends Component {
         return (
             <div className="formCreationDevis">
 
-                <PorgressBarCreationDevis numEtape={4} />
+               
             </div>
         );
     }

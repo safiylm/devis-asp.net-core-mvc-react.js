@@ -35,7 +35,7 @@ class SaisirLesProduits extends Component {
             <div className="formCreationDevis">
 
 
-                <PorgressBarCreationDevis numEtape={3} />
+           
 
                 <p>Liste des produits</p>
                 {this.state.currentCount}
