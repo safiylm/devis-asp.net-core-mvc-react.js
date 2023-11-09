@@ -48,14 +48,6 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/ListeDB">Liste DB</NavLink>
               </NavItem>
 
-              {/*<NavItem>*/}
-              {/*    <NavLink tag={Link} className="text-dark" to="/ListeDevis">Liste de devis</NavLink>*/}
-              {/*</NavItem>*/}
-
-            <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/CreerUnDevis/SaisirUnAuteur">Créer un devis</NavLink>
-            </NavItem>
-
              <NavItem>
                <NavLink tag={Link} className="text-dark" to="/Auth/Connexion">Connexion</NavLink>
              </NavItem>

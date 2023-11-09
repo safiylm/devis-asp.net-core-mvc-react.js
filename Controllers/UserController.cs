@@ -32,53 +32,41 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
 
 
-        // GET: User
-        public async Task<IActionResult> Index()
-        {
-              return _context.UserModel != null ? 
-                          View(await _context.UserModel.ToListAsync()) :
-                          Problem("Entity set 'DevisContext.UserModel'  is null.");
-        }
-
-        // GET: User/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.UserModel == null)
-            {
-                return NotFound();
-            }
-
-            var userModel = await _context.UserModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (userModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(userModel);
-        }
-
-        // GET: User/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: User/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Email,Password,Telephone,DateCreation")] UserModel userModel)
+        [Route("User/Inscription")]
+        public object Inscription([FromHeader] string token, [FromForm] UserModel data)
         {
-            if (ModelState.IsValid)
+            var res = "Création de compte utilisateur a échoué.";
+
+            if (data != null && data.Email != null &&
+                data.Nom != null && data.Prenom != null && data.Password != null &&
+                data.Telephone != 0)
             {
-                _context.Add(userModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.UserModel.Add(data);
+                _context.SaveChangesAsync();
+                res = "Votre compte utilisateur a été enregistré avec succès!";
             }
-            return View(userModel);
+            return Json(res);
         }
+
+        [HttpPost]
+        [Route("User/Connexion")]
+        public object Connexion([FromHeader] string token, [FromForm] UserModel data)
+        {
+            var res = "Connexion de compte utilisateur a échoué.";
+           
+            if (data != null && data.Email != null && data.Password != null )
+            {
+                if (_context.UserModel.Where((u) => u.Email == data.Email).Where((u => u.Password == data.Password)).ToList().Count() > 0)
+                {
+                    return Json(_context.UserModel.Where((u) => u.Email == data.Email).Where((u => u.Password == data.Password)).ToList());
+                }
+                return Json(res);
+            }
+            return Json(res);
+        }
+
+
 
         // GET: User/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -96,9 +84,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(userModel);
         }
 
-        // POST: User/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Prenom,Email,Password,Telephone,DateCreation")] UserModel userModel)
@@ -131,6 +118,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(userModel);
         }
 
+
+
         // GET: User/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -149,6 +138,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(userModel);
         }
 
+       
+        
         // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -167,6 +158,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
 
         private bool UserModelExists(int id)
         {

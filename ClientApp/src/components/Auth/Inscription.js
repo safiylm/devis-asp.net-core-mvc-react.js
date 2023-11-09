@@ -1,36 +1,69 @@
-﻿import React, { Component } from 'react';
+﻿import React, { useState } from 'react';
 import "../../styles/auth.css"
 
 
-export class Inscription extends Component {
+const  Inscription = ()=> {
 
-    constructor(props) {
-        super(props);
-      
-    } 
+    const[message, setMessage] = useState("");
+    const[user, setUser] = useState({
+        nom: "Nom", prenom: "Prenom", email: "Email",
+        telephone: "Telephone", dateCreation: Date.now
+    });
 
 
-    render() {
+    const handleClick = (event) => {
+        //Send Post 
+
+        let formData = new FormData();
+        Object.keys(user).forEach(function (key) {
+            formData.append(key, user[key]);
+        });
+
+        event.preventDefault();
+        var request;
+        if (window.XMLHttpRequest) {
+            //New browsers.
+            request = new XMLHttpRequest();
+        }
+        else if (window.ActiveXObject) {
+            //Old IE Browsers.
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if (request != null) {
+
+            request.open("POST", "User/Inscription", false);
+            request.onload = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    var response = JSON.parse(request.responseText);
+                    setMessage(response);
+                }
+            }.bind(this);
+            request.send(formData);
+        }
+    }
+
+    const changeHandler = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
+    }
+
+
+   
         return (
             <div className="container-auth">
               <h1>S'inscrire </h1>
-                <form>
-                    <input type="text" className="form-control" name="Nom" placeholder="Nom" />
-                    <input type="text" className="form-control" name="Prenom" placeholder="Prenom" />
-                    <input type="text" className="form-control" name="Email" placeholder="Adresse Email" />
-                    <input type="text" className="form-control" name="Adresse" placeholder="Adresse" />
-                    <input name="CodePostale" className="form-control" placeholder="CodePostale" />
-                    <input type="text" name="Ville" className="form-control" placeholder="Ville" />
-                    <input name="Telephone" className="form-control" placeholder="Telephone" />
-                    <input type="text" name="SiteInternet" className="form-control" placeholder="SiteInternet" />
-                    <input name="UserId" type="hidden" value="1" />
+                <form onSubmit={handleClick }>
+                    <input type="text" className="form-control" name="nom" onChange={changeHandler} placeholder="Nom" />
+                    <input type="text" className="form-control" name="prenom" onChange={changeHandler} placeholder="Prenom" />
+                    <input type="text" className="form-control" name="email" onChange={changeHandler} placeholder="Adresse Email" />
+                    <input type="password" className="form-control" name="password" onChange={changeHandler} placeholder="Password" />
+                    <input type="number" className="form-control" name="telephone" onChange={changeHandler} placeholder="Telephone" />
 
-                    <button className="btn btn-primary" type="button">S'inscrire </button>
+                    <button className="btn btn-primary" type="submit">S'inscrire </button>
                 </form>
-
+                <p style={{ color : "white"} }>{message}</p> 
             </div>
         );
-    }
+   
 }
 
 

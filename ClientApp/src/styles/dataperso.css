@@ -17,7 +17,8 @@
 
 .div-mes-donnees-perso .div1 {
     padding: 20px;
-    border: 5px solid #152e31;
+    /*border: 5px solid #152e31;*/
+    background-color: rgb(76, 105, 108);
     border-radius: 20px;
     width: 750px;
     display: flex;
@@ -34,7 +35,9 @@
     }
 
     .div-mes-donnees-perso .div1 label {
-    margin-left : 10px;}
+    margin-left : 10px;
+    color:white;
+    }
 
 .div-mes-donnees-perso button {
     border: none;

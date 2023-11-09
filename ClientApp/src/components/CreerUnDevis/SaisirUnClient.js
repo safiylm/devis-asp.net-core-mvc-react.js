@@ -1,10 +1,10 @@
 ﻿import React, { Component, useState } from 'react';
 import '../../styles/formCreationDevis.css';
 
-const SaisirUnClient  = () => {
+const SaisirUnClient = () => {
 
-   
 
+    const [message, setMessage] = useState(""); 
     const [client, setClient] = useState({
         nom: "Nom", prenom: "Prenom", email: "Email",
         adresse: "Adresse", codePostale: "CodePostale", ville: "Ville",
@@ -33,12 +33,10 @@ const SaisirUnClient  = () => {
            if (request != null) {
 
                request.open("POST", "Client/Create", false);
-
-         
                       request.onload = function () {
                    if (request.readyState == 4 && request.status == 200) {
-                      var response = JSON.parse(request.responseText);
-                       console.log(response);
+                       var response = JSON.parse(request.responseText);
+                       setMessage(response);
                    }
                }.bind(this);
                request.send(formData);
@@ -62,6 +60,7 @@ const SaisirUnClient  = () => {
                 <input className="form-control" name="telephone"  onChange={changeHandler} placeholder="Telephone" />
 
                 <button className="btn btn-primary" type="submit">Créer </button>
+                {message }
             </form>
            
         </div>

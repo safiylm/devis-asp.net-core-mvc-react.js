@@ -58,7 +58,7 @@ public static class Initdb
                   Ville = "Paris",
                   Telephone = 0615482659,
                   DateCreation = DateTime.Now,
-                  DevisId = 1
+                 
               }
             );
 

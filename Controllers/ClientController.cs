@@ -65,9 +65,19 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         [Route("Client/Create")]
         public object Create([FromHeader] string token, [FromForm] ClientModel data)
         {
+            var res = "Erreur (ajouter client )";
             // check token
             // do something with data
-            return Json(data);
+            if (data != null && data.Email != null && 
+                data.Nom!=null && data.Prenom != null &&
+                data.Adresse != null && data.CodePostale != 0  &&
+               data.Ville != null && data.Telephone != 0) { 
+
+                _context.ClientModel.Add(data); 
+                _context.SaveChangesAsync();
+                res = "Votre Client a été enregistré avec succès!";
+            }
+            return Json(res);
         }
 
 
@@ -78,9 +88,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         //{
         //    //if (ModelState.IsValid)
         //    //{
-        //    //    _context.Add(clientModel);
-        //    //    await _context.SaveChangesAsync();
-        //    //    return RedirectToAction(nameof(Index));
+        //    //  
         //    //}
         //    Console.WriteLine(HttpContext.Request.Body);
         //    return View();
