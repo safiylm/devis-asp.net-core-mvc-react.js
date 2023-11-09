@@ -8,7 +8,7 @@ function PorgressBarCreationDevis({ numEtapee, changeNumEtape }) {
 
             <div>
                
-                <div class="stepper-wrapper">
+                <div className="stepper-wrapper">
 
                     <div className={`${numEtapee === 1 ? "stepper-item active completed" : "stepper-item"}`} >
                         <button onClick={() => changeNumEtape(1)} >

@@ -1,7 +1,6 @@
 ﻿import React, {  Component } from 'react';
-import PorgressBarCreationDevis from './PorgressBarCreationDevis';
 import FormAjouterUnProduit from './FormAjouterUnProduit'; 
-import '../../styles/formCreationDevis.css';
+import '../../../styles/formCreationDevis.css';
 
 class SaisirLesProduits extends Component {
 
