@@ -10,7 +10,7 @@ const context =  [
     "/Devis",
     "/User",
     "/Client",
-    "/Auteurr",
+    "/Entreprise"
 ];
 
 module.exports = function(app) {

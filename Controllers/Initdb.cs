@@ -11,37 +11,55 @@ public static class Initdb
             serviceProvider.GetRequiredService<
                 DbContextOptions<DevisContext>>()))
         {
-            ////// Look for any user.
+
+            //////// Look for any user.
             if (context.ProduitModel.Any())
             {
-              return;   // DB has been seeded
+                return;   // DB has been seeded
             }
+
+            context.DevisModel.Add(
+        new DevisModel
+        {
+            Motif = "",
+            ClientId = 1,
+            EntrepriseId = 1,
+            UserId = 1,
+            TVATotal = 0,
+            TotalHT = 0,
+            AccompteQuantite = 1,
+            AccomptePourcentage = 20,
+            AccompteInformations = "",
+            InformationSuplementaire ="",
+            DateCreation = DateTime.Now
+        }
+      ); 
+
+
+        
 
             context.ProduitModel.Add(
                 new ProduitModel
                 {
-                   
-                    Quantite = 55,
+                    Quantite = 1,
                     Designation = "Iphone 15 pro plus",
                     PrixUnitaireHT = 1200,
                     TVA = 20,
                     DateCreation = DateTime.Now
-                }//,
-                 //new ProduitModel{}
+                }
             ) ;
 
 
-         context.AuteurModel.Add(
-           new AuteurModel
+         context.EntrepriseModel.Add(
+           new EntrepriseModel
            {
-               Nom = "Dupont",
-               Email = "Iphone 15 pro plus",
+               Nom = "Entreprise1",
+               Email = "entreprise1@gmail.com",
                Adresse = "7 rue du Maréchal",
-               CodePostale = 20,
+               CodePostale = 95000,
                Ville = "Paris",
                Telephone = 0615482659,
-               SiteInternet = "http://monsite.com",
-               UserId = 1,
+               SiteInternet = "www.monentreprise.com",
                DateCreation = DateTime.Now,
            }
        );
@@ -50,13 +68,13 @@ public static class Initdb
               new ClientModel
               {
 
-                  Nom = "Dupont",
-                  Prenom="Quentin",
-                  Email = "Iphone 15 pro plus",
-                  Adresse = "7 rue du Maréchal",
-                  CodePostale = 20,
+                  Nom = "Marie",
+                  Prenom="Bary",
+                  Email = "marie.bary@gmail.com",
+                  Adresse = "7 rue de paris",
+                  CodePostale = 95000,
                   Ville = "Paris",
-                  Telephone = 0615482659,
+                  Telephone = 0615482655,
                   DateCreation = DateTime.Now,
                  
               }
@@ -65,25 +83,16 @@ public static class Initdb
            context.UserModel.Add(
            new UserModel
            {
-               Nom = "Dupont",
-               Prenom = "Quentin",
-               Email = "Iphone 15 pro plus",
-               Password = "abcd",
-               Telephone = 0615482659,
+               Nom = "Clara",
+               Prenom = "Bourgeois",
+               Email = "clara.bourgeois@gmail.com",
+               Password = "123",
+               Telephone = 0617782659,
                DateCreation = DateTime.Now
            }
          );
 
-          context.DevisModel.Add(
-           new DevisModel
-           {
-                ClientId =1,
-                AuteurId=1,
-                UserId =1,
-                DateCreation = DateTime.Now
-           }
-         );
-
+       
             context.SaveChanges();
         }
     }

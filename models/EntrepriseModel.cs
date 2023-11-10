@@ -1,6 +1,6 @@
 ﻿namespace devis_asp.net_core_mvc_react.js.Models
 {
-    public class AuteurModel
+    public class EntrepriseModel
     {
         public int Id { get; set; }
         public string Nom { get; set; }
@@ -10,7 +10,6 @@
         public string Ville { get; set; }
         public int Telephone { get; set; }
         public string SiteInternet { get; set; }
-        public int UserId { get; set; }
         public DateTime DateCreation { get; set; }
     }
 

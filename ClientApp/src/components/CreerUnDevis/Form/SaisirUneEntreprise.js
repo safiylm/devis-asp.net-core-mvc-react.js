@@ -8,7 +8,7 @@ const SaisirUneEntreprise = ()=>{
      const [entreprise, setEntreprise] = useState({
          nom: "Nom", email: "Email",
          adresse: "Adresse", codePostale: 123, ville: "Ville",
-         telephone: 456789, siteInternet:"mon-entreprise.fr", userId:1,  dateCreation: Date.now
+         telephone: 456789, siteInternet:"mon-entreprise.fr", dateCreation: Date.now
      });
 
      const handleSubmit = (event) => {
@@ -31,7 +31,7 @@ const SaisirUneEntreprise = ()=>{
          }
          if (request != null) {
 
-             request.open("POST", "Auteur/Create", false);
+             request.open("POST", "Entreprise/Create", false);
              request.onload = function () {
                  if (request.readyState == 4 && request.status == 200) {
                      var response = JSON.parse(request.responseText);
@@ -40,10 +40,6 @@ const SaisirUneEntreprise = ()=>{
              }.bind(this);
              request.send(formData);
          }
-
-
-
-
      };
 
      const changeHandler = (e) => {
@@ -58,7 +54,7 @@ const SaisirUneEntreprise = ()=>{
              <h1>Créer une nouvelle entreprise </h1>
             <div className="formCreationDevis">
         
-                <form onClick={handleSubmit }>
+                <form onSubmit={handleSubmit }>
                     <input type="text" className="form-control" name="nom" onChange={changeHandler} placeholder="Nom" />
                     <input type="email" className="form-control" name="email" onChange={changeHandler} placeholder="Adresse Email" />
                     <input type="text" className="form-control" name="adresse" onChange={changeHandler} placeholder="Adresse" />
@@ -66,10 +62,9 @@ const SaisirUneEntreprise = ()=>{
                     <input type="text" className="form-control" name="ville" onChange={changeHandler} placeholder="Ville" />
                     <input type="number" className="form-control" name="telephone" onChange={changeHandler} placeholder="Telephone" />
                     <input type="text" className="form-control" name="siteInternet" onChange={changeHandler} placeholder="SiteInternet" />
-                    <input type="number" className="form-control" name="userId" onChange={changeHandler} placeholder="UserId" />
                     
                     
-                    <button className="btn btn-primary" type="button">Créer </button>
+                    <button className="btn btn-primary" type="submit">Créer </button>
                 </form>
                 {message }
             </div>

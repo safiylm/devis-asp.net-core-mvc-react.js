@@ -5,7 +5,7 @@ const ListeEntreprise = () => {
 
     const [entreprises, setEntreprise] = useState([])
 
-    fetch('http://localhost:44453/Client/getAll')
+    fetch('http://localhost:44453/Entreprise/getAll')
         .then((res) => res.json())
         .then((data) => setEntreprise(data));
 
@@ -18,13 +18,13 @@ const ListeEntreprise = () => {
                 entreprises.map((item) => (
                         <div className="divEntreprise" key={item.id}>
 
-                            <p>{item.nom} {item.prenom}</p>
+                            <p>{item.nom} {item.ville}</p>
                             <p> {item.email}</p>
 
                         </div>))
                 : <p> Chargement des entreprises ...</p>}
           
-           
+            
            
         </div>
     );

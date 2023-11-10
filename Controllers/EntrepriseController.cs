@@ -7,42 +7,41 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using devis_asp.net_core_mvc_react.js.Data;
 using devis_asp.net_core_mvc_react.js.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace devis_asp.net_core_mvc_react.js.Controllers
 {
-    public class AuteurrController : Controller
+    public class EntrepriseController : Controller
     {
         private readonly DevisContext _context;
 
-        public AuteurrController(DevisContext context)
+        public EntrepriseController(DevisContext context)
         {
             _context = context;
         }
 
         public IActionResult GetAll()
         {
-
-            return  Json(_context.AuteurModel.ToList());
-
+            return  Json(_context.EntrepriseModel.ToList());
         }
 
         // GET: AuteurModels
         public async Task<IActionResult> Index()
         {
-              return _context.AuteurModel != null ? 
-                          View(await _context.AuteurModel.ToListAsync()) :
+              return _context.EntrepriseModel != null ? 
+                          View(await _context.EntrepriseModel.ToListAsync()) :
                           Problem("Entity set 'DevisContext.AuteurModel'  is null.");
         }
 
         // GET: AuteurModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.AuteurModel == null)
+            if (id == null || _context.EntrepriseModel == null)
             {
                 return NotFound();
             }
 
-            var auteurModel = await _context.AuteurModel
+            var auteurModel = await _context.EntrepriseModel
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (auteurModel == null)
             {
@@ -52,37 +51,39 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(auteurModel);
         }
 
-        // GET: AuteurModels/Create
-        public IActionResult Create()
+      
+                //_context.Add(auteurModel);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+           
+
+
+        [HttpPost]
+        [Route("Entreprise/Create")]
+        public object Create([FromHeader] string token, [FromForm] EntrepriseModel data)
         {
-            return View();
+            var res = "Erreur (ajouter entreprise )";
+            // check token
+            // do something with data
+            if (data != null && data.Nom != null && data.Email !=null && data.Telephone != 0 )
+            {
+                _context.EntrepriseModel.Add(data);
+                _context.SaveChangesAsync();
+                res = "Votre entreprise a été enregistré avec succès!";
+            }
+            return Json(res);
         }
 
-        // POST: AuteurModels/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Email,Adresse,CodePostale,Ville,Telephone,SiteInternet,UserId,DateCreation")] AuteurModel auteurModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(auteurModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(auteurModel);
-        }
 
         // GET: AuteurModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.AuteurModel == null)
+            if (id == null || _context.EntrepriseModel == null)
             {
                 return NotFound();
             }
 
-            var auteurModel = await _context.AuteurModel.FindAsync(id);
+            var auteurModel = await _context.EntrepriseModel.FindAsync(id);
             if (auteurModel == null)
             {
                 return NotFound();
@@ -95,7 +96,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Email,Adresse,CodePostale,Ville,Telephone,SiteInternet,UserId,DateCreation")] AuteurModel auteurModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Email,Adresse,CodePostale,Ville,Telephone,SiteInternet,UserId,DateCreation")] EntrepriseModel auteurModel)
         {
             if (id != auteurModel.Id)
             {
@@ -128,12 +129,12 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         // GET: AuteurModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.AuteurModel == null)
+            if (id == null || _context.EntrepriseModel == null)
             {
                 return NotFound();
             }
 
-            var auteurModel = await _context.AuteurModel
+            var auteurModel = await _context.EntrepriseModel
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (auteurModel == null)
             {
@@ -148,14 +149,14 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.AuteurModel == null)
+            if (_context.EntrepriseModel == null)
             {
                 return Problem("Entity set 'DevisContext.AuteurModel'  is null.");
             }
-            var auteurModel = await _context.AuteurModel.FindAsync(id);
+            var auteurModel = await _context.EntrepriseModel.FindAsync(id);
             if (auteurModel != null)
             {
-                _context.AuteurModel.Remove(auteurModel);
+                _context.EntrepriseModel.Remove(auteurModel);
             }
             
             await _context.SaveChangesAsync();
@@ -164,7 +165,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         private bool AuteurModelExists(int id)
         {
-          return (_context.AuteurModel?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.EntrepriseModel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

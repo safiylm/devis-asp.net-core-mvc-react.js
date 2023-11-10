@@ -14,7 +14,7 @@ namespace devis_asp.net_core_mvc_react.js.Data
         {
         }
         public DbSet<DevisModel> DevisModel { get; set; } = default!;
-        public DbSet<AuteurModel> AuteurModel { get; set; }
+        public DbSet<EntrepriseModel> EntrepriseModel { get; set; }
         public DbSet<UserModel> UserModel { get; set; }
         public DbSet<ClientModel> ClientModel { get; set; }
         public DbSet<ProduitModel> ProduitModel { get; set; } = default!;
