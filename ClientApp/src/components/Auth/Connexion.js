@@ -1,8 +1,11 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import "../../styles/auth.css"
 import { Link } from 'react-router-dom';
 
 const Connexion =()=> {
+
+    useEffect(() => { document.title = 'Connexion'; });
+
 
     const [message, setMessage] = useState("");
 

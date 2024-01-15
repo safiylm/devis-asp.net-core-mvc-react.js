@@ -1,8 +1,10 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import "../../styles/auth.css"
 
 
 const  Inscription = ()=> {
+
+    useEffect(() => { document.title = 'Inscription'; });
 
     const[message, setMessage] = useState("");
     const[user, setUser] = useState({
