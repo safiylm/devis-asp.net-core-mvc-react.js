@@ -13,36 +13,44 @@
 
     }
 
+.div-mes-donnees-perso .div-mes-donnees-perso-flex{
+    width: 100%;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center;
 
+}
 
-.div-mes-donnees-perso .div1 {
+.div-mes-donnees-perso-flex .div1 {
     padding: 20px;
     /*border: 5px solid #152e31;*/
-    background-color: rgb(76, 105, 108);
+    background-color: rgb(189, 203, 204);
     border-radius: 20px;
-    width: 750px;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 35px 0;
+    margin: 15px;
 }
 
-    .div-mes-donnees-perso .div1 input {
-        width: 600px;
-        margin: 10px;
-        border: 0.5px solid #152e31;
-    }
+.div-mes-donnees-perso .div1 input {
+    width: 100%;
+    margin: 10px;
+    border: 0.5px solid #152e31;
+}
 
-    .div-mes-donnees-perso .div1 label {
-    margin-left : 10px;
-    color:white;
-    }
+.div-mes-donnees-perso .div1 label {
+    width: 90%;
+    text-align:center;
+    color: black;
+}
 
 .div-mes-donnees-perso button {
     border: none;
     border-radius: 6px;
-    background-color: #152e31;
+    background-color: #4e5a5b;
     color: white;
     padding: 6px 9px;
     margin: 10px 0;

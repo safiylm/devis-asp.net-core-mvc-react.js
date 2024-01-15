@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/dataperso.css';
 import MenuVerticale from '../MenuVerticale/MenuVerticale.js'
 
 const MesDonneesPersonnelles = () => {
     const [users, setUser] = useState([]);
+    useEffect(() => { document.title = 'Mes données personnelles'; });
 
     fetch('http://localhost:44453/User/GetById?id=1')
         .then((res) => res.json())
@@ -24,7 +25,7 @@ const MesDonneesPersonnelles = () => {
             {users.length > 0 ?
 
                 users.map(user => (
-                <div key={user.id}>
+                    <div className="div-mes-donnees-perso-flex" key={user.id}>
 
                     <div className="div1" id="form-pre-nom" >
                             <label> Prénom<input id="input-prenom-id" className="form-control" value={user.prenom} /></label> 
@@ -32,11 +33,7 @@ const MesDonneesPersonnelles = () => {
                             <button onClick={ updateNom() }>Modifier </button>
                     </div>
 
-                        <div className="div1" id="form-email" >
-                            <label> Email <input className="form-control" value={user.email} /></label> 
-                            <button>Modifier votre email</button>
-                    </div>
-
+                  
                      <div className="div1">
                             <label> Saisissez votre ancien mot de passe
                                 <input placeholder="Saisissez votre ancien mot de passe" className="form-control" value={user.password} />
@@ -49,6 +46,12 @@ const MesDonneesPersonnelles = () => {
                             </label> 
 
                             <button>Modifier votre mot de passe </button>
+                     </div>
+
+
+                    <div className="div1" id="form-email" >
+                            <label> Email <input className="form-control" value={user.email} /></label> 
+                            <button>Modifier votre email</button>
                      </div>
 
                      <div className="div1">
