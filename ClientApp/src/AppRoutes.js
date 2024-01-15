@@ -1,14 +1,11 @@
-import { Counter } from "./components/Counter";
 import { Home } from "./components/Home";
-import ListeDB from './components/ListeDB';
-import Form from "./components/Form/Form";
-
 import ListeDevis from './components/ListeDevis/ListeDevis';
 import Devis from './components/Devis/Devis';
 import Index from './components/CreerUnDevis/Index';
 import Inscription from './components/Auth/Inscription'
 import Connexion from './components/Auth/Connexion';
 import MesDonneesPersonnelles from './components/MonCompte/MesDonneesPersonnelles';
+import Commencer from './components/CreerUnDevis/Commencer'
 
 const AppRoutes = [
   {
@@ -16,10 +13,6 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter',
-    element: <Counter />
-    },
-    {
         path: '/Auth/Inscription',
         element: < Inscription />
     },
@@ -31,24 +24,21 @@ const AppRoutes = [
         path: '/MonCompte/MesDonneesPersonnelles',
         element: < MesDonneesPersonnelles />
     },
+   
     {
-      path: '/ListeDB',
-        element: < ListeDB />
-    },
-    {
-        path: '/CreerUnDevis',
+        path: '/CreerUnDevis/:id',
         element: < Index />
+    }, {
+        path: '/CreerUnDevis/Commencer',
+        element: < Commencer />
     },
     {
         path: '/ListeDevis',
         element: < ListeDevis />
     }, 
     {
-        path: '/Devis/:id',
+        path: '/Devis/:id/:clientId/:entrepriseId',
         element: < Devis />
-    }, {
-        path: '/Form/Form', 
-        element: <Form/>
     }
 ];
 
