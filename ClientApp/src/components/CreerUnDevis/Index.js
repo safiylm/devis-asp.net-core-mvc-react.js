@@ -20,6 +20,9 @@ function Index() {
     const queryParameters = new URLSearchParams(window.location.search)
     const id_param = queryParameters.get("id")
 
+    const [tvaTotal, setTvaTotal] = useState(0)
+    const [htTotal, setHtTotal] = useState(0)
+
 
     return (
         <div className="page-formCreationDevis">
@@ -32,7 +35,7 @@ function Index() {
                 {numEtapee == 1 && < SaisirUneEntreprise setIdEntreprise={setIdEntreprise} setDateCreationEntreprise={setDateCreationEntreprise} setEmailEntreprise={setEmailEntreprise} changeNumEtape={changeNumEtape} />}
                 {numEtapee == 2 && < SaisirUnClient setIdClient={setIdClient} setEmailClient={setEmailClient} setDateCreationClient={setDateCreationClient} changeNumEtape={changeNumEtape} />}
                 {numEtapee == 3 && < SaisirLesProduits idDevis={id_param} changeNumEtape={changeNumEtape} />}
-                {numEtapee == 4 && < SaisirLesDerniersInformations idDevis={id_param} changeNumEtape={changeNumEtape} /> }
+                {numEtapee == 4 && < SaisirLesDerniersInformations idDevis={id_param} changeNumEtape={changeNumEtape} idClient={idClient} idEntreprise={idEntreprise} tvaTotal={tvaTotal} htTotal={htTotal } /> }
             </div>
         </div>
         );
