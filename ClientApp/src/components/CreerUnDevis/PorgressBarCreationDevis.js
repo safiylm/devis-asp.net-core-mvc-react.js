@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import '../../styles/PorgressBarCreationDevis.css'
 
-function PorgressBarCreationDevis({ numEtapee, changeNumEtape }) {
+function PorgressBarCreationDevis({ numEtapee }) {
 
    
         return (
@@ -11,10 +11,10 @@ function PorgressBarCreationDevis({ numEtapee, changeNumEtape }) {
                 <div className="stepper-wrapper">
 
                     <div className={`${numEtapee === 1 ? "stepper-item active completed" : "stepper-item"}`} >
-                        <button onClick={() => changeNumEtape(1)} >
+                       <button onClick={() => changeNumEtape(1)} >
                             <div className="step-counter">1</div>
                             <div className="step-name">Ajouter un auteur</div>
-                        </button >
+                       </button >
                     </div>
 
                     <div 
