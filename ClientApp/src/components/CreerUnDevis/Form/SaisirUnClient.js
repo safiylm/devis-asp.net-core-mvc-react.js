@@ -2,11 +2,11 @@
 import '../../../styles/formCreationDevis.css';
 import ListeClient from '../Liste/ListeClient.js'
 
-const SaisirUnClient = () => {
+const SaisirUnClient = ({ changeNumEtape, setEmailClient, setDateCreationClient, setIdClient }) => {
 
 
     const [message, setMessage] = useState("");
-    const [client, setClient] = useState({
+    const [formclient, setFormClient] = useState({
         nom: "Nom", prenom: "Prenom", email: "Email",
         adresse: "Adresse", codePostale: "CodePostale", ville: "Ville",
         telephone: "Telephone", dateCreation: Date.now
@@ -17,10 +17,10 @@ const SaisirUnClient = () => {
         //Send Post 
 
         let formData = new FormData();
-        Object.keys(client).forEach(function (key) {
-            formData.append(key, client[key]);
+        Object.keys(formclient).forEach(function (key) {
+            formData.append(key, formclient[key]);
         });
-
+       
         event.preventDefault();
         var request;
         if (window.XMLHttpRequest) {
@@ -38,6 +38,12 @@ const SaisirUnClient = () => {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
                     setMessage(response);
+                    document.querySelectorAll("form input").forEach((e) => {
+                        e.value = "";
+                    })
+                    changeNumEtape(3);
+                    setEmailClient(formclient.email);
+                    setDateCreationClient(formclient.dateCreation);
                 }
             }.bind(this);
             request.send(formData);
@@ -45,13 +51,13 @@ const SaisirUnClient = () => {
     }
 
     const changeHandler = (e) => {
-        setClient({ ...client, [e.target.name]: e.target.value })
+        setFormClient({ ...formclient, [e.target.name]: e.target.value })
     }
 
     return (
         <div>
             <h1>Choisir parmi un client enregistré </h1>
-            <ListeClient />
+            <ListeClient setIdClient={setIdClient} changeNumEtape={changeNumEtape }  />
             <p></p>
             <h1>Créer un nouveau client </h1>
              <div className="formClient">
@@ -64,8 +70,9 @@ const SaisirUnClient = () => {
                     <input type="text" className="form-control" name="ville" onChange={changeHandler} placeholder="Ville" />
                     <input className="form-control" name="telephone" onChange={changeHandler} placeholder="Telephone" />
 
-                    <button className="btn btn-primary" type="submit">Créer </button>
+                    <button className="btn btn-success" type="submit">Créer </button>
                     {message}
+
                 </form>
 
              </div>

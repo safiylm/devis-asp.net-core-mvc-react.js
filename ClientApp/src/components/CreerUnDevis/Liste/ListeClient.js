@@ -1,27 +1,42 @@
 ﻿import React, {  useState } from 'react';
 import '../../../styles/FormListeClientEntreprise.css';
 
-const SaisirUnClient = () => {
+const SaisirUnClient = ({ setIdClient, changeNumEtape }) => {
 
-    const [clients , setClient] = useState([])
+    const [clientsDB, setClientDB] = useState([])
 
     fetch('http://localhost:44453/Client/getAll')
         .then((res) => res.json())
-        .then((data) => setClient(data));
+        .then((data) => setClientDB(data));
+
+    const onChange = (e) => {
+       
+        console.log(e.target.value)
+        setIdClient(e.target.value)
+        changeNumEtape(3);
+    }
+
 
     return (
-        <div className="ListeClient">
+        <form >
+            <div className="ListeClient">
            
-            {(clients.length > 0) ?  
-                clients.map((item) => (
-                    <div className="divClient" key={item.id}>
+              {(clientsDB.length > 0) ?
+                   clientsDB.map((item) => (
+                        <div key={item.id}>
+                            <label>
+                               <input type="radio" name="clientchoose"
+                                   onChange={onChange} value={item.id }/>
+                                    {item.nom} {item.ville} {item.email}
+                           
+                            </label>
+                        </div>
+                ))
+               : <p> Chargement des clients ...</p>}
+            </div>
 
-                        <p>{item.nom} {item.prenom}</p>
-                        <p> {item.email}</p>
-                       
-                    </div>))
-                : <p> Chargement des clients ...</p>}
-        </div>
+            <button type="submit" className="btn btn-success"> Envoyer </button>
+        </form>
     );
 }
 
