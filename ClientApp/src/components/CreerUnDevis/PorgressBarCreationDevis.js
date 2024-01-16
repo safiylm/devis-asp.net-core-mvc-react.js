@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import '../../styles/PorgressBarCreationDevis.css'
 
-function PorgressBarCreationDevis({ numEtapee }) {
+function PorgressBarCreationDevis({ numEtapee, changeNumEtape }) {
 
    
         return (
