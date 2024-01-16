@@ -2,7 +2,7 @@
 import '../../../styles/formCreationDevis.css';
 import ListeEntreprise from '../Liste/ListeEntreprise.js'
 
-const SaisirUneEntreprise = ()=>{
+const SaisirUneEntreprise = ({ changeNumEtape, setDateCreationEntreprise, setEmailEntreprise, setIdEntreprise})=>{
   
      const [message, setMessage] = useState("");
      const [entreprise, setEntreprise] = useState({
@@ -17,8 +17,8 @@ const SaisirUneEntreprise = ()=>{
          Object.keys(entreprise).forEach(function (key) {
              formData.append(key, entreprise[key]);
          });
-
-        event.preventDefault();
+         
+         event.preventDefault();
      
          var request;
          if (window.XMLHttpRequest) {
@@ -35,7 +35,14 @@ const SaisirUneEntreprise = ()=>{
              request.onload = function () {
                  if (request.readyState == 4 && request.status == 200) {
                      var response = JSON.parse(request.responseText);
+                     document.querySelectorAll("form input").forEach((e) => {
+                         e.value = "";
+                     })
                      setMessage(response);
+                     setEmailEntreprise(entreprise.email)
+                     setDateCreationEntreprise(entreprise.dateCreation)
+                     changeNumEtape(2);
+
                  }
              }.bind(this);
              request.send(formData);
@@ -49,7 +56,7 @@ const SaisirUneEntreprise = ()=>{
      return (
          <div>
              <h1>Choisir parmi une entreprise enregistrée </h1>
-             <ListeEntreprise />
+             <ListeEntreprise setIdEntreprise={setIdEntreprise} changeNumEtape={changeNumEtape } />
              <p></p>
              <h1>Créer une nouvelle entreprise </h1>
             <div className="formCreationDevis">
@@ -62,9 +69,7 @@ const SaisirUneEntreprise = ()=>{
                     <input type="text" className="form-control" name="ville" onChange={changeHandler} placeholder="Ville" />
                     <input type="number" className="form-control" name="telephone" onChange={changeHandler} placeholder="Telephone" />
                     <input type="text" className="form-control" name="siteInternet" onChange={changeHandler} placeholder="SiteInternet" />
-                    
-                    
-                    <button className="btn btn-primary" type="submit">Créer </button>
+                    <button className="btn btn-success" type="submit">Créer </button>
                 </form>
                 {message }
             </div>
