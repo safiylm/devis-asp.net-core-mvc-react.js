@@ -5,6 +5,7 @@
     width: 100%;
 }
 
+
     .page-formCreationDevis .formCreationDevis {
         flex: 80%;
         margin: -16px 12px;
@@ -37,7 +38,6 @@
     }
 
 
-
     .formCreationDevis form button[type="button"],
     .formCreationDevis form button[type="submit"] {
         margin: 6px 0;
@@ -61,3 +61,5 @@
             height: 43px !important;
             margin: 6px 0;
         }
+
+/*-------------------------------------*/
