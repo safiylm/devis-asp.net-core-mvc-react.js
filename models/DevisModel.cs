@@ -7,7 +7,7 @@ namespace devis_asp.net_core_mvc_react.js.Models
     {
 
         public int Id { get; set; }
-        public int TempId { get; set; }
+        public string TempId { get; set; }
         public string Motif { get; set; }
         public int ClientId { get; set; }
         public int EntrepriseId { get; set; }
