@@ -4,7 +4,6 @@ import SaisirUnClient from './Form/SaisirUnClient';
 import SaisirUneEntreprise from './Form/SaisirUneEntreprise';
 import SaisirLesProduits from './Form/SaisirLesProduits';
 import SaisirLesDerniersInformations from './Form/SaisirLesDerniersInformations';
-import MenuVerticale from '../MenuVerticale/MenuVerticale.js'
 
 function Index() {
 
@@ -26,17 +25,15 @@ function Index() {
 
     return (
         <div className="page-formCreationDevis">
-            <MenuVerticale />
-            <div className="formCreationDevis">
-                Entreprise{idEntreprise}{emailEntreprise}{dateCreationEntreprise}<br />
-                Client {idClient}{emailClient}{dateCreationClient}
+                Id = {id_param }<br/>
+                Entreprise = {idEntreprise}{emailEntreprise}{dateCreationEntreprise}<br />
+                Client = {idClient}{emailClient}{dateCreationClient}
                 <PorgressBarCreationDevis numEtapee={numEtapee} changeNumEtape={changeNumEtape } />
 
                 {numEtapee == 1 && < SaisirUneEntreprise setIdEntreprise={setIdEntreprise} setDateCreationEntreprise={setDateCreationEntreprise} setEmailEntreprise={setEmailEntreprise} changeNumEtape={changeNumEtape} />}
                 {numEtapee == 2 && < SaisirUnClient setIdClient={setIdClient} setEmailClient={setEmailClient} setDateCreationClient={setDateCreationClient} changeNumEtape={changeNumEtape} />}
                 {numEtapee == 3 && < SaisirLesProduits idDevis={id_param} changeNumEtape={changeNumEtape} />}
                 {numEtapee == 4 && < SaisirLesDerniersInformations idDevis={id_param} changeNumEtape={changeNumEtape} idClient={idClient} idEntreprise={idEntreprise} tvaTotal={tvaTotal} htTotal={htTotal } /> }
-            </div>
         </div>
         );
     

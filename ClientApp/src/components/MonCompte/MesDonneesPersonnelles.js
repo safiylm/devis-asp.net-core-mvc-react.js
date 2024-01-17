@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/dataperso.css';
-import MenuVerticale from '../MenuVerticale/MenuVerticale.js'
 
 const MesDonneesPersonnelles = () => {
     const [users, setUser] = useState([]);
@@ -10,7 +9,7 @@ const MesDonneesPersonnelles = () => {
         .then((res) => res.json())
         .then((data) => setUser(data));
 
-    console.log(users);
+
 
     const updateNom = () => {
        // document.getElementById("input-prenom-id").ariaDisabled;
@@ -19,7 +18,6 @@ const MesDonneesPersonnelles = () => {
 
     return (
         <div className="page-mes-donnees-perso">
-            <MenuVerticale/>
             <div className="div-mes-donnees-perso">
 
             {users.length > 0 ?
