@@ -25,6 +25,13 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return  Json(_context.EntrepriseModel.ToList());
         }
 
+
+        public IActionResult GetById([FromQuery] int id)//Identifiant du devis 
+        {
+            return Json(_context.EntrepriseModel.Where((u) => u.Id == id).ToList());
+        }
+
+
         // GET: AuteurModels
         public async Task<IActionResult> Index()
         {
@@ -70,6 +77,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                 _context.EntrepriseModel.Add(data);
                 _context.SaveChangesAsync();
                 res = "Votre entreprise a été enregistré avec succès!";
+              
             }
             return Json(res);
         }
