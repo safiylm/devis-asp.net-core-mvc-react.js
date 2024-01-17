@@ -5,7 +5,6 @@ import Index from './components/CreerUnDevis/Index';
 import Inscription from './components/Auth/Inscription'
 import Connexion from './components/Auth/Connexion';
 import MesDonneesPersonnelles from './components/MonCompte/MesDonneesPersonnelles';
-import Commencer from './components/CreerUnDevis/Commencer'
 
 const AppRoutes = [
   {
@@ -28,9 +27,6 @@ const AppRoutes = [
     {
         path: '/CreerUnDevis/:id',
         element: < Index />
-    }, {
-        path: '/CreerUnDevis/Commencer',
-        element: < Commencer />
     },
     {
         path: '/ListeDevis',
