@@ -1,41 +1,43 @@
 ﻿.page-liste-devis {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     width: 100%;
 }
 
-    .page-liste-devis .div-liste-devis {
-        flex: 80%;
-        margin: -16px 12px;
-        padding : 50px;
+.div-search-{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    margin: 15px 0;
+}
+    .div-search- input, 
+    .div-search- button  {
+        margin: 0 15px;
+        max-height: 50px;
+        height: 40px;
+        width: auto;
     }
 
-
-
-
-.div-liste-devis h1 {
-   font-size:22px;
-   font-family:Tahoma;
-   font-weight:200;
-   margin:25px 0;
-   
+.page-liste-devis h1 {
+    font-size: 22px;
+    font-family: Tahoma;
+    font-weight: 200;
+    margin: 25px 0;
 }
 
-    .div-liste-devis table  {
+    .page-liste-devis table {
         width: 100%;
     }
-        .div-liste-devis table thead tr,
-        .div-liste-devis table tbody tr {
+        .page-liste-devis table thead tr,
+        .page-liste-devis table tbody tr {
             width: 100%;
             max-height: 40px !important;
         }
 
-    .div-liste-devis table thead {
-        background-color:whitesmoke;
-    }
+        .page-liste-devis table thead {
+            background-color: whitesmoke;
+        }
 
-        .div-liste-devis table tbody tr {
+        .page-liste-devis table tbody tr {
             border-bottom: 0.3px solid grey;
             padding: 8px 0;
         }
@@ -43,3 +45,22 @@
        padding:8px 0;
        max-height:40px;
    }
+
+.div-commencer-createdevis-show {
+    position: absolute;
+    width: 700px;
+    height: auto;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    z-index: 1;
+    font-family: "ProximaNova-Regular", sans-serif;
+    font-weight: 100;
+    background-color: whitesmoke;
+    box-shadow: 3px 3px 10px #283527;
+    border-radius: 9px;
+    padding: 50px;
+    text-align: center;
+    z-index: 2;
+}
