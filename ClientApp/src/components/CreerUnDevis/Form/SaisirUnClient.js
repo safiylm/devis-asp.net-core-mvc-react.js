@@ -55,13 +55,13 @@ const SaisirUnClient = ({ changeNumEtape, setEmailClient, setDateCreationClient,
     }
 
     return (
-        <div>
-            <h1>Choisir parmi un client enregistré </h1>
+        <div className="div-choisir-ou-saisir" >
+
             <ListeClient setIdClient={setIdClient} changeNumEtape={changeNumEtape }  />
-            <p></p>
-            <h1>Créer un nouveau client </h1>
-             <div className="formClient">
+            
+            <div className="div-saisir">
                 <form onSubmit={handleClick}>
+                    <h1>Créer un nouveau client </h1>
                     <input type="text" className="form-control" name="nom" onChange={changeHandler} placeholder="Nom" />
                     <input type="text" className="form-control" name="prenom" onChange={changeHandler} placeholder="Prenom" />
                     <input type="email" className="form-control" name="email" onChange={changeHandler} placeholder="Adresse Email" />
@@ -69,12 +69,9 @@ const SaisirUnClient = ({ changeNumEtape, setEmailClient, setDateCreationClient,
                     <input className="form-control" name="codePostale" onChange={changeHandler} placeholder="CodePostale" />
                     <input type="text" className="form-control" name="ville" onChange={changeHandler} placeholder="Ville" />
                     <input className="form-control" name="telephone" onChange={changeHandler} placeholder="Telephone" />
-
                     <button className="btn btn-success" type="submit">Créer </button>
                     {message}
-
                 </form>
-
              </div>
         </div>
     );

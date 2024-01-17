@@ -54,14 +54,12 @@ const SaisirUneEntreprise = ({ changeNumEtape, setDateCreationEntreprise, setEma
      }
     
      return (
-         <div>
-             <h1>Choisir parmi une entreprise enregistrée </h1>
+         <div className="div-choisir-ou-saisir" >
              <ListeEntreprise setIdEntreprise={setIdEntreprise} changeNumEtape={changeNumEtape } />
-             <p></p>
-             <h1>Créer une nouvelle entreprise </h1>
-            <div className="formCreationDevis">
-        
-                <form onSubmit={handleSubmit }>
+            
+             <div className="div-saisir">
+                 <form onSubmit={handleSubmit}>
+                    <h1>Créer une nouvelle entreprise </h1>
                     <input type="text" className="form-control" name="nom" onChange={changeHandler} placeholder="Nom" />
                     <input type="email" className="form-control" name="email" onChange={changeHandler} placeholder="Adresse Email" />
                     <input type="text" className="form-control" name="adresse" onChange={changeHandler} placeholder="Adresse" />

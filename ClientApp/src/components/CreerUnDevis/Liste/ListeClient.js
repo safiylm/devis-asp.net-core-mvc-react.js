@@ -18,7 +18,9 @@ const SaisirUnClient = ({ setIdClient, changeNumEtape }) => {
 
 
     return (
-        <form >
+        <form className="div-choisir">
+            <h1>Choisir parmi un client enregistré </h1>
+
             <div className="ListeClient">
            
               {(clientsDB.length > 0) ?

@@ -1,5 +1,4 @@
 ﻿import React, { useState } from 'react';
-import FormAjouterUnProduit from './FormAjouterUnProduit'; 
 import '../../../styles/formCreationDevis.css';
 import { Navigate } from "react-router-dom";
 
@@ -61,21 +60,26 @@ const SaisirLesDerniersInformations = ({ idDevis, idClient, idEntreprise, htTota
     }
 
         return (
-            <div className="formCreationDevis">
+            <div className="div-saisir">
                 <form onSubmit={handleSubmit}>
-                    {/*<input name="tempId" value={idDevis} />*/}
-                    {/*<input name="clientId" value={idClient} />*/}
-                    {/*<input name="entrepriseId" value={idEntreprise } />*/}
-
+                
                     <label>Motif du devis :
-                        <input type="text" className="form-control" name="motif" onChange={changeHandler} style={{ width: "420px" }} />
-                    </label>
-                    <input name="accomptePourcentage" className="form-control" onChange={changeHandler} placeholder="Accompte Pourcentage" />
-                    <input name="accompteQuantite" className="form-control" onChange={changeHandler} placeholder="Accompte Quantite" />
-                    <input name="accompteInformations" className="form-control" onChange={changeHandler} placeholder="Accompte Informations" />
-                    <input name="informationSuplementaire" className="form-control" onChange={changeHandler} placeholder="Information Suplémentaire" />
+                        <input type="text" name="motif" className="form-control"  onChange={changeHandler} style={{ width: "420px" }} />
+                    </label><br/>
+                    <label>Accompte pourcentage :
+                        <input name="accomptePourcentage" className="form-control" onChange={changeHandler}  />
+                    </label><br />
+                    <label>Accompte quantitée :
+                        <input name="accompteQuantite" className="form-control" onChange={changeHandler}  />
+                    </label><br />
+                    <label>Accompte informations :
+                        <input name="accompteInformations" className="form-control" onChange={changeHandler}  />
+                    </label><br />
+                    <label>Informations suplémentaires :
+                        <input name="informationSuplementaire" className="form-control" onChange={changeHandler}  />
+                    </label><br />
                     <p>Mode de paiement </p>
-                    <button type="submit" className="btn btn-light">Enregistrer et terminer</button>
+                    <button type="submit" className="btn btn-success">Enregistrer et terminer</button>
                 </form>
                 {success && <Navigate to="/CreerUnDevis" replace={true} />}
 

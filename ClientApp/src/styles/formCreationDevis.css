@@ -1,50 +1,29 @@
 ﻿.page-formCreationDevis {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
     width: 100%;
 }
 
-
-    .page-formCreationDevis .formCreationDevis {
-        flex: 80%;
-        margin: -16px 12px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    
-    }
-
-.formCreationDevis {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.formCreationDevis form{
-   display:flex;
-   flex-direction:column;
-   align-items:center;
-   justify-content:center;
-   padding:30px;
-   margin:10px;
-   width : 800px;
-}
-
-    .formCreationDevis form input {
-        padding: 5px 2px;
-        margin: 5px 0;
-        height: 43px !important;
-    }
+        .page-formCreationDevis form input {
+            padding: 5px 2px;
+            margin: 5px 0;
+            height: 43px !important;
+        }
 
 
-    .formCreationDevis form button[type="button"],
-    .formCreationDevis form button[type="submit"] {
-        margin: 6px 0;
+    .page-formCreationDevis form button[type="button"],
+    .page-formCreationDevis form button[type="submit"] {
+      
         font-size: 17px;
         height: 43px !important;
+        margin: 15px auto;
+        display: block;
     }
-    
+
+
+    /**************************/
     .div-ajouter-un-produit{
     display:flex;
     flex-direction:row;
@@ -55,6 +34,7 @@
 .div-ajouter-un-produit input {
     flex:24%;
     margin : 6px;
+  
 }
 
         .div-ajouter-un-produit * {
@@ -63,3 +43,30 @@
         }
 
 /*-------------------------------------*/
+
+.div-choisir-ou-saisir {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 80vw;
+}
+
+.div-choisir, .div-saisir {
+    margin: 20px;
+    padding: 20px;
+    width: 550px;
+}
+
+.div-choisir-ou-saisir h1{
+    font-size: 24px;
+    margin : 15px 0;
+    text-align:center;
+}
+
+
+
+.div-saisir label input {
+    min-width: 500px;
+}

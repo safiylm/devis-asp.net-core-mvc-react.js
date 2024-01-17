@@ -19,7 +19,9 @@ const ListeEntreprise = ({ setIdEntreprise, changeNumEtape }) => {
     }
 
     return (
-        <form >
+        <form className="div-choisir">
+            <h1>Choisir parmi une entreprise enregistrée </h1>
+
             <div className="ListeEntreprise">
            
                 {(entreprises.length > 0) ?
