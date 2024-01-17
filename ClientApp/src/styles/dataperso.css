@@ -55,3 +55,9 @@
     padding: 6px 9px;
     margin: 10px 0;
 }
+
+@media screen and (max-width: 900px) {
+    .div-mes-donnees-perso-flex .div1 {
+        width:100%;
+    }
+}
