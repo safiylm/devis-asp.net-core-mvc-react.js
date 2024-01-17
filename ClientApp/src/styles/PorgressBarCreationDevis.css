@@ -1,9 +1,9 @@
 ﻿.stepper-wrapper {
-    margin-top: auto;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin: 20px;
     width: 800px;
+    border: 1px solid gray;
 }
 
 .stepper-wrapper a{
