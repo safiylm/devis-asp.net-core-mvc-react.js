@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import '../../styles/listedevis.css';
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 
 
 
@@ -82,7 +82,7 @@ const ListeDevis = () => {
                         {(deviss.length > 0 && clients.length > 0 ?
                             deviss.map(devis => (
                                 <tr key={devis.id}>
-                                    <td>{devis.id}</td>
+                                    <td><Link to={`/Devis/${devis.id}/${devis.clientId}/${devis.entrepriseId}`}>{devis.id}</Link></td>
 
                                     {clients.map(client => (
                                         <td key={client.id}> {client.prenom} {client.nom} </td>

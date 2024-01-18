@@ -21,6 +21,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         public IActionResult Index([FromQuery] int id, [FromQuery] int clientId, [FromQuery] int entrepriseId)
         {
+
             return View(Index);
         }
 
@@ -35,8 +36,6 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return Json(_context.DevisModel.Where(devis => devis.Id == id).ToList() );
         }
 
-
-      
 
         [HttpPost]
         [Route("Devis/Create")]
