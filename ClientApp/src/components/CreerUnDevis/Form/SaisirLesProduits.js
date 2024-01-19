@@ -18,6 +18,10 @@ function SaisirLesProduits() {
         setFormAddProduct({ ...formAddProduct, [e.target.name]: e.target.value })
     }
 
+    
+    const sommePrixTVA = produits.map(item => item.tva).reduce((prev, curr) => prev + curr, 0);
+    const sommePrixHT = produits.map(item => item.prixUnitaireHT).reduce((prev, curr) => prev + curr, 0);
+    const sommeTotale = sommePrixTVA + sommePrixHT;
 
     const submitCreationProduit = (event) => {
         //Send Post 
@@ -64,7 +68,7 @@ function SaisirLesProduits() {
                         <th>Quantite</th>
                         <th>Designation</th>
                         <th>Prix Unitaire HT</th>
-                        <th>TVA</th>
+                        <th>Prix TVA</th>
 
 
                     </tr>
@@ -75,8 +79,8 @@ function SaisirLesProduits() {
                             <tr key={item.id}>
                                 <td>{item.quantite}</td>
                                 <td>{item.designation}</td>
-                                <td>{item.prixUnitaireHT}</td>
-                                <td>{item.tva}</td>
+                                <td>{item.prixUnitaireHT} $ </td>
+                                <td>{item.tva} $ </td>
 
                             </tr>
                         )) :
@@ -99,9 +103,9 @@ function SaisirLesProduits() {
             
             <br />
 
-            <h1>Montant Total : 0$</h1>
-            <div className="tVATotal"></div>
-            <div className="totalHT"></div>
+            <h1>Montant Total: {sommeTotale } $</h1>
+            <h4>Somme TVA: {sommePrixTVA} $</h4>
+            <h4>Somme Hors Taxe: {sommePrixHT} $ </h4>
 
             </div>
     );
