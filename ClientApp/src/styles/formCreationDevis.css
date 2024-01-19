@@ -24,23 +24,24 @@
 
 
     /**************************/
-    .div-ajouter-un-produit{
-    display:flex;
-    flex-direction:row;
-    width: 750px;
-    
+.div-ajouter-un-produit {
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    align-items: center;
+    justify-content:center;
 }
 
 .div-ajouter-un-produit input {
     flex:24%;
     margin : 6px;
-  
 }
 
-        .div-ajouter-un-produit * {
-            height: 43px !important;
-            margin: 6px 0;
-        }
+.div-ajouter-un-produit * {
+     height: 43px !important;
+     margin: 6px 0;
+}
+
 
 /*-------------------------------------*/
 
@@ -69,4 +70,9 @@
 
 .div-saisir label input {
     min-width: 500px;
+}
+
+
+.div-saisir table{
+    width:100%
 }

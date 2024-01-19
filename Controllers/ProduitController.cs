@@ -109,27 +109,25 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(produitModel);
         }
 
-        // GET: Produit/Create
-        public IActionResult Create()
+
+
+        [HttpPost]
+        [Route("Produit/Create")]
+        public object Create([Bind("DevisId,Quantite,Designation,PrixUnitaireHT,TVA")] ProduitModel produitModel)
         {
-            return View();
+            var res = "Erreur, votre produit n'a pas pu être enregistrer, veuillez recommencer.";
+            if (produitModel.TVA != 0 && produitModel.Designation != null 
+                && produitModel.Quantite != 0 && produitModel.PrixUnitaireHT != 0)
+            {
+                produitModel.DateCreation = DateTime.Now;
+                _context.ProduitModel.Add(produitModel);
+                _context.SaveChangesAsync();
+                res = "Votre produit a été enregistré avec succès!";
+
+            }
+            return Json(res);
         }
 
-        // POST: Produit/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Quantite,Designation,PrixUnitaireHT,TVA,DateCreation")] ProduitModel produitModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(produitModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(produitModel);
-        }
 
         // GET: Produit/Edit/5
         public async Task<IActionResult> Edit(int? id)

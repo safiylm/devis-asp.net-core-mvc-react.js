@@ -69,7 +69,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         [Route("Entreprise/Create")]
         public object Create([FromHeader] string token, [FromForm] EntrepriseModel data)
         {
-            var res = "Erreur (ajouter entreprise )";
+            var res = "Erreur, votre entreprise n'a pas été enregistrer, veuillez recommencer.";
             // check token
             // do something with data
             if (data != null && data.Nom != null && data.Email !=null && data.Telephone != 0 )

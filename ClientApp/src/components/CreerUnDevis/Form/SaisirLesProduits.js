@@ -1,60 +1,111 @@
-﻿import React, {  Component } from 'react';
-import FormAjouterUnProduit from './FormAjouterUnProduit'; 
+﻿import React, { Component, useState } from 'react';
 import '../../../styles/formCreationDevis.css';
 
-class SaisirLesProduits extends Component {
+function SaisirLesProduits() {
 
-    constructor(props) {
-        super(props);
+    const [message, setMessage] = useState("");
+    const [produits, setProduit] = useState([]);
+    const [formAddProduct, setFormAddProduct] = useState({
+        devisId: "2029", quantite: "0", designation: "-",
+        prixUnitaireHT: "0", tva: "20"
+    });
 
-        this.state = { currentCount: 1, tab: [0] };
-        this.incrementCounter = this.incrementCounter.bind(this);
-        this.incrementTab = this.incrementTab.bind(this);
-       
+    fetch(`http://localhost:44453/Produit/GetAll`)
+        .then((res) => res.json())
+        .then((data) => setProduit(data));
+
+    const changeHandler = (e) => {
+        setFormAddProduct({ ...formAddProduct, [e.target.name]: e.target.value })
     }
 
-    incrementTab() {
-        this.setState({
-            tab: this.state.tab.concat(this.state.currentCount)
-        })
-        console.log(this.state.tab)
-    }
 
-    incrementCounter() {
-        this.setState({
-            currentCount: this.state.currentCount + 1
+    const submitCreationProduit = (event) => {
+        //Send Post 
+
+        let formData = new FormData();
+        Object.keys(formAddProduct).forEach(function (key) {
+            formData.append(key, formAddProduct[key]);
         });
-        this.incrementTab();
 
+        event.preventDefault();
+        var request;
+        if (window.XMLHttpRequest) {
+            //New browsers.
+            request = new XMLHttpRequest();
+        }
+        else if (window.ActiveXObject) {
+            //Old IE Browsers.
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if (request != null) {
+
+            request.open("POST", "Produit/Create", false);
+            request.onload = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    var response = JSON.parse(request.responseText);
+                    setMessage(response);
+                    document.querySelectorAll("form input").forEach((e) => {
+                        e.value = "";
+                    })
+                   
+                   
+                }
+            }.bind(this);
+            request.send(formData);
+        }
     }
-   
 
-    render() {
-        return (
-            <div className="formCreationDevis">
+    return (
+        <div className="div-saisir" style={{ width: "60vw" }}>
+            <h1>Liste des produits</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quantite</th>
+                        <th>Designation</th>
+                        <th>Prix Unitaire HT</th>
+                        <th>TVA</th>
 
 
-           
+                    </tr>
+                </thead>
+                <tbody>
+                    {(produits.length > 0) ?
+                        produits.map((item) => (
+                            <tr key={item.id}>
+                                <td>{item.quantite}</td>
+                                <td>{item.designation}</td>
+                                <td>{item.prixUnitaireHT}</td>
+                                <td>{item.tva}</td>
 
-                <p>Liste des produits</p>
-                {this.state.currentCount}
+                            </tr>
+                        )) :
+                        <tr><td>Loading ...</td></tr>
+                    }
+                </tbody>
+            </table>
 
 
-                {this.state.tab.map((index) => (
-                    <FormAjouterUnProduit />
-                ))}
+            <form onSubmit={submitCreationProduit} className="div-ajouter-un-produit">         
+                    
+                <input name="quantite" onChange={changeHandler} className="form-control" placeholder="Quantité" />          
+                <input name="designation" onChange={changeHandler} className="form-control" placeholder="Désignation" />
+               <input name="prixUnitaireHT" onChange={changeHandler} className="form-control" placeholder="Prix Unitaire HT" />
+               <input name="tva" onChange={changeHandler} className="form-control" placeholder="TVA" />
+               <button type="submit" className="btn btn-success"> Save </button>
+                           
+            </form>
+            {message }
+            
+            <br />
 
-                <br/>
-                <button className="btn btn-primary" onClick={this.incrementCounter}>Ajouter un produit </button>
-
-                <p>Montant Total : </p>
-                <p>Accompte de 20% à payer avant la date</p>
-                <p>Mode de paiement </p>
+            <h1>Montant Total : 0$</h1>
+            <div className="tVATotal"></div>
+            <div className="totalHT"></div>
 
             </div>
-        );
-    }
-
+    );
 }
+
 
 export default SaisirLesProduits;
