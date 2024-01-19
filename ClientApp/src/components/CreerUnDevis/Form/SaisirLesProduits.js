@@ -103,9 +103,9 @@ function SaisirLesProduits() {
             
             <br />
 
-            <h1>Montant Total: {sommeTotale } $</h1>
             <h4>Somme TVA: {sommePrixTVA} $</h4>
             <h4>Somme Hors Taxe: {sommePrixHT} $ </h4>
+            <h1>Montant Total: {sommeTotale} $</h1>
 
             </div>
     );
