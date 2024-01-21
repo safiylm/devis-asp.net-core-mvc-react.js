@@ -33,13 +33,10 @@ const ListeDevis = () => {
         .then((res) => res.json()  )
         .then((data) => setDevis(data));
 
-    fetch('http://localhost:44453/Client/GetById?id=1')
+    fetch("http://localhost:44453/Client/GetAll")
         .then((res) => res.json())
         .then((data) => setClients(data));
 
-    //fetch('http://localhost:44453/Auteur/GetAll')
-    //    .then((res) => res.json())
-    //    .then((data) => setDevis(data));
 
 
     return (
@@ -84,7 +81,7 @@ const ListeDevis = () => {
                                 <tr key={devis.id}>
                                     <td><Link to={`/Devis/${devis.id}/${devis.clientId}/${devis.entrepriseId}`}>{devis.id}</Link></td>
 
-                                    {clients.map(client => (
+                                    {clients.filter(c => c.id == devis.clientId ).map(client => (
                                         <td key={client.id}> {client.prenom} {client.nom} </td>
                                     ))}
 
