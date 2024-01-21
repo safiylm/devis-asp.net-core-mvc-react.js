@@ -33,7 +33,7 @@ const AppRoutes = [
         element: < ListeDevis />
     }, 
     {
-        path: '/Devis/:id/:clientId/:entrepriseId',
+        path: '/Devis/:id/:tempId/:clientId/:entrepriseId',
         element: < Devis />
     }
 ];

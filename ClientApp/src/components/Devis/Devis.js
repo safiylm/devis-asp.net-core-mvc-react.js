@@ -1,6 +1,5 @@
 ﻿import React, { useState, useEffect } from "react"
 import "../../styles/devis.css"
-import { useParams } from "react-router-dom"
 
 
 const Devis = () => {
@@ -8,8 +7,9 @@ const Devis = () => {
     const url_ = window.location.pathname;
     const arrayURL = url_.split("/");
     const id = arrayURL[2];
-    const clientId_param = arrayURL[3];
-    const entrepriseId_param = arrayURL[4];
+    const id_ = arrayURL[3];
+    const clientId_param = arrayURL[4];
+    const entrepriseId_param = arrayURL[5];
 
 
 
@@ -39,7 +39,7 @@ const Devis = () => {
         .then((data) => setEntreprise(data));
 
 
-    fetch(`http://localhost:44453/Produit/GetByDevisId?id=${id}`)
+    fetch(`http://localhost:44453/Produit/GetByDevisId?id=${id_ }`)
         .then((res) => res.json())
         .then((data) => setProduit(data));
 

@@ -19,7 +19,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             _context = context;
         }
 
-        public IActionResult Index([FromQuery] int id, [FromQuery] int clientId, [FromQuery] int entrepriseId)
+        public IActionResult Index([FromQuery] int id, [FromForm] int tempId,  [FromQuery] int clientId, [FromQuery] int entrepriseId)
         {
 
             return View();
