@@ -1,11 +1,17 @@
 ﻿import React, { useState, useEffect } from "react"
 import "../../styles/devis.css"
+import { useParams } from "react-router-dom"
+
+
 const Devis = () => {
 
-    const queryParameters = new URLSearchParams(window.location.search)
-    const id_param = queryParameters.get("id")
-    const clientId_param = queryParameters.get("clientId")
-    const entrepriseId_param = queryParameters.get("entrepriseId")
+    const url_ = window.location.pathname;
+    const arrayURL = url_.split("/");
+    const id = arrayURL[2];
+    const clientId_param = arrayURL[3];
+    const entrepriseId_param = arrayURL[4];
+
+
 
     const [produits, setProduit] = useState([]);
 
@@ -17,23 +23,23 @@ const Devis = () => {
     const sommePrixHT = produits.map(item => item.prixUnitaireHT).reduce((prev, curr) => prev + curr, 0);
     const sommeTotale = sommePrixTVA + sommePrixHT;
 
-    useEffect(() => { document.title = `Devis N° ${id_param}`; });
+    useEffect(() => { document.title = `Devis N° ${id}`; });
 
-    fetch(`http://localhost:44453/Devis/GetById?id=2029`)
+    fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
         .then((res) => res.json())
         .then((data) => setDevis(data) );
 
 
-    fetch(`http://localhost:44453/Client/GetById?id=1`)
+    fetch(`http://localhost:44453/Client/GetById?id=${clientId_param}`)
         .then((res) => res.json())
         .then((data) => setClients(data));
 
-    fetch(`http://localhost:44453/Entreprise/GetById?id=1`)
+    fetch(`http://localhost:44453/Entreprise/GetById?id=${entrepriseId_param}`)
         .then((res) => res.json())
         .then((data) => setEntreprise(data));
 
 
-    fetch(`http://localhost:44453/Produit/GetAll`)
+    fetch(`http://localhost:44453/Produit/GetByDevisId?id=${id}`)
         .then((res) => res.json())
         .then((data) => setProduit(data));
 
@@ -44,7 +50,7 @@ const Devis = () => {
 
             <div className="div-devis">
                 <div className="div-devis2">
-                    <h1>Devis N° : {id_param} --{clientId_param} -- {entrepriseId_param }</h1>
+                    <h1>Devis N° : {id} </h1>
 
             {(produits.length > 0 && clients.length > 0 && deviss.length > 0) &&                   
                <div>
@@ -91,6 +97,7 @@ const Devis = () => {
                             <th>Designation</th>
                             <th>Prix Unitaire HT</th>
                             <th>TVA</th>
+                            <th>Prix TTC</th>
                           
 
                         </tr>
@@ -103,6 +110,7 @@ const Devis = () => {
                         <td>{item.designation}</td>
                         <td>{item.prixUnitaireHT}</td>
                         <td>{item.tva}</td>
+                        <td>{item.prixUnitaireHT + item.tva}</td>
                       
                    </tr>
                 )) :
