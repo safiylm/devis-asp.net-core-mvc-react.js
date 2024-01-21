@@ -1,12 +1,12 @@
 ﻿import React, { Component, useState } from 'react';
 import '../../../styles/formCreationDevis.css';
 
-function SaisirLesProduits({ idDevis }) {
+function SaisirLesProduits({ idDevis, setSommePrixTVA, setSommePrixHT }) {
 
     const [message, setMessage] = useState("");
     const [produits, setProduit] = useState([]);
     const [formAddProduct, setFormAddProduct] = useState({
-        devisId: "2029", quantite: "0", designation: "-",
+        devisId: idDevis, quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
     });
     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${idDevis}`)
@@ -19,10 +19,12 @@ function SaisirLesProduits({ idDevis }) {
         setFormAddProduct({ ...formAddProduct, [e.target.name]: e.target.value })
     }
 
-    
     const sommePrixTVA = produits.map(item => item.tva).reduce((prev, curr) => prev + curr, 0);
     const sommePrixHT = produits.map(item => item.prixUnitaireHT).reduce((prev, curr) => prev + curr, 0);
     const sommeTotale = sommePrixTVA + sommePrixHT;
+
+    setSommePrixTVA(sommePrixTVA);
+    setSommePrixHT(sommePrixHT);
 
     const submitCreationProduit = (event) => {
         //Send Post 

@@ -25,7 +25,7 @@ public static class Initdb
             ClientId = 1,
             EntrepriseId = 1,
             UserId = 1,
-            TVATotal = 0,
+            TotalTVA = 0,
             TotalHT = 0,
             AccompteQuantite = 1,
             AccomptePourcentage = 20,

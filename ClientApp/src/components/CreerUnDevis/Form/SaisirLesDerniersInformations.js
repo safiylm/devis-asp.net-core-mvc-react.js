@@ -2,18 +2,18 @@
 import '../../../styles/formCreationDevis.css';
 import { Navigate } from "react-router-dom";
 
-const SaisirLesDerniersInformations = ({ idDevis, idClient, idEntreprise, htTotal , tvaTotal}) => { 
+const SaisirLesDerniersInformations = ({ idDevis, idClient, idEntreprise, sommePrixTVA, sommePrixHT}) => { 
 
     const [success, setSuccess] = useState(false);
 
     const [deviss, setDevis] = useState({
-        tempId: 88, //idDevis,
+        tempId: idDevis,
         motif: "Facture-Motif",
         clientId: idClient,
         entrepriseId:idEntreprise,
         userId: 21,
-        tVATotal: tvaTotal,
-        totalHT: htTotal,
+        totalTVA: sommePrixTVA,
+        totalHT: sommePrixHT,
         accompteQuantite: 10,
         accomptePourcentage: 2,
         accompteInformations: "accompteInformations",
@@ -81,7 +81,7 @@ const SaisirLesDerniersInformations = ({ idDevis, idClient, idEntreprise, htTota
                     <p>Mode de paiement </p>
                     <button type="submit" className="btn btn-success">Enregistrer et terminer</button>
                 </form>
-                {success && <Navigate to="/CreerUnDevis" replace={true} />}
+                {success && <Navigate to="/ListeDevis" replace={true} />}
 
             </div>
         );

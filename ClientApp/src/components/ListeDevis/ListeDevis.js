@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import '../../styles/listedevis.css';
 import { Navigate, Link } from "react-router-dom";
 
@@ -10,6 +10,7 @@ const ListeDevis = () => {
     const [show, setShow] = useState(false);
     const [generateIdDevis, setgenerateIdDevis] = useState(false);
     const [success, setSuccess] = useState(false);
+    useEffect(() => { document.title = "Mes devis"; });
 
     const hrefDataUsers = () => {
         document.location.href ="/MonCompte/MesDonneesPersonnelles"
@@ -23,9 +24,9 @@ const ListeDevis = () => {
         const m = today.getMinutes();
         const s = today.getSeconds();
         const ms = today.getMilliseconds();
-        const currentDate = year + "-" + month + "-" + date + "-" + h + "-" + m + "" + s + "-" + ms;
+        const currentDate = year + "" + month + "" + date + "" + h + "" + m + "" + s + "" + ms;
 
-        setgenerateIdDevis(currentDate + "-safi")
+        setgenerateIdDevis(currentDate)
         setSuccess(true)
     }
 
@@ -72,6 +73,7 @@ const ListeDevis = () => {
                         <th>Montant TTC</th>
                         <th>Date du devis</th>
                         <th>Statut</th>
+                        <th>Modifier</th>
 
                     </tr>
                 </thead>
@@ -79,25 +81,25 @@ const ListeDevis = () => {
                         {(deviss.length > 0 && clients.length > 0 ?
                             deviss.map(devis => (
                                 <tr key={devis.id}>
-                                    <td><Link to={`/Devis/${devis.id}/${devis.clientId}/${devis.entrepriseId}`}>{devis.id}</Link></td>
+                                    <td><Link to={`/Devis/${devis.id}/${devis.tempId}/${devis.clientId}/${devis.entrepriseId}`}>{devis.id}</Link></td>
 
                                     {clients.filter(c => c.id == devis.clientId ).map(client => (
                                         <td key={client.id}> {client.prenom} {client.nom} </td>
                                     ))}
 
                                     <td>
-                                        200$
+                                        {devis.totalHT }$
                                     </td>
 
                                     <td>
-                                        220$
-                                    </td>
+                                        {devis.totalHT + devis.totalTVA }$                                  </td>
                                     <td>
-                                        <a> {devis.dateCreation} </a>
+                                        <a> {devis.dateCreation } </a>
                                     </td>
                                     <td>
                                         Devis / Bon de commande
                                     </td>
+                                    <td><Link to="/Devis/Edit">Modifier</Link></td>
                                 </tr>
 
                             )) : <tr><td>Chargement en cours ... </td></tr> )}

@@ -20,6 +20,9 @@ function Index() {
     const url_ = window.location.pathname;
     const arrayURL = url_.split("/");
     const id_param = arrayURL[2];
+    const [sommePrixTVA, setSommePrixTVA] = useState(0);
+    const [sommePrixHT, setSommePrixHT] = useState(0);
+
 
     return (
         <div className="page-formCreationDevis">
@@ -30,8 +33,8 @@ function Index() {
 
                 {numEtapee == 1 && < SaisirUneEntreprise setIdEntreprise={setIdEntreprise} setDateCreationEntreprise={setDateCreationEntreprise} setEmailEntreprise={setEmailEntreprise} changeNumEtape={changeNumEtape} />}
                 {numEtapee == 2 && < SaisirUnClient setIdClient={setIdClient} setEmailClient={setEmailClient} setDateCreationClient={setDateCreationClient} changeNumEtape={changeNumEtape} />}
-                {numEtapee == 3 && < SaisirLesProduits idDevis={id_param} changeNumEtape={changeNumEtape} />}
-                {numEtapee == 4 && < SaisirLesDerniersInformations idDevis={id_param} changeNumEtape={changeNumEtape} idClient={idClient} idEntreprise={idEntreprise} /> }
+            {numEtapee == 3 && < SaisirLesProduits idDevis={id_param} changeNumEtape={changeNumEtape} setSommePrixTVA={setSommePrixTVA} setSommePrixHT={setSommePrixHT }/>}
+            {numEtapee == 4 && < SaisirLesDerniersInformations idDevis={id_param} changeNumEtape={changeNumEtape} idClient={idClient} idEntreprise={idEntreprise} sommePrixTVA={sommePrixTVA} sommePrixHT={sommePrixHT }/> }
         </div>
         );
     
