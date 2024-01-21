@@ -1,7 +1,7 @@
 ﻿import React, { Component, useState } from 'react';
 import '../../../styles/formCreationDevis.css';
 
-function SaisirLesProduits() {
+function SaisirLesProduits({ idDevis }) {
 
     const [message, setMessage] = useState("");
     const [produits, setProduit] = useState([]);
@@ -9,10 +9,11 @@ function SaisirLesProduits() {
         devisId: "2029", quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
     });
-
-    fetch(`http://localhost:44453/Produit/GetAll`)
+    fetch(`http://localhost:44453/Produit/GetByDevisId?id=${idDevis}`)
         .then((res) => res.json())
         .then((data) => setProduit(data));
+
+ 
 
     const changeHandler = (e) => {
         setFormAddProduct({ ...formAddProduct, [e.target.name]: e.target.value })
