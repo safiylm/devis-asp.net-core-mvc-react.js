@@ -4,7 +4,6 @@ import SaisirUnClient from './Form/SaisirUnClient';
 import SaisirUneEntreprise from './Form/SaisirUneEntreprise';
 import SaisirLesProduits from './Form/SaisirLesProduits';
 import SaisirLesDerniersInformations from './Form/SaisirLesDerniersInformations';
-import { useSearchParams, useLocation }  from "react-router-dom"
 
 
 function Index() {
