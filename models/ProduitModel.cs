@@ -8,6 +8,6 @@
         public int PrixUnitaireHT { get; set; }
         public int TVA { get; set; }
         public DateTime DateCreation { get; set; }
-        public int DevisId { get; set; }
+        public string DevisId { get; set; }
     }
 }
