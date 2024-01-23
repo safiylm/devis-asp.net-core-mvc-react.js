@@ -1,8 +1,32 @@
 ﻿import React, { useState, useEffect } from "react"
 import "../../styles/devis.css"
-
+import jsPDF from 'jspdf';
+import { useRef } from 'react';
 
 const Devis = () => {
+
+    const reportTemplateRefHTML = useRef(null);
+
+    const handleGeneratePdf = () => {
+        const doc = new jsPDF({
+            orientation: 'p',
+            format: 'a0',
+            unit: 'px',
+           
+             putOnlyUsedFonts: true
+        });
+
+        
+
+        doc.html(reportTemplateRefHTML.current, {
+            async callback(doc) {
+               
+                await doc.save('devispdfessai');
+            },
+        });
+
+    };
+
 
     const url_ = window.location.pathname;
     const arrayURL = url_.split("/");
@@ -23,7 +47,7 @@ const Devis = () => {
     const sommePrixHT = produits.map(item => item.prixUnitaireHT).reduce((prev, curr) => prev + curr, 0);
     const sommeTotale = sommePrixTVA + sommePrixHT;
 
-    useEffect(() => { document.title = `Devis N° ${id}`; });
+    useEffect(() => { document.title = `Devis N° ${id}`; 
 
     fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
         .then((res) => res.json())
@@ -42,14 +66,18 @@ const Devis = () => {
     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${id_ }`)
         .then((res) => res.json())
         .then((data) => setProduit(data));
-
-   
+});
 
     return (
-        <div className="page-devis">
+        <>
 
-            <div className="div-devis">
-                <div className="div-devis2">
+            <button className="button" onClick={handleGeneratePdf}>
+                Generate PDF
+            </button>
+           
+           ,<div className="page-devis" ref={reportTemplateRefHTML}>
+                <div className="div-devis" id="devis" >
+               
                     <h1>Devis N° : {id} </h1>
 
             {(produits.length > 0 && clients.length > 0 && deviss.length > 0) &&                   
@@ -108,9 +136,9 @@ const Devis = () => {
                     <tr key={item.id}>
                         <td>{item.quantite }</td>
                         <td>{item.designation}</td>
-                        <td>{item.prixUnitaireHT}</td>
-                        <td>{item.tva}</td>
-                        <td>{item.prixUnitaireHT + item.tva}</td>
+                        <td>{item.prixUnitaireHT}$</td>
+                        <td>{item.tva}$</td>
+                        <td>{item.prixUnitaireHT + item.tva}$</td>
                       
                    </tr>
                 )) :
@@ -139,7 +167,8 @@ const Devis = () => {
         }
                 </div>
             </div>
-        </div>
+           
+    </>
     );
 }
 
