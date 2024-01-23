@@ -48,7 +48,7 @@ const Devis = () => {
     const sommeTotale = sommePrixTVA + sommePrixHT;
 
     useEffect(() => { document.title = `Devis N° ${id}`; 
-
+       
     fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
         .then((res) => res.json())
         .then((data) => setDevis(data) );
@@ -66,7 +66,8 @@ const Devis = () => {
     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${id_ }`)
         .then((res) => res.json())
         .then((data) => setProduit(data));
-});
+   }, []); 
+
 
     return (
         <>

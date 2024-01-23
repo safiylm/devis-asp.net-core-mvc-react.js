@@ -29,15 +29,15 @@ const ListeDevis = () => {
         setgenerateIdDevis(currentDate)
         setSuccess(true)
     }
+    useEffect(() => {
+        fetch('http://localhost:44453/Devis/GetAll')
+            .then((res) => res.json()  )
+            .then((data) => setDevis(data));
 
-    fetch('http://localhost:44453/Devis/GetAll')
-        .then((res) => res.json()  )
-        .then((data) => setDevis(data));
-
-    fetch("http://localhost:44453/Client/GetAll")
-        .then((res) => res.json())
-        .then((data) => setClients(data));
-
+        fetch("http://localhost:44453/Client/GetAll")
+            .then((res) => res.json())
+            .then((data) => setClients(data));
+    }, []); 
 
 
     return (
@@ -83,7 +83,7 @@ const ListeDevis = () => {
                                 <tr key={devis.id}>
                                     <td><Link to={`/Devis/${devis.id}/${devis.tempId}/${devis.clientId}/${devis.entrepriseId}`}>{devis.id}</Link></td>
 
-                                    {clients.filter(c => c.id == devis.clientId ).map(client => (
+                                    {clients.filter(c => c.id === devis.clientId ).map(client => (
                                         <td key={client.id}> {client.prenom} {client.nom} </td>
                                     ))}
 
@@ -94,12 +94,12 @@ const ListeDevis = () => {
                                     <td>
                                         {devis.totalHT + devis.totalTVA }$                                  </td>
                                     <td>
-                                        <a> {devis.dateCreation } </a>
+                                         {devis.dateCreation }
                                     </td>
                                     <td>
                                         Devis / Bon de commande
                                     </td>
-                                    <td><Link to="/Devis/Edit">Modifier</Link></td>
+                                    <td><Link to={`/Devis/Edit/${devis.id}`} >Modifier</Link></td>
                                 </tr>
 
                             )) : <tr><td>Chargement en cours ... </td></tr> )}
