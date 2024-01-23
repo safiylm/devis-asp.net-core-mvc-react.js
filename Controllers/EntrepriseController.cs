@@ -83,40 +83,22 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         }
 
 
-        // GET: AuteurModels/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.EntrepriseModel == null)
-            {
-                return NotFound();
-            }
 
-            var auteurModel = await _context.EntrepriseModel.FindAsync(id);
-            if (auteurModel == null)
-            {
-                return NotFound();
-            }
-            return View(auteurModel);
-        }
 
-        // POST: AuteurModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Email,Adresse,CodePostale,Ville,Telephone,SiteInternet,UserId,DateCreation")] EntrepriseModel auteurModel)
+        [Route("Entreprise/Edit")]
+        public object Edit(int id, [FromForm] EntrepriseModel auteurModel)
         {
             if (id != auteurModel.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid) {
                 try
                 {
-                    _context.Update(auteurModel);
-                    await _context.SaveChangesAsync();
+                    _context.EntrepriseModel.Update(auteurModel);
+                    _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -130,8 +112,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(auteurModel);
+           // }return View(auteurModel);
         }
 
         // GET: AuteurModels/Delete/5

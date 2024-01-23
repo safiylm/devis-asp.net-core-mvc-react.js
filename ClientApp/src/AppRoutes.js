@@ -5,7 +5,8 @@ import Index from './components/CreerUnDevis/Index';
 import Inscription from './components/Auth/Inscription'
 import Connexion from './components/Auth/Connexion';
 import MesDonneesPersonnelles from './components/MonCompte/MesDonneesPersonnelles';
-
+import DevisPDF from './components/Devis/DevisPDF';
+import EditDevis from "./components/Devis/Edit"
 const AppRoutes = [
   {
     index: true,
@@ -29,12 +30,19 @@ const AppRoutes = [
         element: < Index />
     },
     {
+        path: '/Devis/Edit/:id',
+        element: < EditDevis />
+    },
+    {
         path: '/ListeDevis',
         element: < ListeDevis />
     }, 
     {
         path: '/Devis/:id/:tempId/:clientId/:entrepriseId',
         element: < Devis />
+    }, {
+        path: '/a',
+        element: < DevisPDF />
     }
 ];
 

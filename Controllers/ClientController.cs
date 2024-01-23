@@ -21,7 +21,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         public IActionResult GetAll()
         {
-           
+
             return Json(_context.ClientModel.ToList());
 
         }
@@ -36,9 +36,9 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         // GET: Client
         public async Task<IActionResult> Index()
         {
-              return _context.ClientModel != null ? 
-                          View(await _context.ClientModel.ToListAsync()) :
-                          Problem("Entity set 'DevisContext.ClientModel'  is null.");
+            return _context.ClientModel != null ?
+                        View(await _context.ClientModel.ToListAsync()) :
+                        Problem("Entity set 'DevisContext.ClientModel'  is null.");
         }
 
         // GET: Client/Details/5
@@ -59,7 +59,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return View(clientModel);
         }
 
-   
+
 
         [HttpPost]
         [Route("Client/Create")]
@@ -68,12 +68,12 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             var res = "Erreur (ajouter client )";
             // check token
             // do something with data
-            if (data != null && data.Email != null && 
-                data.Nom!=null && data.Prenom != null &&
-                data.Adresse != null && data.CodePostale != 0  &&
-               data.Ville != null && data.Telephone != 0) { 
+            if (data != null && data.Email != null &&
+                data.Nom != null && data.Prenom != null &&
+                data.Adresse != null && data.CodePostale != 0 &&
+               data.Ville != null && data.Telephone != 0) {
 
-                _context.ClientModel.Add(data); 
+                _context.ClientModel.Add(data);
                 _context.SaveChangesAsync();
                 res = "Votre Client a été enregistré avec succès!";
             }
@@ -82,52 +82,17 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(/*[Bind("Id,Nom,Prenom,Email,Adresse,CodePostale,Ville,Telephone,DateCreation,DevisId")] ClientModel clientModel*/)
-        //{
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //  
-        //    //}
-        //    Console.WriteLine(HttpContext.Request.Body);
-        //    return View();
-        //}
-
-        // GET: Client/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.ClientModel == null)
-            {
-                return NotFound();
-            }
-
-            var clientModel = await _context.ClientModel.FindAsync(id);
-            if (clientModel == null)
-            {
-                return NotFound();
-            }
-            return View(clientModel);
-        }
-
-        // POST: Client/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Prenom,Email,Adresse,CodePostale,Ville,Telephone,DateCreation,DevisId")] ClientModel clientModel)
-        {
-            if (id != clientModel.Id)
-            {
-                return NotFound();
-            }
+        [Route("Client/Edit")]
 
-            if (ModelState.IsValid)
-            {
+        public object Edit( [FromForm] ClientModel clientModel)
+        {
+        
+            //if (ModelState.IsValid) {
                 try
                 {
-                    _context.Update(clientModel);
-                    await _context.SaveChangesAsync();
+                    _context.ClientModel.Update(clientModel);
+                     _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -141,8 +106,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(clientModel);
+           // }
+           // return View(clientModel);
         }
 
         // GET: Client/Delete/5

@@ -59,21 +59,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
       
 
-        // GET: Devis/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.DevisModel == null)
-            {
-                return NotFound();
-            }
-
-            var devisModel = await _context.DevisModel.FindAsync(id);
-            if (devisModel == null)
-            {
-                return NotFound();
-            }
-            return View(devisModel);
-        }
+    
 
         // POST: Devis/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
