@@ -11,7 +11,7 @@ nav{
 
 .container-auth {
     background: linear-gradient(to bottom, #152e31 0%, #112632 100%);
-    width: 100%;
+   
     height: 100%;
     margin: 0;
     height: 85vh;
@@ -27,9 +27,7 @@ nav{
     width: 100% !important;
     min-width: 100vw;
     margin: 0 auto ;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+   
 }
 
 .container-auth h1{

@@ -2,16 +2,20 @@
     width: 100%;
 }
 
-.div-search-{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
-    margin: 15px 0;
+.div-search- {
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background: linear-gradient(to bottom, #152e31 0%, #112632 100%);
+  
+    color:white;
 }
     .div-search- input, 
     .div-search- button  {
-        margin: 0 15px;
+        margin: 15px;
         max-height: 50px;
         height: 40px;
         width: auto;
@@ -22,6 +26,7 @@
     font-family: Tahoma;
     font-weight: 200;
     margin: 25px 0;
+    
 }
 
     .page-liste-devis table {
