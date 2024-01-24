@@ -87,22 +87,27 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         [HttpPost]
         [Route("Entreprise/Edit")]
-        public object Edit(int id, [FromForm] EntrepriseModel auteurModel)
+        public object Edit( [FromForm] EntrepriseModel data)
         {
-            if (id != auteurModel.Id)
+           
+            var res = "Erreur, les données de votre entreprise n'a pas été modifier.";
+            if (data != null && data.Email != null &&
+             data.Nom != null &&
+             data.Adresse != null && data.CodePostale != 0 &&
+            data.Ville != null && data.Telephone != 0)
             {
-                return NotFound();
-            }
 
-            //if (ModelState.IsValid) {
+                //if (ModelState.IsValid) {
                 try
                 {
-                    _context.EntrepriseModel.Update(auteurModel);
+                    _context.EntrepriseModel.Update(data);
                     _context.SaveChangesAsync();
+                    res = "Les données de votre entreprise a été modifier avec succès!";
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AuteurModelExists(auteurModel.Id))
+                    if (!AuteurModelExists(data.Id))
                     {
                         return NotFound();
                     }
@@ -111,7 +116,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+            }
+                return res ;
            // }return View(auteurModel);
         }
 
