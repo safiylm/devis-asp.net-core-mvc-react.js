@@ -15,10 +15,6 @@ const EditClient = () => {
         fetch(`http://localhost:44453/Client/GetById?id=${clientId_param}`)
             .then((res) => res.json())
             .then((data) => setClients(data))
-
-
-      
-
     }, []); 
 
      clients.forEach((item) => {
@@ -29,7 +25,6 @@ const EditClient = () => {
         formclient.codePostale = item.codePostale
         formclient.ville = item.ville
         formclient.telephone = item.telephone
-
     })
 
 

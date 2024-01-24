@@ -3,6 +3,7 @@ import "../../styles/devis.css"
 import EditClient from "./Edit/Client"
 import EditEntreprise from "./Edit/Entreprise"
 import EditProduits from "./Edit/Produits"
+import EditDevisLeReste from "./Edit/LeReste";
 
 const EditDevis = () => {
     const [show, setShow] =useState("R")
@@ -23,7 +24,8 @@ const EditDevis = () => {
             <br/>
             {show == "Client" && <EditClient />}
             {show == "Entreprise" && <EditEntreprise/> }
-            {show == "Produits" && <EditProduits /> }
+            {show == "Produits" && <EditProduits />}
+            {show == "Last element" && <EditDevisLeReste />}
         </>
     );
 }

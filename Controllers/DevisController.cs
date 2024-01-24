@@ -57,27 +57,27 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return Json(res);
         }
 
-      
 
-    
+
+
 
         // POST: Devis/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,AuteurId,UserId,DateCreation")] DevisModel devisModel)
+        [Route("Devis/Edit")]
+        public async Task<object> Edit([FromForm] DevisModel devisModel)
         {
-            if (id != devisModel.Id)
-            {
-                return NotFound();
-            }
+            var res = "Erreur (ajouter Devis )";
 
-            if (ModelState.IsValid)
+
+            if (devisModel != null && devisModel.Id != 0 &&
+                devisModel.Motif != null && devisModel.ClientId != 0
+                && devisModel.EntrepriseId != 0 && devisModel.TempId != "")
             {
                 try
                 {
-                    _context.Update(devisModel);
+                    _context.DevisModel.Update(devisModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -91,10 +91,10 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(devisModel);
-        }
+    
+             return Json(res);
+    }
 
         // GET: Devis/Delete/5
         public async Task<IActionResult> Delete(int? id)
