@@ -72,7 +72,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                 data.Nom != null && data.Prenom != null &&
                 data.Adresse != null && data.CodePostale != 0 &&
                data.Ville != null && data.Telephone != 0) {
-
+                data.DateCreation = DateTime.Now;
                 _context.ClientModel.Add(data);
                 _context.SaveChangesAsync();
                 res = "Votre Client a été enregistré avec succès!";
@@ -85,18 +85,25 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         [HttpPost]
         [Route("Client/Edit")]
 
-        public object Edit( [FromForm] ClientModel clientModel)
+        public object Edit( [FromForm] ClientModel data)
         {
-        
-            //if (ModelState.IsValid) {
+            var res = "Erreur, les données de votre client n'a pas été modifier.";
+            if (data != null && data.Email != null &&
+             data.Nom != null && data.Prenom != null &&
+             data.Adresse != null && data.CodePostale != 0 &&
+            data.Ville != null && data.Telephone != 0)
+            {
+                //if (ModelState.IsValid) {
                 try
                 {
-                    _context.ClientModel.Update(clientModel);
-                     _context.SaveChangesAsync();
+                    _context.ClientModel.Update(data);
+                     _context.SaveChangesAsync();               
+                    res = "Les données de votre client a été modifier avec succès!";
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientModelExists(clientModel.Id))
+                    if (!ClientModelExists(data.Id))
                     {
                         return NotFound();
                     }
@@ -105,9 +112,9 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-           // }
-           // return View(clientModel);
+              
+            }
+            return Json(res);
         }
 
         // GET: Client/Delete/5

@@ -3,26 +3,40 @@ import "../../../styles/devis.css"
 
 
 const EditClient = () => {
-    const clientId_param = 3011;
+    const clientId_param = 4005;
     const [clients, setClients] = useState([]);
     const [formclient, setFormClient] = useState({
-        nom: "", prenom: "", email: "",
+        id: clientId_param, nom: "", prenom: "", email: "",
         adresse: "", codePostale: 0, ville: "",
         telephone: 0
     });
 
- 
     useEffect( () => {
         fetch(`http://localhost:44453/Client/GetById?id=${clientId_param}`)
             .then((res) => res.json())
             .then((data) => setClients(data))
 
+
+      
+
     }, []); 
+
+     clients.forEach((item) => {
+        formclient.nom = item.nom
+        formclient.prenom = item.prenom
+        formclient.email = item.email
+        formclient.adresse = item.adresse
+        formclient.codePostale = item.codePostale
+        formclient.ville = item.ville
+        formclient.telephone = item.telephone
+
+    })
 
 
     const changeHandlerClient = (e) => {
         setFormClient({ ...formclient, [e.target.name]: e.target.value })
     }
+
 
     const editClientSubmit = (event) => {
         let formData = new FormData();
@@ -56,22 +70,21 @@ const EditClient = () => {
 
     return (
         <>
-            {clients.map((item) => (
-                <form key={item.id} onSubmit={editClientSubmit} >
+                <form  onSubmit={editClientSubmit} >
 
                     <h1>Modifier les données du client </h1>
                     
-                    <input type="text" className="form-control" name="nom" onChange={changeHandlerClient} defaultValue={item.nom} />
-                    <input type="text" className="form-control" name="prenom" onChange={changeHandlerClient} defaultValue={item.prenom} />
-                    <input type="email" className="form-control" name="email" onChange={changeHandlerClient} defaultValue={item.email} />
-                    <input type="text" className="form-control" name="adresse" onChange={changeHandlerClient} defaultValue={item.adresse} />
-                    <input className="form-control" name="codePostale" onChange={changeHandlerClient} defaultValue={item.codePostale} />
-                    <input type="text" className="form-control" name="ville" onChange={changeHandlerClient} defaultValue={item.ville} />
-                    <input className="form-control" name="telephone" onChange={changeHandlerClient} defaultValue={item.telephone} />
+                <input type="text" className="form-control" name="nom" onChange={changeHandlerClient} defaultValue={formclient.nom} />
+                <input type="text" className="form-control" name="prenom" onChange={changeHandlerClient} defaultValue={formclient.prenom} />
+                <input type="email" className="form-control" name="email" onChange={changeHandlerClient} defaultValue={formclient.email} />
+                <input type="text" className="form-control" name="adresse" onChange={changeHandlerClient} defaultValue={formclient.adresse} />
+                <input type="number" className="form-control" name="codePostale" onChange={changeHandlerClient} defaultValue={formclient.codePostale} />
+                <input type="text" className="form-control" name="ville" onChange={changeHandlerClient} defaultValue={formclient.ville} />
+                <input className="form-control" name="telephone" onChange={changeHandlerClient} defaultValue={formclient.telephone} />
                         <button className="btn btn-success" type="submit">Modifier </button>
                 
                        
-            </form> ))}
+            </form>
      </>
     );
 }
