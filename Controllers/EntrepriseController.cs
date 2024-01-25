@@ -87,12 +87,24 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         [HttpPost]
         [Route("Entreprise/Edit")]
-        public object Edit( [FromForm] EntrepriseModel data)
+        public object Edit( int? id, [FromForm] EntrepriseModel data)
         {
-           
             var res = "Erreur, les données de votre entreprise n'a pas été modifier.";
+
+            var ancien = _context.EntrepriseModel.AsNoTracking().Where(e => e.Id == id).First();
+
+            if (data.Nom == null) { data.Nom = ancien.Nom; }
+            if (data.Email == null) { data.Email = ancien.Email; }
+            if (data.Adresse == null) { data.Adresse = ancien.Adresse; }
+            if (data.CodePostale == 0) { data.CodePostale = ancien.CodePostale; }
+            if (data.Ville == null) { data.Ville = ancien.Ville; }
+            if (data.Telephone == 0) { data.Telephone = ancien.Telephone; }
+            if (data.SiteInternet == null) { data.SiteInternet = ancien.SiteInternet; }
+            data.DateCreation = DateTime.Now;
+         
+
             if (data != null && data.Email != null &&
-             data.Nom != null &&
+             data.Nom != null && data.SiteInternet !=null &&
              data.Adresse != null && data.CodePostale != 0 &&
             data.Ville != null && data.Telephone != 0)
             {
@@ -117,9 +129,9 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                     }
                 }
             }
-                return res ;
-           // }return View(auteurModel);
+                return Json(res) ;
         }
+
 
         // GET: AuteurModels/Delete/5
         public async Task<IActionResult> Delete(int? id)

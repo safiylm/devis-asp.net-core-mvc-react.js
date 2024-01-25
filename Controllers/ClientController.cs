@@ -96,11 +96,34 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             if (data.Ville == null) { data.Ville = ancien.Ville; }
             if (data.Telephone == 0) { data.Telephone = ancien.Telephone; }
             data.DateCreation = DateTime.Now;
-                _context.ClientModel.Update(data);
+
+            if (data != null && data.Email != null &&
+          data.Nom != null && data.Prenom != null &&
+          data.Adresse != null && data.CodePostale != 0 &&
+         data.Ville != null && data.Telephone != 0)
+            {
+
+                //if (ModelState.IsValid) {
+                try
+                {
+                    
+                    _context.ClientModel.Update(data);
                 _context.SaveChanges();
                 res = "Les données de votre client a été modifier avec succès!";
-           
-            return Json(data);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClientModelExists(data.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return Json(res);
         }
 
         // GET: Client/Delete/5
