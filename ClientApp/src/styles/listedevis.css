@@ -56,13 +56,14 @@
     width: 700px;
     height: auto;
     top: 50%;
-    left: 60%;
+    left: 50%;
     transform: translate(-50%, -50%);
     opacity: 1;
     z-index: 1;
     font-family: "ProximaNova-Regular", sans-serif;
     font-weight: 100;
-    background-color: whitesmoke;
+    background: linear-gradient(to bottom, #152e31 0%, #112632 100%);
+    color: white;
     box-shadow: 3px 3px 10px #283527;
     border-radius: 9px;
     padding: 50px;

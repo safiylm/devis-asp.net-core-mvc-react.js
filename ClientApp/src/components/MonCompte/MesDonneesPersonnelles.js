@@ -3,12 +3,13 @@ import '../../styles/dataperso.css';
 
 const MesDonneesPersonnelles = () => {
     const [users, setUser] = useState([]);
-    useEffect(() => { document.title = 'Mes données personnelles'; });
+    useEffect(() => { document.title = 'Mes données personnelles'; 
 
-    fetch('http://localhost:44453/User/GetById?id=1')
-        .then((res) => res.json())
-        .then((data) => setUser(data));
+        fetch('http://localhost:44453/User/GetById?id=1')
+            .then((res) => res.json())
+            .then((data) => setUser(data));
 
+    }, []); 
 
 
     const updateNom = () => {
@@ -25,16 +26,16 @@ const MesDonneesPersonnelles = () => {
                 users.map(user => (
                     <div className="div-mes-donnees-perso-flex" key={user.id}>
 
-                    <div className="div1" id="form-pre-nom" >
-                            <label> Prénom<input id="input-prenom-id" className="form-control" value={user.prenom} /></label> 
-                            <label> Nom <input className="form-control" value={user.nom} /></label> 
+                        <div className="div1" id="form-pre-nom" >
+                            <label> Prénom<input id="input-prenom-id" className="form-control" defaultValue={user.prenom} /></label> 
+                            <label> Nom <input className="form-control" defaultValue={user.nom} /></label> 
                             <button onClick={ updateNom() }>Modifier </button>
                     </div>
 
                   
                      <div className="div1">
                             <label> Saisissez votre ancien mot de passe
-                                <input placeholder="Saisissez votre ancien mot de passe" className="form-control" value={user.password} />
+                                <input placeholder="Saisissez votre ancien mot de passe" className="form-control" defaultValue={user.password} />
                             </label> 
                             <label> Saisissez votre nouveau mot de passe
                                 <input placeholder="Saisissez votre nouveau mot de passe" className="form-control" />
@@ -48,12 +49,12 @@ const MesDonneesPersonnelles = () => {
 
 
                     <div className="div1" id="form-email" >
-                            <label> Email <input className="form-control" value={user.email} /></label> 
+                            <label> Email <input className="form-control" defaultValue={user.email} /></label> 
                             <button>Modifier votre email</button>
                      </div>
 
                      <div className="div1">
-                            <label> Téléphone <input className="form-control" value={user.telephone} /></label> 
+                            <label> Téléphone <input className="form-control" defaultValue={user.telephone} /></label> 
                             <button>Modifier votre téléphone</button>
                      </div>
 
