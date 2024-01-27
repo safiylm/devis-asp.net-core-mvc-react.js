@@ -129,44 +129,38 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         }
 
 
-        // GET: Produit/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.ProduitModel == null)
-            {
-                return NotFound();
-            }
-
-            var produitModel = await _context.ProduitModel.FindAsync(id);
-            if (produitModel == null)
-            {
-                return NotFound();
-            }
-            return View(produitModel);
-        }
-
-        // POST: Produit/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Quantite,Designation,PrixUnitaireHT,TVA,DateCreation")] ProduitModel produitModel)
-        {
-            if (id != produitModel.Id)
-            {
-                return NotFound();
-            }
+        [Route("Produit/Edit")]
 
-            if (ModelState.IsValid)
+        public object Edit(int? id, [FromForm] ProduitModel data)
+        {
+
+            var res = "Erreur, votre produit n'a pas pu être modifier, veuillez recommencer.";
+            var ancien = _context.ProduitModel.AsNoTracking().Where(e => e.Id == id).First();
+
+            if (data.Quantite == 0) { data.Quantite = ancien.Quantite; }
+            if (data.Designation == null) { data.Designation = ancien.Designation; }
+            if (data.PrixUnitaireHT == 0) { data.PrixUnitaireHT = ancien.PrixUnitaireHT; }
+            if (data.TVA == 0) { data.TVA = ancien.TVA; }
+            if (data.DevisId == null) { data.DevisId = ancien.DevisId; }
+           
+            data.DateCreation = DateTime.Now;
+
+                if (data != null && data.TVA != 0 && data.Designation != null
+                && data.Quantite != 0 && data.PrixUnitaireHT != 0 )
             {
+
+                //if (ModelState.IsValid) {
                 try
                 {
-                    _context.Update(produitModel);
-                    await _context.SaveChangesAsync();
+
+                    _context.ProduitModel.Update(data);
+                    _context.SaveChanges();
+                    res = "Votre produit a été modifier avec succès!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProduitModelExists(produitModel.Id))
+                    if (!ProduitModelExists(data.Id))
                     {
                         return NotFound();
                     }
@@ -175,9 +169,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(produitModel);
+            return Json(res);
         }
 
         // GET: Produit/Delete/5
@@ -199,10 +192,12 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         }
 
         // POST: Produit/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("Produit/Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var res = "Erreur Suprrimer Produit ";
+
             if (_context.ProduitModel == null)
             {
                 return Problem("Entity set 'DevisContext.ProduitModel'  is null.");
@@ -214,8 +209,13 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(res);
         }
+
+
+
+
+
 
         private bool ProduitModelExists(int id)
         {

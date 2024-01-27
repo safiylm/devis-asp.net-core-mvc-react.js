@@ -2,8 +2,9 @@
 import "../../../styles/devis.css"
 
 
-const EditEntreprise = () => {
-    const entrepriseId_param = 1;
+const EditEntreprise = ({ entrepriseId_param }) => {
+    const [message, setMessage] = useState("");
+
     const [formEntreprise, setFormEntreprise] = useState({
         id: entrepriseId_param, nom:"", email:"",
         adresse: "", codePostale: 0, ville:"",
@@ -48,7 +49,7 @@ const EditEntreprise = () => {
             request.onload = function () {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
-                    //setMessage(response);     
+                    setMessage(response);     
                 }
             }.bind(this);
             request.send(formData);
@@ -71,6 +72,7 @@ const EditEntreprise = () => {
                     <input type="text" className="form-control" name="siteInternet" onChange={changeHandlerEntreprise} defaultValue={formEntreprise[0].siteInternet} />
 
                     <button className="btn btn-success" type="submit">Modifier </button>
+                    <p style={{ color: "red" }}>{message}</p> 
 
                 </form>
             </>}

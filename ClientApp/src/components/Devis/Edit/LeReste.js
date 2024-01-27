@@ -2,41 +2,29 @@
 import "../../../styles/devis.css"
 
 
-const EditDevisLeReste = () => {
-  const [success, setSuccess] = useState(false);
-    const devisId = 2029;
-    const [devis, setDevis] = useState([]);
+const EditDevisLeReste = ({ devisId, devisTempId, clientId, entrepriseId, userId, totalTVA, totalHT }) => {
+  const [message, setMessage] = useState("");
+  
 
     const [formdevis, setFormDevis] = useState({
-        tempId: 98465132,
+        tempId: devisTempId,
         motif: "",
-        clientId: 4005,
-        entrepriseId: 1,
+        clientId: clientId,
+        entrepriseId: entrepriseId,
         userId: 21,
-        totalTVA: 6666,
-        totalHT: 6666,
+        totalTVA: totalTVA,
+        totalHT: totalHT,
         accompteQuantite: 0,
         accomptePourcentage:0 ,
         accompteInformations: "",
         informationSuplementaire: "",
-        dateCreation: Date.now
     });
 
     useEffect(() => {
         fetch(`http://localhost:44453/Devis/GetById?id=${devisId}`)
             .then((res) => res.json())
-            .then((data) => setDevis(data))
+            .then((data) => setFormDevis(data))
     }, []); 
-
-    devis.forEach((item) => {
-        formdevis.motif = item.motif
-        formdevis.accomptePourcentage = item.accomptePourcentage
-        formdevis.accompteQuantite = item.accompteQuantite
-        formdevis.accompteInformations = item.accompteInformations
-        formdevis.informationSuplementaire = item.informationSuplementaire
-       
-    })
-
 
 
     const changeHandler = (e) => {
@@ -44,6 +32,14 @@ const EditDevisLeReste = () => {
     }
 
     const editDevisSubmit = (event) => {
+        formdevis.Id = devisId;
+        formdevis.TempId = devisTempId;
+        formdevis.ClientId = clientId;
+        formdevis.EntrepriseId = entrepriseId;
+        formdevis.UserId = userId;
+        formdevis.TotalTVA = totalTVA;
+        formdevis.TotalHT = totalHT;
+
         let formData = new FormData();
         Object.keys(formdevis).forEach(function (key) {
             formData.append(key, formdevis[key]);
@@ -61,11 +57,11 @@ const EditDevisLeReste = () => {
         }
         if (request != null) {
 
-            request.open("POST", "Devis/Edit", false);
+            request.open("POST", `Devis/Edit?id=${devisId}`, false);
             request.onload = function () {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
-                    // setMessage(response);
+                    setMessage(response);
 
                 }
             }.bind(this);
@@ -73,29 +69,31 @@ const EditDevisLeReste = () => {
         }
     }
     return (
-        <>
-            <h1>Modifier </h1>
-            <form onSubmit={editDevisSubmit }>
-                <label>Motif du devis :
-                    <input type="text" name="motif" className="form-control" onChange={changeHandler} defaultValue={formdevis.motif } />
-                </label><br />
-                <label>Accompte pourcentage :
-                    <input name="accomptePourcentage" className="form-control" onChange={changeHandler} defaultValue={formdevis.accomptePourcentage} />
-                </label><br />
-                <label>Accompte quantitée :
-                    <input name="accompteQuantite" className="form-control" onChange={changeHandler} defaultValue={formdevis.accompteQuantite} />
-                </label><br />
-                <label>Accompte informations :
-                    <input name="accompteInformations" className="form-control" onChange={changeHandler} defaultValue={formdevis.accompteInformations} />
-                </label><br />
-                <label>Informations suplémentaires :
-                    <input name="informationSuplementaire" className="form-control" onChange={changeHandler} defaultValue={formdevis.informationSuplementaire } />
-                </label><br />
-                <p>Mode de paiement </p>
-                <button type="submit" className="btn btn-success">Enregistrer et terminer</button>
-
-            </form>
-      </>
+       
+         <>
+                <h1>Modifier </h1>{ formdevis[0] != undefined &&
+                <form onSubmit={editDevisSubmit} className="div-saisir"  >
+                    <label>Motif du devis :
+                        <input type="text" name="motif" className="form-control" onChange={changeHandler} defaultValue={formdevis[0].motif} />
+                    </label><br />
+                    <label>Accompte pourcentage :
+                        <input name="accomptePourcentage" className="form-control" onChange={changeHandler} defaultValue={formdevis[0].accomptePourcentage} />
+                    </label><br />
+                    <label>Accompte quantitée :
+                        <input name="accompteQuantite" className="form-control" onChange={changeHandler} defaultValue={formdevis[0].accompteQuantite} />
+                    </label><br />
+                    <label>Accompte informations :
+                        <input name="accompteInformations" className="form-control" onChange={changeHandler} defaultValue={formdevis[0].accompteInformations} />
+                    </label><br />
+                    <label>Informations suplémentaires :
+                        <input name="informationSuplementaire" className="form-control" onChange={changeHandler} defaultValue={formdevis[0].informationSuplementaire} />
+                    </label><br />
+                    <p>Mode de paiement </p>
+                    <button type="submit" className="btn btn-success">Enregistrer et terminer</button>
+                    <p style={{color: "red" }}>{message}</p> 
+                </form>
+            } </>
+       
     );
 }
 

@@ -2,8 +2,9 @@
 import "../../../styles/devis.css"
 
 
-const EditClient = () => {
-    const clientId_param = 4005;
+const EditClient = ({ clientId_param }) => {
+  const [message, setMessage] = useState("");
+
     const [formclient, setFormClient] = useState({
         id: clientId_param, nom: "", prenom: "", email: "",
         adresse: "", codePostale: 0, ville: "",
@@ -47,7 +48,7 @@ const EditClient = () => {
             request.onload = function () {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
-                   // setMessage(response);
+                    setMessage(response);
                    
                 }
             }.bind(this);
@@ -73,7 +74,8 @@ const EditClient = () => {
                 <input type="text" className="form-control" name="ville" onChange={changeHandlerClient} defaultValue={formclient[0].ville} />
                 <input className="form-control" name="telephone" onChange={changeHandlerClient} defaultValue={formclient[0].telephone} />
                 <button className="btn btn-success" type="submit">Modifier </button>
-                
+                    <p style={{color: "red" }}>{message}</p> 
+
           </> }             
                 </form>
        
