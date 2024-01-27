@@ -1,19 +1,18 @@
-﻿import React, {  useState } from 'react';
+﻿import React, {  useState, useEffect} from 'react';
 import '../../../styles/FormListeClientEntreprise.css';
 
-const ListeEntreprise = ({ setIdEntreprise, changeNumEtape }) => {
+const ListeEntreprise = ({ idEntreprise, setIdEntreprise, changeNumEtape }) => {
 
     const [entreprises, setEntreprise] = useState([])
  
+    useEffect(() => {
 
-    fetch('http://localhost:44453/Entreprise/getAll')
-        .then((res) => res.json())
-        .then((data) => setEntreprise(data));
-
+        fetch('http://localhost:44453/Entreprise/getAll')
+            .then((res) => res.json())
+            .then((data) => setEntreprise(data));
+    },[])
 
     const onChange = (e) => {
-       
-        alert(e.target.value)
         setIdEntreprise(e.target.value)
         changeNumEtape(2);
     }
@@ -27,12 +26,23 @@ const ListeEntreprise = ({ setIdEntreprise, changeNumEtape }) => {
                 {(entreprises.length > 0) ?
                     entreprises.map((item) => (
                         <div key={item.id}>
-                            <label>
-                                <input type="radio" name="entreprisechoose"
-                                    onChange={onChange} value={item.id} />
-                                    {item.nom} {item.ville} {item.email}
-                           
-                            </label>
+
+                      
+                            {(idEntreprise == item.id) ?
+                                <label>
+                                    <input type="radio" name="entreprisechoose"
+                                        onChange={onChange} value={item.id} checked />
+                                    {item.nom} <br /> {item.email} <br />{item.ville}
+
+                                </label>
+                                :
+                                <label>
+                                    <input type="radio" name="entreprisechoose"
+                                        onChange={onChange} value={item.id} />
+                                    {item.nom} <br /> {item.email} <br />{item.ville}
+
+                                </label>
+                            }
                         </div>
                 ))
                 : <p> Chargement des entreprises ...</p>}

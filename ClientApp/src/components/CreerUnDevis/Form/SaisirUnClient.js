@@ -2,7 +2,7 @@
 import '../../../styles/formCreationDevis.css';
 import ListeClient from '../Liste/ListeClient.js'
 
-const SaisirUnClient = ({ changeNumEtape, setEmailClient, setDateCreationClient, setIdClient }) => {
+const SaisirUnClient = ({ idClient, changeNumEtape, setEmailClient, setDateCreationClient, setIdClient }) => {
 
 
     const [message, setMessage] = useState("");
@@ -57,7 +57,7 @@ const SaisirUnClient = ({ changeNumEtape, setEmailClient, setDateCreationClient,
     return (
         <div className="div-choisir-ou-saisir" >
 
-            <ListeClient setIdClient={setIdClient} changeNumEtape={changeNumEtape }  />
+            <ListeClient idClient={idClient} setIdClient={setIdClient} changeNumEtape={changeNumEtape }  />
             
             <div className="div-saisir">
                 <form onSubmit={handleClick}>

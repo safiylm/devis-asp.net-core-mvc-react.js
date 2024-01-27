@@ -2,7 +2,7 @@
 import '../../../styles/formCreationDevis.css';
 import ListeEntreprise from '../Liste/ListeEntreprise.js'
 
-const SaisirUneEntreprise = ({ changeNumEtape, setDateCreationEntreprise, setEmailEntreprise, setIdEntreprise})=>{
+const SaisirUneEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEntreprise, setEmailEntreprise, setIdEntreprise})=>{
   
      const [message, setMessage] = useState("");
      const [entreprise, setEntreprise] = useState({
@@ -55,7 +55,7 @@ const SaisirUneEntreprise = ({ changeNumEtape, setDateCreationEntreprise, setEma
     
      return (
          <div className="div-choisir-ou-saisir" >
-             <ListeEntreprise setIdEntreprise={setIdEntreprise} changeNumEtape={changeNumEtape } />
+             <ListeEntreprise idEntreprise={idEntreprise} setIdEntreprise={setIdEntreprise} changeNumEtape={changeNumEtape } />
             
              <div className="div-saisir">
                  <form onSubmit={handleSubmit}>

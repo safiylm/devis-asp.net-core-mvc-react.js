@@ -1,13 +1,16 @@
-﻿import React, {  useState } from 'react';
+﻿import React, {  useState, useEffect } from 'react';
 import '../../../styles/FormListeClientEntreprise.css';
 
-const SaisirUnClient = ({ setIdClient, changeNumEtape }) => {
+const SaisirUnClient = ({ idClient, setIdClient, changeNumEtape }) => {
 
     const [clientsDB, setClientDB] = useState([])
+    useEffect(() => {
 
-    fetch('http://localhost:44453/Client/getAll')
-        .then((res) => res.json())
-        .then((data) => setClientDB(data));
+        fetch('http://localhost:44453/Client/getAll')
+            .then((res) => res.json())
+            .then((data) => setClientDB(data));
+    }, []);
+
 
     const onChange = (e) => {
        
@@ -25,13 +28,22 @@ const SaisirUnClient = ({ setIdClient, changeNumEtape }) => {
            
               {(clientsDB.length > 0) ?
                    clientsDB.map((item) => (
-                        <div key={item.id}>
+                       <div key={item.id}>
+                           {(idClient == item.id) ?
+                               <label>
+                                   <input type="radio" name="clientchoose"
+                                       onChange={onChange} value={item.id} checked />
+                                    {item.nom} <br /> {item.email} <br />{item.ville}
+
+                               </label>
+                           :
                             <label>
                                <input type="radio" name="clientchoose"
                                    onChange={onChange} value={item.id }/>
-                                    {item.nom} {item.ville} {item.email}
+                                   {item.nom} <br /> {item.email} <br />{item.ville}
                            
-                            </label>
+                           </label>
+                           }
                         </div>
                 ))
                : <p> Chargement des clients ...</p>}

@@ -1,4 +1,4 @@
-﻿import React, { Component, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import '../../../styles/formCreationDevis.css';
 
 function SaisirLesProduits({ idDevis, setSommePrixTVA, setSommePrixHT }) {
@@ -9,10 +9,13 @@ function SaisirLesProduits({ idDevis, setSommePrixTVA, setSommePrixHT }) {
         devisId: idDevis, quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
     });
-    fetch(`http://localhost:44453/Produit/GetByDevisId?id=${idDevis}`)
-        .then((res) => res.json())
-        .then((data) => setProduit(data));
 
+    useEffect(() => {
+
+        fetch(`http://localhost:44453/Produit/GetByDevisId?id=${idDevis}`)
+            .then((res) => res.json())
+            .then((data) => setProduit(data));
+    },[])
  
 
     const changeHandler = (e) => {
