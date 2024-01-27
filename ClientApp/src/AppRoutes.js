@@ -30,7 +30,7 @@ const AppRoutes = [
         element: < Index />
     },
     {
-        path: '/Devis/Edit/:id',
+        path: '/Devis/Edit/:id/:tempId/:clientId/:entrepriseId',
         element: < EditDevis />
     },
     {

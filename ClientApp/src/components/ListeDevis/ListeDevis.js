@@ -15,6 +15,7 @@ const ListeDevis = () => {
     const hrefDataUsers = () => {
         document.location.href ="/MonCompte/MesDonneesPersonnelles"
     }
+
     const generateId = () => {
         const today = new Date();
         const month = today.getMonth() + 1;
@@ -57,9 +58,9 @@ const ListeDevis = () => {
         </div>
 
             {show && <div className="div-commencer-createdevis-show">
-                <h1>Commançons la création d'un nouveau devis </h1><br />
-                <button className="btn btn-success" onClick={generateId}>Commencer</button><br/>
-                <button className="btn btn-light" onClick={() => setShow(false)}>Annuler</button><br />
+                <h1>Commençons la création d'un nouveau devis </h1><br />
+                <button className="btn btn-light" onClick={generateId} >Commencer</button> &nbsp;
+                <button className="btn btn-light" onClick={() => setShow(false)} >Annuler</button><br />
                 </div>}
             {success && <Navigate to={{ pathname: `/CreerUnDevis/${generateIdDevis}` }} replace={true} />}
 
@@ -99,13 +100,11 @@ const ListeDevis = () => {
                                     <td>
                                         Devis / Bon de commande
                                     </td>
-                                    <td><Link to={`/Devis/Edit/${devis.id}`} >Modifier</Link></td>
+                                    <td><Link to={`/Devis/Edit/${devis.id}/${devis.tempId}/${devis.clientId}/${devis.entrepriseId}`} > Modifier</Link>
+                                </td>
                                 </tr>
 
-                            )) : <tr><td>Chargement en cours ... </td></tr> )}
-                            
-                           
-                      
+                            )) : <tr><td>Chargement en cours ... </td></tr> )}        
                   
                 </tbody>
                     </table>

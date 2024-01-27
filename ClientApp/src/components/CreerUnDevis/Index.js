@@ -31,8 +31,8 @@ function Index() {
                 Client = {idClient}{emailClient}{dateCreationClient}
                 <PorgressBarCreationDevis numEtapee={numEtapee} changeNumEtape={changeNumEtape } />
 
-                {numEtapee == 1 && < SaisirUneEntreprise setIdEntreprise={setIdEntreprise} setDateCreationEntreprise={setDateCreationEntreprise} setEmailEntreprise={setEmailEntreprise} changeNumEtape={changeNumEtape} />}
-                {numEtapee == 2 && < SaisirUnClient setIdClient={setIdClient} setEmailClient={setEmailClient} setDateCreationClient={setDateCreationClient} changeNumEtape={changeNumEtape} />}
+            {numEtapee == 1 && < SaisirUneEntreprise idEntreprise={idEntreprise} setIdEntreprise={setIdEntreprise} setDateCreationEntreprise={setDateCreationEntreprise} setEmailEntreprise={setEmailEntreprise} changeNumEtape={changeNumEtape} />}
+            {numEtapee == 2 && < SaisirUnClient idClient={idClient} setIdClient={setIdClient} setEmailClient={setEmailClient} setDateCreationClient={setDateCreationClient} changeNumEtape={changeNumEtape} />}
             {numEtapee == 3 && < SaisirLesProduits idDevis={id_param} changeNumEtape={changeNumEtape} setSommePrixTVA={setSommePrixTVA} setSommePrixHT={setSommePrixHT }/>}
             {numEtapee == 4 && < SaisirLesDerniersInformations idDevis={id_param} changeNumEtape={changeNumEtape} idClient={idClient} idEntreprise={idEntreprise} sommePrixTVA={sommePrixTVA} sommePrixHT={sommePrixHT }/> }
         </div>

@@ -23,63 +23,7 @@ export class Home extends Component {
                 Modele
             </a>
         <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-            <fieldset>
-                <legend>Devis app features:</legend>
-
-              
-
-
-                <h4>Front end </h4>
-
-                <div>
-                    <input type="checkbox" id="" name="z" check />
-                    <label for="z">Ajouter Auteur </label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="" name="z" check />
-                    <label for="z">Ajouter Client </label>
-                </div>
-
-
-                <div>
-                    <input type="checkbox" id="" name="z" check />
-                    <label for="z">Ajouter Les Produits </label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="" name="z" check />
-                    <label for="z">Ajouter Les Produits / Supprimer element in list of produit   </label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="" name="z"  />
-                    <label for="z">Apercu Devis </label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="" name="z"  />
-                    <label for="z">Display Devis </label>
-                </div>
-
-                <h4>Back end </h4>
-
-                <div>
-                    <input type="checkbox" id="" name="z"  />
-                    <label for="z">Ajouter Auteur </label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="" name="z"  />
-                    <label for="z">Ajouter Client </label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="" name="z"  />
-                    <label for="z">Ajouter Les Produits </label>
-                </div>
-
-            </fieldset>
+        
 
         </div>
     );

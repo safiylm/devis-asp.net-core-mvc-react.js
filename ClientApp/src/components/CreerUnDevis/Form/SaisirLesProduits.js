@@ -6,7 +6,7 @@ function SaisirLesProduits({ idDevis, setSommePrixTVA, setSommePrixHT }) {
     const [message, setMessage] = useState("");
     const [produits, setProduit] = useState([]);
     const [formAddProduct, setFormAddProduct] = useState({
-        devisId: idDevis, quantite: "0", designation: "-",
+       id:0, devisId: idDevis, quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
     });
 
@@ -56,9 +56,10 @@ function SaisirLesProduits({ idDevis, setSommePrixTVA, setSommePrixHT }) {
                     setMessage(response);
                     document.querySelectorAll("form input").forEach((e) => {
                         e.value = "";
-                    })
-                   
-                   
+                    }) 
+                    fetch(`http://localhost:44453/Produit/GetByDevisId?id=${idDevis}`)
+                        .then((res) => res.json())
+                        .then((data) => setProduit(data));
                 }
             }.bind(this);
             request.send(formData);
@@ -98,6 +99,7 @@ function SaisirLesProduits({ idDevis, setSommePrixTVA, setSommePrixHT }) {
 
             <form onSubmit={submitCreationProduit} className="div-ajouter-un-produit">         
                     
+                <input name="id" type="hidden" value={idDevis } />          
                 <input name="quantite" onChange={changeHandler} className="form-control" placeholder="Quantité" />          
                 <input name="designation" onChange={changeHandler} className="form-control" placeholder="Désignation" />
                <input name="prixUnitaireHT" onChange={changeHandler} className="form-control" placeholder="Prix Unitaire HT" />
