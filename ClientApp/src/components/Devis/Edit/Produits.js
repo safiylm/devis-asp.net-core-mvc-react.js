@@ -2,7 +2,7 @@
 import "../../../styles/devis.css"
 
 
-const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
+const EditProduits = ({ tempid_, changeNumEtape}) => {
 
     const [showEditOneProductId, setShowEditOneProduct] = useState(0)
     const [message, setMessage] = useState("");
@@ -15,8 +15,13 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
         id: 0, devisId: tempid_, quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
     });
+    const [devis, setDevis] = useState([]);
 
     useEffect(() => {
+        fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
+            .then((res) => res.json())
+            .then((data) => setDevis(data));
+ 
         fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
             .then((res) => res.json())
             .then((data) => setProduit(data));
@@ -48,14 +53,9 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
         setFormAddProduct({ ...formAddProduct, [e.target.name]: e.target.value })
     }
 
-    const sommePrixTVA = produits.map(item => item.tva).reduce((prev, curr) => prev + curr, 0);
-    const sommePrixHT = produits.map(item => item.prixUnitaireHT).reduce((prev, curr) => prev + curr, 0);
-    const sommeTotale = sommePrixTVA + sommePrixHT;
-
     const submitCreationProduit = (event) => {
         //Send Post 
-        setTotalHT(sommePrixHT)
-        setTotalTVA(sommePrixTVA)
+      
 
         let formData = new FormData();
         Object.keys(formAddProduct).forEach(function (key) {
@@ -85,7 +85,9 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
                     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
                         .then((res) => res.json())
                         .then((data) => setProduit(data));
-
+                    fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
+                        .then((res) => res.json())
+                        .then((data) => setDevis(data));
 
                 }
             }.bind(this);
@@ -95,8 +97,7 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
 
     const submitEditProduit = (event) => {
         //Send Post 
-        setTotalHT(sommePrixHT);
-        setTotalTVA(sommePrixTVA);
+    
         formEditProduct.devisId = tempid_;
         let formData = new FormData();
         Object.keys(formEditProduct).forEach(function (key) {
@@ -120,9 +121,16 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
                     setMessage(response);
-                    fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
-                        .then((res) => res.json())
-                        .then((data) => setProduit(data));
+                    setTimeout(() => {
+
+                        fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
+                            .then((res) => res.json())
+                            .then((data) => setProduit(data));
+                        fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
+                            .then((res) => res.json())
+                            .then((data) => setDevis(data));
+                    }, "1000");
+
                 }
             }.bind(this);
             request.send(formData);
@@ -131,8 +139,7 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
 
     const submitDeleteProduit = () => {
         //Send Post 
-        setTotalHT(sommePrixHT);
-        setTotalTVA(sommePrixTVA);
+       
         formEditProduct.devisId = tempid_;
         let formData = new FormData();
         Object.keys(formEditProduct).forEach(function (key) {
@@ -158,7 +165,9 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
                     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
                         .then((res) => res.json())
                         .then((data) => setProduit(data));
-
+                    fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
+                        .then((res) => res.json())
+                        .then((data) => setDevis(data));
                 }
             }.bind(this);
             request.send(formData);
@@ -171,8 +180,8 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
         clientId: 0,
         entrepriseId: 0,
         userId: 0,
-        totalTVA: sommePrixTVA,
-        totalHT: sommePrixHT,
+        totalTVA: 0,
+        totalHT: 0,
         accompteQuantite: 0,
         accomptePourcentage: 0,
         accompteInformations: "",
@@ -184,17 +193,20 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
     const id = arrayURL[3];
     const clientId_param = arrayURL[5];
     const entrepriseId_param = arrayURL[6];
-
+  
     const sauvegarderLesProduits = () => {
-        setTotalHT(sommePrixHT);
-        setTotalTVA(sommePrixTVA);
+     
         formdevis.Id = id; 
         formdevis.tempId = tempid_;
         formdevis.clientId = clientId_param;
         formdevis.entrepriseId = entrepriseId_param;
         formdevis.userId = 22;
-        formdevis.totalTVA = sommePrixTVA;
-        formdevis.totalHT = sommePrixHT;
+        devis.forEach((i) => {
+
+            formdevis.totalTVA = i.totalTVA;
+            formdevis.totalHT = i.totalHT;
+
+        })
         let formData = new FormData();
         Object.keys(formdevis).forEach(function (key) {
             formData.append(key, formdevis[key]);
@@ -286,10 +298,14 @@ const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
             <p style={{color: "red"} }>{message}</p>
 
             <br />
-
-            <h4>Somme TVA: {sommePrixTVA} $</h4>
-            <h4>Somme Hors Taxe: {sommePrixHT} $ </h4>
-            <h1>Montant Total: {sommeTotale} $</h1>
+            {devis.map
+                ((item) => (
+                    <div key={item.id}>
+                        <h4>Somme TVA: {item.totalTVA} $</h4>
+                        <h4>Somme Hors Taxe: {item.totalHT} $ </h4>
+                        <h1>Montant Total: {item.totalTVA + item.totalHT} $</h1>
+                       
+                    </div>))}
             <button type="button" className="btn btn-primary" onClick={ sauvegarderLesProduits}> Terminer et sauvegarder </button>
 
         </div>

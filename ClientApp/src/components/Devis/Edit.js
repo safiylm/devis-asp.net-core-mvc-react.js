@@ -11,6 +11,7 @@ const EditDevis = () => {
     const editEntreprise = () => { setShow("Entreprise") }
     const editProduits = () => { setShow("Produits") }
     const editLastElements = () => { setShow("Last element")  }
+  
 
 
     const url_ = window.location.pathname;
@@ -21,8 +22,6 @@ const EditDevis = () => {
     const entrepriseId_param = arrayURL[6];
     const userId = 21;
   
-    const [totalTVA, setTotalTVA] = useState(0)
-    const [totalHT, setTotalHT] = useState(0)
 
     const clickDeleteDevis = (devisId) => {
         let text = "Vous êtes sure de vouloir supprimer votre devis";
@@ -52,8 +51,7 @@ const EditDevis = () => {
             }
         }
     }
-
-
+  
 
     return (
         <div className="page-formCreationDevis">
@@ -66,7 +64,9 @@ const EditDevis = () => {
                 <button type="button" class="btn btn-outline-danger" onClick={() => clickDeleteDevis(id)}>Supprimer ce devis</button>
             </div> 
 
-            <br/>
+            <br />
+
+          
             {show == "Client" &&
                 <div style={{ width: "550px" }}>
                     <EditClient clientId_param={clientId_param} />
@@ -81,18 +81,20 @@ const EditDevis = () => {
 
             {show == "Produits" &&
                 <div style={{ width: "auto" }}>
-                    <EditProduits tempid_={tempid_} setTotalTVA={setTotalTVA} setTotalHT={setTotalHT} />
+                    <EditProduits tempid_={tempid_} />
                 </div>
             }
 
             {show == "Last element" && <div style={{ width: "550px" }}>
+            
                 <EditDernieresInformations devisId={id}
                     devisTempId={tempid_}
                     clientId={clientId_param}
                     entrepriseId={entrepriseId_param}
                     userId={2}
-                    totalTVA={totalTVA}
-                    totalHT={totalHT} />
+                
+                />
+                        
             </div>
             }
         </div>

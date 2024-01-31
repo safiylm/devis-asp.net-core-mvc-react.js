@@ -2,7 +2,7 @@
 import "../../../styles/devis.css"
 
 
-const EditDerniersInformations = ({ devisId, devisTempId, clientId, entrepriseId, userId, totalTVA, totalHT }) => {
+const EditDerniersInformations = ({ devisId, devisTempId, clientId, entrepriseId, userId}) => {
   const [message, setMessage] = useState("");
   
 
@@ -12,8 +12,7 @@ const EditDerniersInformations = ({ devisId, devisTempId, clientId, entrepriseId
         clientId: clientId,
         entrepriseId: entrepriseId,
         userId: 21,
-        totalTVA: totalTVA,
-        totalHT: totalHT,
+       
         accompteQuantite: 0,
         accomptePourcentage:0 ,
         accompteInformations: "",
@@ -37,8 +36,7 @@ const EditDerniersInformations = ({ devisId, devisTempId, clientId, entrepriseId
         formdevis.ClientId = clientId;
         formdevis.EntrepriseId = entrepriseId;
         formdevis.UserId = userId;
-        formdevis.TotalTVA = totalTVA;
-        formdevis.TotalHT = totalHT;
+    
 
         let formData = new FormData();
         Object.keys(formdevis).forEach(function (key) {
