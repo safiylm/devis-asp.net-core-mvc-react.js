@@ -1,7 +1,7 @@
 import { Home } from "./components/Home";
-import ListeDevis from './components/ListeDevis/ListeDevis';
-import Devis from './components/Devis/Devis';
-import Index from './components/CreerUnDevis/Index';
+import ListeDevis from './components/Devis/ListeDevis';
+import Devis from './components/Devis/Index';
+import Create from './components/Devis/Create';
 import Inscription from './components/Auth/Inscription'
 import Connexion from './components/Auth/Connexion';
 import MesDonneesPersonnelles from './components/MonCompte/MesDonneesPersonnelles';
@@ -26,8 +26,8 @@ const AppRoutes = [
     },
    
     {
-        path: '/CreerUnDevis/:id',
-        element: < Index />
+        path: '/Devis/Create/:id',
+        element: < Create />
     },
     {
         path: '/Devis/Edit/:id/:tempId/:clientId/:entrepriseId',

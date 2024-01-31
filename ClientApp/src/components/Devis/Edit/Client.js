@@ -1,5 +1,4 @@
 ﻿import React, { useState, useEffect } from "react"
-import "../../../styles/devis.css"
 
 
 const EditClient = ({ clientId_param }) => {
@@ -57,28 +56,25 @@ const EditClient = ({ clientId_param }) => {
     }
    
     return (
-     
     
-        
-            <form className="div-saisir" onSubmit={editClientSubmit} >
+        <div class="container-lg">
+            <form onSubmit={editClientSubmit} >
+                {formclient[0] != undefined && <>
 
-            {formclient[0] != undefined && <>
-
-                <h1>Modifier les données du client </h1>
-          
-                <input type="text" className="form-control" name="nom" onChange={changeHandlerClient} defaultValue={formclient[0].nom }  />
-                <input type="text" className="form-control" name="prenom" onChange={changeHandlerClient} defaultValue={formclient[0].prenom} />
-                <input type="email" className="form-control" name="email" onChange={changeHandlerClient} defaultValue={formclient[0].email} />
-                <input type="text" className="form-control" name="adresse" onChange={changeHandlerClient} defaultValue={formclient[0].adresse} />
-                <input type="number" className="form-control" name="codePostale" onChange={changeHandlerClient} defaultValue={formclient[0].codePostale} />
-                <input type="text" className="form-control" name="ville" onChange={changeHandlerClient} defaultValue={formclient[0].ville} />
-                <input className="form-control" name="telephone" onChange={changeHandlerClient} defaultValue={formclient[0].telephone} />
-                <button className="btn btn-success" type="submit">Modifier </button>
+                    <h1>Modifier les données du client </h1>
+                    <input type="text" className="form-control" name="nom" onChange={changeHandlerClient} defaultValue={formclient[0].nom }  />
+                    <input type="text" className="form-control" name="prenom" onChange={changeHandlerClient} defaultValue={formclient[0].prenom} />
+                    <input type="email" className="form-control" name="email" onChange={changeHandlerClient} defaultValue={formclient[0].email} />
+                    <input type="text" className="form-control" name="adresse" onChange={changeHandlerClient} defaultValue={formclient[0].adresse} />
+                    <input type="number" className="form-control" name="codePostale" onChange={changeHandlerClient} defaultValue={formclient[0].codePostale} />
+                    <input type="text" className="form-control" name="ville" onChange={changeHandlerClient} defaultValue={formclient[0].ville} />
+                    <input className="form-control" name="telephone" onChange={changeHandlerClient} defaultValue={formclient[0].telephone} />
+                    <button className="btn btn-primary" type="submit">Modifier </button>
                     <p style={{color: "red" }}>{message}</p> 
 
-          </> }             
-                </form>
-       
+                </> }             
+            </form>
+       </div>
     
     );
 }

@@ -50,9 +50,6 @@ const Connexion =()=> {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
 
-
-
-  
         return (
             <div className="container-auth">
                 <h1>Se Connecter </h1>
@@ -64,10 +61,10 @@ const Connexion =()=> {
                         <Link to="/Auth/Inscription">S'inscrire </Link>
                     </div>
                 </form>
-                <p style={{color: "white"}}>{message}</p> 
+                <p style={{color: "white"}}>{message}</p>
             </div>
+
         );
-    
 }
 
 

@@ -2,7 +2,7 @@
 import "../../../styles/devis.css"
 
 
-const EditDevisLeReste = ({ devisId, devisTempId, clientId, entrepriseId, userId, totalTVA, totalHT }) => {
+const EditDerniersInformations = ({ devisId, devisTempId, clientId, entrepriseId, userId, totalTVA, totalHT }) => {
   const [message, setMessage] = useState("");
   
 
@@ -89,7 +89,7 @@ const EditDevisLeReste = ({ devisId, devisTempId, clientId, entrepriseId, userId
                         <input name="informationSuplementaire" className="form-control" onChange={changeHandler} defaultValue={formdevis[0].informationSuplementaire} />
                     </label><br />
                     <p>Mode de paiement </p>
-                    <button type="submit" className="btn btn-success">Enregistrer et terminer</button>
+                    <button type="submit" className="btn btn-primary">Enregistrer et terminer</button>
                     <p style={{color: "red" }}>{message}</p> 
                 </form>
             } </>
@@ -99,4 +99,4 @@ const EditDevisLeReste = ({ devisId, devisTempId, clientId, entrepriseId, userId
 
 
 
-export default EditDevisLeReste;
+export default EditDerniersInformations;

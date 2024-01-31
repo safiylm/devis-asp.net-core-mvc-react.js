@@ -1,5 +1,4 @@
 ﻿import React, {  useState, useEffect } from 'react';
-import '../../../styles/FormListeClientEntreprise.css';
 
 const SaisirUnClient = ({ idClient, setIdClient, changeNumEtape }) => {
 
@@ -16,41 +15,48 @@ const SaisirUnClient = ({ idClient, setIdClient, changeNumEtape }) => {
        
         console.log(e.target.value)
         setIdClient(e.target.value)
-        changeNumEtape(3);
     }
 
+    const submitChoisirClient = (e) => {
+        changeNumEtape(3);
+
+    }
 
     return (
-        <form className="div-choisir">
-            <h1>Choisir parmi un client enregistré </h1>
 
-            <div className="ListeClient">
-           
+        <div style={{ width: "100%" }}>
+            <h3 style={{ textAlign: "center" }}>Choisir parmi un client enregistré </h3>
+            <form onSubmit={submitChoisirClient }>
+                
+                <div class="flex-center-wrap-row border">
+                       
+
               {(clientsDB.length > 0) ?
                    clientsDB.map((item) => (
-                       <div key={item.id}>
+                       <div key={item.id} >
                            {(idClient == item.id) ?
                                <label>
                                    <input type="radio" name="clientchoose"
                                        onChange={onChange} value={item.id} checked />
                                     {item.nom} <br /> {item.email} <br />{item.ville}
-
                                </label>
                            :
                             <label>
                                <input type="radio" name="clientchoose"
                                    onChange={onChange} value={item.id }/>
                                    {item.nom} <br /> {item.email} <br />{item.ville}
-                           
                            </label>
                            }
                         </div>
                 ))
                : <p> Chargement des clients ...</p>}
-            </div>
+                </div>
 
-            <button type="submit" className="btn btn-success"> Envoyer </button>
-        </form>
+                <button type="submit" className="btn btn-primary"> Choisir </button>
+            </form>
+            
+        </div>
+        
     );
 }
 

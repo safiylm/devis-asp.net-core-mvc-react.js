@@ -1,8 +1,6 @@
 ﻿import React, { Component, useState } from 'react';
-import '../../../styles/formCreationDevis.css';
-import ListeClient from '../Liste/ListeClient.js'
 
-const SaisirUnClient = ({ idClient, changeNumEtape, setEmailClient, setDateCreationClient, setIdClient }) => {
+const CreateClient = ({ idClient, changeNumEtape, setEmailClient, setDateCreationClient, setIdClient }) => {
 
 
     const [message, setMessage] = useState("");
@@ -11,6 +9,7 @@ const SaisirUnClient = ({ idClient, changeNumEtape, setEmailClient, setDateCreat
         adresse: "Adresse", codePostale: "CodePostale", ville: "Ville",
         telephone: "Telephone", dateCreation: Date.now
     });
+    const [showFormCreateClient, setSFormCreateClient] = useState(false);
 
 
     const handleClick = (event) => {
@@ -41,9 +40,6 @@ const SaisirUnClient = ({ idClient, changeNumEtape, setEmailClient, setDateCreat
                     document.querySelectorAll("form input").forEach((e) => {
                         e.value = "";
                     })
-                    changeNumEtape(3);
-                    setEmailClient(formclient.email);
-                    setDateCreationClient(formclient.dateCreation);
                 }
             }.bind(this);
             request.send(formData);
@@ -55,13 +51,16 @@ const SaisirUnClient = ({ idClient, changeNumEtape, setEmailClient, setDateCreat
     }
 
     return (
-        <div className="div-choisir-ou-saisir" >
+        <div className="d-flex justify-content-center">
+   
+           
+            {showFormCreateClient === false &&
+                <button className="btn btn-outline-primary" onClick={() => setSFormCreateClient(true)}> Créer un nouveau client </button>
+            }
+          
 
-            <ListeClient idClient={idClient} setIdClient={setIdClient} changeNumEtape={changeNumEtape }  />
-            
-            <div className="div-saisir">
-                <form onSubmit={handleClick}>
-                    <h1>Créer un nouveau client </h1>
+            {showFormCreateClient && 
+                <form onSubmit={handleClick} style={{ width: "100%" }}>
                     <input type="text" className="form-control" name="nom" onChange={changeHandler} placeholder="Nom" />
                     <input type="text" className="form-control" name="prenom" onChange={changeHandler} placeholder="Prenom" />
                     <input type="email" className="form-control" name="email" onChange={changeHandler} placeholder="Adresse Email" />
@@ -69,15 +68,18 @@ const SaisirUnClient = ({ idClient, changeNumEtape, setEmailClient, setDateCreat
                     <input className="form-control" name="codePostale" onChange={changeHandler} placeholder="CodePostale" />
                     <input type="text" className="form-control" name="ville" onChange={changeHandler} placeholder="Ville" />
                     <input className="form-control" name="telephone" onChange={changeHandler} placeholder="Telephone" />
-                    <button className="btn btn-success" type="submit">Créer </button>
+                    <button className="btn btn-primary" type="submit">Créer </button>
+                     <button className="btn btn-light" type="button" onClick={() => setSFormCreateClient(false) }>Annuler </button>
                     {message}
                 </form>
-             </div>
+                }
+                
+            
         </div>
     );
 }
 
 
 
-export default SaisirUnClient;
+export default CreateClient;
 

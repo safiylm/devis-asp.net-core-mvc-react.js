@@ -3,7 +3,7 @@ import "../../styles/devis.css"
 import EditClient from "./Edit/Client"
 import EditEntreprise from "./Edit/Entreprise"
 import EditProduits from "./Edit/Produits"
-import EditDevisLeReste from "./Edit/LeReste";
+import EditDernieresInformations    from "./Edit/DernieresInformations";
 
 const EditDevis = () => {
     const [show, setShow] =useState("Client")
@@ -56,18 +56,46 @@ const EditDevis = () => {
 
 
     return (
-        <>
-            <button className="btn btn-light" onClick={editClient }>Modifier le client </button>
-            <button className="btn btn-light" onClick={editEntreprise }>Modifier l'entreprise  </button>
-            <button className="btn btn-light" onClick={editProduits }> Modifier les produits  </button>
-            <button className="btn btn-light" onClick={editLastElements }> Modifier les derniers éléments  </button>
-            <button className="btn btn-danger" onClick={ () => clickDeleteDevis(id)}> Supprimer ce devis  </button>
+        <div className="page-formCreationDevis">
+
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" class="btn btn-outline-dark" onClick={editClient}>Modifier le client </button>
+                <button type="button" class="btn btn-outline-dark" onClick={editEntreprise}>Modifier l'entreprise  </button>
+                <button type="button" class="btn btn-outline-dark" onClick={editProduits}>Modifier les produits </button>
+                <button type="button" class="btn btn-outline-dark" onClick={editLastElements}>Modifier les derniers éléments  </button>
+                <button type="button" class="btn btn-outline-danger" onClick={() => clickDeleteDevis(id)}>Supprimer ce devis</button>
+            </div> 
+
             <br/>
-            {show == "Client" && <EditClient clientId_param={clientId_param } />}
-            {show == "Entreprise" && <EditEntreprise entrepriseId_param={entrepriseId_param }/> }
-            {show == "Produits" && <EditProduits tempid_={tempid_} setTotalTVA={setTotalTVA} setTotalHT={setTotalHT }/>}
-            {show == "Last element" && <EditDevisLeReste devisId={id} devisTempId={tempid_} clientId={clientId_param} entrepriseId={entrepriseId_param} userId={2} totalTVA={totalTVA} totalHT={totalHT } />}
-        </>
+            {show == "Client" &&
+                <div style={{ width: "550px" }}>
+                    <EditClient clientId_param={clientId_param} />
+                </div>
+            }
+
+            {show == "Entreprise" &&
+                <div style={{ width: "550px" }}>
+                    <EditEntreprise entrepriseId_param={entrepriseId_param} />
+                </div>
+            }
+
+            {show == "Produits" &&
+                <div style={{ width: "auto" }}>
+                    <EditProduits tempid_={tempid_} setTotalTVA={setTotalTVA} setTotalHT={setTotalHT} />
+                </div>
+            }
+
+            {show == "Last element" && <div style={{ width: "550px" }}>
+                <EditDernieresInformations devisId={id}
+                    devisTempId={tempid_}
+                    clientId={clientId_param}
+                    entrepriseId={entrepriseId_param}
+                    userId={2}
+                    totalTVA={totalTVA}
+                    totalHT={totalHT} />
+            </div>
+            }
+        </div>
     );
 }
 

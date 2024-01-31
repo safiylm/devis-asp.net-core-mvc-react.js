@@ -1,5 +1,4 @@
 ﻿import React, {  useState, useEffect} from 'react';
-import '../../../styles/FormListeClientEntreprise.css';
 
 const ListeEntreprise = ({ idEntreprise, setIdEntreprise, changeNumEtape }) => {
 
@@ -14,20 +13,22 @@ const ListeEntreprise = ({ idEntreprise, setIdEntreprise, changeNumEtape }) => {
 
     const onChange = (e) => {
         setIdEntreprise(e.target.value)
-        changeNumEtape(2);
     }
 
-    return (
-        <form className="div-choisir">
-            <h1>Choisir parmi une entreprise enregistrée </h1>
+    const submitChoisirEntreprise = () => {
+        changeNumEtape(2);
 
-            <div className="ListeEntreprise">
-           
+    }
+    return (
+
+        <div style={{ width: "100%" }}>
+            <form onSubmit={submitChoisirEntreprise}>
+                <h3 style={{ textAlign: "center" }}>Choisir parmi une entreprise enregistrée </h3>
+                <div class="flex-center-wrap-row border">
                 {(entreprises.length > 0) ?
                     entreprises.map((item) => (
                         <div key={item.id}>
 
-                      
                             {(idEntreprise == item.id) ?
                                 <label>
                                     <input type="radio" name="entreprisechoose"
@@ -45,11 +46,13 @@ const ListeEntreprise = ({ idEntreprise, setIdEntreprise, changeNumEtape }) => {
                             }
                         </div>
                 ))
-                : <p> Chargement des entreprises ...</p>}
-            </div>
+                        : <p> Chargement des entreprises ...</p>}
+                </div>
 
-            <button type="submit" className="btn btn-success"> Envoyer </button>
-        </form>
+            <button type="submit" className="btn btn-primary"> Choisir </button>
+            </form>
+        </div>
+           
     );
 }
 

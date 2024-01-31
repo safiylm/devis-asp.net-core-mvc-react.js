@@ -2,13 +2,13 @@
 import "../../../styles/devis.css"
 
 
-const EditProduits = ({ tempid_, setTotalHT, setTotalTVA }) => {
+const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA }) => {
 
     const [showEditOneProductId, setShowEditOneProduct] = useState(0)
     const [message, setMessage] = useState("");
     const [produits, setProduit] = useState([]);
     const [formAddProduct, setFormAddProduct] = useState({
-        id: 0, devisId: tempid_, quantite: "0", designation: "-",
+       /* id: 0,*/ devisId: tempid_, quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
     });
     const [formEditProduct, setFormEditProduct] = useState({
@@ -216,6 +216,7 @@ const EditProduits = ({ tempid_, setTotalHT, setTotalTVA }) => {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
                     setMessage(response);
+                    changeNumEtape(4);
                }
             }.bind(this);
             request.send(formData);
@@ -223,8 +224,8 @@ const EditProduits = ({ tempid_, setTotalHT, setTotalTVA }) => {
     }
 
     return (
-        <div className="div-saisir" style={{ width: "60vw" }}>
-            <h1>Liste des produits</h1>
+        <div>
+            <h3>Liste des produits</h3>
             <table style={{ width: "60vw" }}>
                 <thead>
                     <tr>
@@ -243,7 +244,7 @@ const EditProduits = ({ tempid_, setTotalHT, setTotalTVA }) => {
                                 <td>{item.prixUnitaireHT} $ </td>
                                 <td>{item.tva} $ </td>
                                 {showEditOneProductId != item.id && <>
-                                    <td> <button className="btn btn-success" onClick={ () => goEditProduit(item.id) }> Modifier</button> </td>
+                                    <td> <button className="btn btn-primary" onClick={ () => goEditProduit(item.id) }> Modifier</button> </td>
                                    
                                 </>}
                             </tr>
@@ -256,7 +257,7 @@ const EditProduits = ({ tempid_, setTotalHT, setTotalTVA }) => {
                                             <input name="designation" onChange={changeHandlerEdit} className="form-control" defaultValue={formEditProduct.designation} />
                                             <input name="prixUnitaireHT" onChange={changeHandlerEdit} className="form-control" defaultValue={formEditProduct.prixUnitaireHT} />
                                             <input name="tva" onChange={changeHandlerEdit} className="form-control" defaultValue={formEditProduct.tva} />
-                                            <button type="submit" className="btn btn-success"> Save </button>
+                                            <button type="submit" className="btn btn-primary"> Save </button>
                                             <button type="button" className="btn btn-light" onClick={() => setShowEditOneProduct(0)}> Annuler</button>
                                             <button className="btn btn-danger" onClick={() => submitDeleteProduit()}> Supprimer </button> 
                                         </form>
@@ -279,7 +280,7 @@ const EditProduits = ({ tempid_, setTotalHT, setTotalTVA }) => {
                 <input name="designation" onChange={changeHandlerAdd} className="form-control" placeholder="Désignation" />
                 <input name="prixUnitaireHT" onChange={changeHandlerAdd} className="form-control" placeholder="Prix Unitaire HT" />
                 <input name="tva" onChange={changeHandlerAdd} className="form-control" placeholder="TVA" />
-                <button type="submit" className="btn btn-success"> Save </button>
+                <button type="submit" className="btn btn-primary"> Save </button>
 
             </form>
             <p style={{color: "red"} }>{message}</p>
@@ -289,7 +290,7 @@ const EditProduits = ({ tempid_, setTotalHT, setTotalTVA }) => {
             <h4>Somme TVA: {sommePrixTVA} $</h4>
             <h4>Somme Hors Taxe: {sommePrixHT} $ </h4>
             <h1>Montant Total: {sommeTotale} $</h1>
-            <button type="button" className="btn btn-success" onClick={ sauvegarderLesProduits}> Terminer et sauvegarder </button>
+            <button type="button" className="btn btn-primary" onClick={ sauvegarderLesProduits}> Terminer et sauvegarder </button>
 
         </div>
     );

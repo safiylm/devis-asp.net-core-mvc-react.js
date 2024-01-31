@@ -1,4 +1,8 @@
-﻿.page-liste-devis {
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.page-liste-devis {
     width: 100%;
 }
 

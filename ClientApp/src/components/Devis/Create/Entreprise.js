@@ -1,8 +1,6 @@
 ﻿import React, { useState } from 'react';
-import '../../../styles/formCreationDevis.css';
-import ListeEntreprise from '../Liste/ListeEntreprise.js'
 
-const SaisirUneEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEntreprise, setEmailEntreprise, setIdEntreprise})=>{
+const CreateEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEntreprise, setEmailEntreprise, setIdEntreprise})=>{
   
      const [message, setMessage] = useState("");
      const [entreprise, setEntreprise] = useState({
@@ -10,7 +8,7 @@ const SaisirUneEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEnt
          adresse: "Adresse", codePostale: 123, ville: "Ville",
          telephone: 456789, siteInternet:"mon-entreprise.fr", dateCreation: Date.now
      });
-
+    const [showFormCreateEntreprise, setSFormCreateEntreprise] = useState(false);
      const handleSubmit = (event) => {
 
          let formData = new FormData();
@@ -39,9 +37,7 @@ const SaisirUneEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEnt
                          e.value = "";
                      })
                      setMessage(response);
-                     setEmailEntreprise(entreprise.email)
-                     setDateCreationEntreprise(entreprise.dateCreation)
-                     changeNumEtape(2);
+                   
 
                  }
              }.bind(this);
@@ -54,12 +50,14 @@ const SaisirUneEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEnt
      }
     
      return (
-         <div className="div-choisir-ou-saisir" >
-             <ListeEntreprise idEntreprise={idEntreprise} setIdEntreprise={setIdEntreprise} changeNumEtape={changeNumEtape } />
+         <div className="d-flex justify-content-center">
+             
+             {showFormCreateEntreprise === false &&
+                 <button className="btn btn-outline-primary" onClick={() => setSFormCreateEntreprise(true)}> Créer une nouvelle entreprise</button>
+             }
             
-             <div className="div-saisir">
-                 <form onSubmit={handleSubmit}>
-                    <h1>Créer une nouvelle entreprise </h1>
+             {showFormCreateEntreprise &&
+                 <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                     <input type="text" className="form-control" name="nom" onChange={changeHandler} placeholder="Nom" />
                     <input type="email" className="form-control" name="email" onChange={changeHandler} placeholder="Adresse Email" />
                     <input type="text" className="form-control" name="adresse" onChange={changeHandler} placeholder="Adresse" />
@@ -67,10 +65,12 @@ const SaisirUneEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEnt
                     <input type="text" className="form-control" name="ville" onChange={changeHandler} placeholder="Ville" />
                     <input type="number" className="form-control" name="telephone" onChange={changeHandler} placeholder="Telephone" />
                     <input type="text" className="form-control" name="siteInternet" onChange={changeHandler} placeholder="SiteInternet" />
-                    <button className="btn btn-success" type="submit">Créer </button>
-                </form>
-                {message }
-            </div>
+                    <button className="btn btn-primary" type="submit">Créer </button>
+                     <button className="btn btn-light" type="button" onClick={() => setSFormCreateEntreprise(false) }>Annuler </button>
+                     {message}
+                 </form>
+               
+           }
          </div>
         );
     
@@ -78,4 +78,4 @@ const SaisirUneEntreprise = ({ idEntreprise,  changeNumEtape, setDateCreationEnt
 
 
 
-export default SaisirUneEntreprise;
+export default CreateEntreprise;

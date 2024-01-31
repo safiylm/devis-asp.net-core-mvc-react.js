@@ -113,21 +113,51 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         [HttpPost]
         [Route("Produit/Create")]
-        public object Create([Bind("DevisId,Quantite,Designation,PrixUnitaireHT,TVA")] ProduitModel produitModel)
+        public object Create([FromForm] [Bind("DevisId,Quantite,Designation,PrixUnitaireHT,TVA")] ProduitModel produitModel)
         {
             var res = "Erreur, votre produit n'a pas pu être enregistrer, veuillez recommencer.";
             if (produitModel.TVA != 0 && produitModel.Designation != null 
                 && produitModel.Quantite != 0 && produitModel.PrixUnitaireHT != 0)
             {
-                produitModel.DateCreation = DateTime.Now;
-                _context.ProduitModel.Add(produitModel);
-                _context.SaveChangesAsync();
-                res = "Votre produit a été enregistré avec succès!";
+                var devis = _context.DevisModel.Where(e => e.TempId == produitModel.DevisId).First();
+                devis.TotalHT = CalculHT(produitModel.DevisId);
+                devis.TotalTVA = CalculTVA(produitModel.DevisId);
 
+                if (devis != null)
+                {
+                    _context.DevisModel.Update(devis);
+                    produitModel.DateCreation = DateTime.Now;
+                    _context.ProduitModel.Add(produitModel);
+                    _context.SaveChangesAsync();
+                    res = "Votre produit a été enregistré avec succès!";
+                }
             }
             return Json(res);
         }
 
+        public  int CalculHT(string idDevis)
+        {
+            int somme = 0;
+            List<ProduitModel> ancien = _context.ProduitModel.Where(e => e.DevisId == idDevis).ToList();
+            foreach (var item in ancien)
+            {
+                somme = item.PrixUnitaireHT * item.Quantite + somme;
+            }
+            return somme;
+
+        }
+
+        public int CalculTVA(string idDevis)
+        {
+            int somme = 0;
+            List<ProduitModel> ancien = _context.ProduitModel.Where(e => e.DevisId == idDevis).ToList();
+            foreach (var item in ancien)
+            {
+                somme = item.TVA * item.Quantite + somme;
+            }
+            return somme;
+
+        }
 
         [HttpPost]
         [Route("Produit/Edit")]
@@ -146,27 +176,33 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
            
             data.DateCreation = DateTime.Now;
 
-                if (data != null && data.TVA != 0 && data.Designation != null
-                && data.Quantite != 0 && data.PrixUnitaireHT != 0 )
+            if (data != null && data.TVA != 0 && data.Designation != null
+            && data.Quantite != 0 && data.PrixUnitaireHT != 0)
             {
+                var devis = _context.DevisModel.Where(e => e.TempId == data.DevisId).First();
+                devis.TotalHT = CalculHT(data.DevisId);
+                devis.TotalTVA = CalculTVA(data.DevisId);
 
-                //if (ModelState.IsValid) {
-                try
+                if (devis != null)
                 {
+                    try
+                    { 
+                        _context.DevisModel.Update(devis);
+                        _context.ProduitModel.Update(data);
+                        _context.SaveChanges();
 
-                    _context.ProduitModel.Update(data);
-                    _context.SaveChanges();
-                    res = "Votre produit a été modifier avec succès!";
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProduitModelExists(data.Id))
-                    {
-                        return NotFound();
+                        res = "Votre produit a été modifier avec succès!";
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ProduitModelExists(data.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
                 }
             }

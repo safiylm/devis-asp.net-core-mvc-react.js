@@ -57,12 +57,11 @@ const EditEntreprise = ({ entrepriseId_param }) => {
     }
 
     return (
-        <>
-            {formEntreprise[0] != undefined && <>
+        <div class="container-lg">
+            <form onSubmit={editEntrepriseSubmit} >
+                {formEntreprise[0] != undefined && <>
 
-                <form className="div-saisir" onSubmit={editEntrepriseSubmit} >
-
-                    <h1>Modifier les données de l'entreprise </h1>
+                    <h3>Modifier les données de l'entreprise </h3>
                     <input type="text" className="form-control" name="nom" onChange={changeHandlerEntreprise} defaultValue={formEntreprise[0].nom} />
                     <input type="email" className="form-control" name="email" onChange={changeHandlerEntreprise} defaultValue={formEntreprise[0].email} />
                     <input type="text" className="form-control" name="adresse" onChange={changeHandlerEntreprise} defaultValue={formEntreprise[0].adresse} />
@@ -71,13 +70,12 @@ const EditEntreprise = ({ entrepriseId_param }) => {
                     <input className="form-control" name="telephone" onChange={changeHandlerEntreprise} defaultValue={formEntreprise[0].telephone} />
                     <input type="text" className="form-control" name="siteInternet" onChange={changeHandlerEntreprise} defaultValue={formEntreprise[0].siteInternet} />
 
-                    <button className="btn btn-success" type="submit">Modifier </button>
+                    <button className="btn btn-primary" type="submit">Modifier </button>
                     <p style={{ color: "red" }}>{message}</p> 
-
-                </form>
+                
             </>}
-            
-      </>
+            </form>
+        </div>
     );
 }
 
