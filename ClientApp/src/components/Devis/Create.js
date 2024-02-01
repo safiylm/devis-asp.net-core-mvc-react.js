@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import CreateClient from './Create/Client';
 import CreateEntreprise from './Create/Entreprise';
-import EditProduits from './Edit/Produits';
+import EditProduits from './Create/Produits';
 import CreateDernieresInformations from './Create/DernieresInformations';
 import ListeEntreprise from './Select/Entreprise.js';
 import ListeClient from './Select/Client.js';
@@ -21,8 +21,8 @@ function CreateDevis() {
     const url_ = window.location.pathname;
     const arrayURL = url_.split("/");
     const id_param = arrayURL[3];
-    const [sommePrixTVA, setSommePrixTVA] = useState(0);
-    const [sommePrixHT, setSommePrixHT] = useState(0);
+    const [totalTVA, setTotalTVA] = useState(0);
+    const [totalHT, setTotalHT] = useState(0);
 
 
     return (
@@ -62,7 +62,7 @@ function CreateDevis() {
                     </button >
                 }
 
-                {sommePrixHT === 0 ?
+                {totalHT === 0 ?
                     <button type="button"
                         className={`${numEtapee === 4 ? "btn btn-dark" : "btn btn-outline-dark"}`}
                         onClick={() => changeNumEtape(4)} disabled>
@@ -106,8 +106,20 @@ function CreateDevis() {
             </div>
 
             }
-            {numEtapee == 3 && < EditProduits tempid_={id_param} changeNumEtape={changeNumEtape} setTotalTVA={setSommePrixTVA} setTotalHT={setSommePrixHT} />}
-            {numEtapee == 4 && < CreateDernieresInformations idDevis={id_param} changeNumEtape={changeNumEtape} idClient={idClient} idEntreprise={idEntreprise} sommePrixTVA={sommePrixTVA} sommePrixHT={sommePrixHT }/> }
+            {numEtapee == 3 && < EditProduits tempid_={id_param}
+                changeNumEtape={changeNumEtape}
+                setTotalTVA={setTotalTVA}
+                setTotalHT={setTotalHT}
+                totalTVA={totalTVA}
+                totalHT={totalHT} />}
+
+            {numEtapee == 4 && < CreateDernieresInformations
+                idDevis={id_param}
+                changeNumEtape={changeNumEtape}
+                idClient={idClient}
+                idEntreprise={idEntreprise}
+                totalTVA={totalTVA}
+                totalHT={totalHT} />}
 
 
             <ul className="list-group" style={{ margin: "50px" }}>

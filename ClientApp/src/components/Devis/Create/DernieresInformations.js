@@ -2,7 +2,7 @@
 import '../../../styles/formCreationDevis.css';
 import { Navigate } from "react-router-dom";
 
-const CreateDerniersInformations = ({ idDevis, idClient, idEntreprise, sommePrixTVA, sommePrixHT}) => { 
+const CreateDerniersInformations = ({ idDevis, idClient, idEntreprise, totalHT, totalTVA}) => { 
 
     const [success, setSuccess] = useState(false);
 
@@ -12,8 +12,8 @@ const CreateDerniersInformations = ({ idDevis, idClient, idEntreprise, sommePrix
         clientId: idClient,
         entrepriseId:idEntreprise,
         userId: 21,
-        totalTVA: sommePrixTVA,
-        totalHT: sommePrixHT,
+        totalTVA: totalTVA,
+        totalHT: totalHT,
         accompteQuantite: 10,
         accomptePourcentage: 2,
         accompteInformations: "accompteInformations",
