@@ -7,6 +7,7 @@ import { Navigate, Link } from "react-router-dom";
 const ListeDevis = () => {
     const [deviss, setDevis] = useState([]);
     const [clients, setClients] = useState([]);
+    const [entreprises, setEntreprises] = useState([]);
     const [show, setShow] = useState(false);
     const [generateIdDevis, setgenerateIdDevis] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -39,6 +40,10 @@ const ListeDevis = () => {
         fetch("http://localhost:44453/Client/GetAll")
             .then((res) => res.json())
             .then((data) => setClients(data));
+
+        fetch("http://localhost:44453/Entreprise/GetAll")
+            .then((res) => res.json())
+            .then((data) => setEntreprises(data));
     }, []); 
 
 
@@ -86,7 +91,9 @@ const ListeDevis = () => {
                 <thead>
                     <tr>
                         <th scope="col">N° de devis </th>
+                        <th scope="col">Motif</th>
                         <th scope="col">Client</th>
+                        <th scope="col">Entreprise</th>
                         <th scope="col">Montant HT</th>
                         <th scope="col">Montant TTC</th>
                         <th scope="col">Date du devis</th>
@@ -104,8 +111,14 @@ const ListeDevis = () => {
                                         {devis.id}
                                     </Link></td>
 
+                                    <td>{devis.motif }</td>
+
                                     {clients.filter(c => c.id === devis.clientId ).map(client => (
                                         <td key={client.id}> {client.prenom} {client.nom} </td>
+                                    ))}
+
+                                    {entreprises.filter(c => c.id === devis.entrepriseId).map(e => (
+                                        <td key={e.id}> {e.prenom} {e.nom} </td>
                                     ))}
 
                                     <td>
