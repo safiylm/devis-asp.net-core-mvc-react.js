@@ -100,16 +100,16 @@ const Devis = () => {
                             }
                         </div>
 
-                        <div className="div-client">
+                        <div className="div-client" >
 
                         {(clients.length > 0) &&
                             clients.map((item) => (
                                 <div key={item.id}>
-                                    <p> Client : {item.nom} {item.prenom}</p>
-                                    <p> Email : {item.email}</p>
-                                    <p> Adresse : {item.adresse}</p>
-                                    <p> Ville : {item.ville} {item.codePostale}</p>
-                                    <p> Téléphone : {item.telephone}</p>
+                                    <p>  {item.nom} {item.prenom}</p>
+                                    <p>  {item.email}</p>
+                                    <p>  {item.adresse}</p>
+                                    <p>  {item.ville} {item.codePostale}</p>
+                                    <p>  {item.telephone}</p>
 
                                 </div>
                             ))
@@ -117,8 +117,12 @@ const Devis = () => {
                     </div>
                     </div>
 
-                    <div className="div-container-devis">
-                <p>Intitulé : Motif ou description du devis.</p>
+                            {deviss.map((devitem) => ( 
+                                
+                               
+                                <div className="div-container-devis">
+                                    <p>Intitulé : {devitem.motif}</p>
+                                    
                 <table>
                     <thead>
                         <tr>
@@ -148,23 +152,26 @@ const Devis = () => {
                     </tbody>
                 </table>
                                 <div className="div-prix-parent">
-                                    <div className="div-prix-total">
-                                        <p> Total HT :{sommePrixHT}$</p>
-                                        <p> Total TVA : {sommePrixTVA}$</p>
-                                        <p> <strong>Total TTC : {sommeTotale}$ </strong></p>
+                                        <div className="div-prix-total">
+                                            <p> Total HT :{devitem.totalHT}$</p>
+                                            <p> Total TVA : {devitem.totalTVA}$</p>
+                                            <p> <strong>Total TTC : {devitem.totalHT + devitem.totalTVA}$ </strong></p>
                                     </div>
                                 </div>
 
                 <div className="div-informations-suppementaires">
-                    <p><strong>Conditions de paiement</strong> </p>
-                    <p>Accompte de 20% à la signature: 150$ </p>
-
-                    <p><strong>Moyens de paiement </strong></p>
+                                        <p><strong>Conditions de paiement</strong> </p>
+                                        <p>Nombre d'accompte : {devitem.accompteQuantite}</p>
+                                        <p>Accompte de {devitem.accomptePourcentage}% à la signature </p>
+                                        <p>{devitem.accompteInformations}</p>
+                                        <p> {devitem.informationSuplementaire}</p>
+                    
+                                        <p><strong>Moyens de paiement </strong></p>
                     <p>Espèce - Virement </p>
                 </div>
 
             </div>
-              </div>
+                         ))}   </div>
         }
                 </div>
             </div>

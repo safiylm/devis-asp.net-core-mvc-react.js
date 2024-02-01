@@ -54,6 +54,7 @@
     border: 0.1px solid grey;
     border-radius: 8px;
     padding: 15px ;
+    text-align:right;
 }
 
 .div-auteur p, .div-client p{
