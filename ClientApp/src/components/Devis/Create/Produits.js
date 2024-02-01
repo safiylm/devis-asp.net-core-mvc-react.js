@@ -2,11 +2,12 @@
 import "../../../styles/devis.css"
 
 
-const EditProduits = ({ tempid_, changeNumEtape, setSommeHT, setSommeTVA}) => {
+const EditProduits = ({ tempid_, changeNumEtape, setTotalHT, setTotalTVA, totalHT, totalTVA}) => {
 
     const [showEditOneProductId, setShowEditOneProduct] = useState(0)
     const [message, setMessage] = useState("");
     const [produits, setProduit] = useState([]);
+  
     const [formAddProduct, setFormAddProduct] = useState({
        /* id: 0,*/ devisId: tempid_, quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
@@ -15,11 +16,29 @@ const EditProduits = ({ tempid_, changeNumEtape, setSommeHT, setSommeTVA}) => {
         id: 0, devisId: tempid_, quantite: "0", designation: "-",
         prixUnitaireHT: "0", tva: "20"
     });
+    const calculTotal = () => {
+
+        let sommeHT = 0;
+        let sommeTVA = 0;
+        produits.forEach((i) => {
+            sommeHT = i.prixUnitaireHT * i.quantite + sommeHT;
+            sommeTVA = i.tva * i.quantite + sommeTVA
+        });
+        setTotalHT(sommeHT);
+        setTotalTVA(sommeTVA);
+
+
+        console.log(totalHT)
+        console.log(totalTVA)
+        console.log('World!');
+
+    }
+    calculTotal();
 
     useEffect(() => {
         fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
             .then((res) => res.json())
-            .then((data) => setProduit(data));
+            .then((data) => setProduit(data))
    }, []); 
 
 
@@ -47,6 +66,9 @@ const EditProduits = ({ tempid_, changeNumEtape, setSommeHT, setSommeTVA}) => {
     const changeHandlerAdd = (e) => {
         setFormAddProduct({ ...formAddProduct, [e.target.name]: e.target.value })
     }
+   
+ 
+    const GoSuivant = () => { changeNumEtape(4) }
 
     const submitCreationProduit = (event) => {
         //Send Post 
@@ -79,13 +101,13 @@ const EditProduits = ({ tempid_, changeNumEtape, setSommeHT, setSommeTVA}) => {
                     })
                     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
                         .then((res) => res.json())
-                        .then((data) => setProduit(data));
-
-
+                        .then((data) => { setProduit(data); calculTotal() })
                 }
             }.bind(this);
             request.send(formData);
         }
+        return calculTotal();
+
     }
 
     const submitEditProduit = (event) => {
@@ -109,18 +131,20 @@ const EditProduits = ({ tempid_, changeNumEtape, setSommeHT, setSommeTVA}) => {
         }
         if (request != null) {
 
-            request.open("POST", `Produit/Edit?id=${tempid_}`, false);
+            request.open("POST", `Produit/Edit_?id=${tempid_}`, false);
             request.onload = function () {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
                     setMessage(response);
                     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
                         .then((res) => res.json())
-                        .then((data) => setProduit(data));
+                        .then((data) => setProduit(data))
                 }
             }.bind(this);
             request.send(formData);
         }
+        return calculTotal();
+
     }
 
     const submitDeleteProduit = () => {
@@ -143,49 +167,24 @@ const EditProduits = ({ tempid_, changeNumEtape, setSommeHT, setSommeTVA}) => {
         }
         if (request != null) {
 
-            request.open("POST", `Produit/Delete?id=${showEditOneProductId}`, false);
+            request.open("POST", `Produit/Delete_?id=${tempid_}`, false);
             request.onload = function () {
                 if (request.readyState == 4 && request.status == 200) {
                     var response = JSON.parse(request.responseText);
                     setMessage(response);
                     fetch(`http://localhost:44453/Produit/GetByDevisId?id=${tempid_}`)
                         .then((res) => res.json())
-                        .then((data) => setProduit(data));
+                        .then((data) => setProduit(data))
 
                 }
             }.bind(this);
             request.send(formData);
         }
+        return calculTotal();
     }
 
-    const [formdevis, setFormDevis] = useState({
-        tempId: tempid_,
-        motif: "",
-        clientId: 0,
-        entrepriseId: 0,
-        userId: 0,
-        totalTVA: 0,
-        totalHT: 0,
-        accompteQuantite: 0,
-        accomptePourcentage: 0,
-        accompteInformations: "",
-        informationSuplementaire: "",
-    });
 
-    const url_ = window.location.pathname;
-    const arrayURL = url_.split("/");
-    const id = arrayURL[3];
-    const clientId_param = arrayURL[5];
-    const entrepriseId_param = arrayURL[6];
-    const [devis, setDevis] = useState([]);
-
-    useEffect(() => {
-        fetch(`http://localhost:44453/Devis/GetById?id=${id}`)
-            .then((res) => res.json())
-            .then((data) => setDevis(data));
-    }, []);
-
- 
+   
     return (
         <div>
             <h3>Liste des produits</h3>
@@ -249,16 +248,16 @@ const EditProduits = ({ tempid_, changeNumEtape, setSommeHT, setSommeTVA}) => {
             <p style={{color: "red"} }>{message}</p>
 
             <br />
-            {devis.map
-                ((item) => (
-                    <div key={item.id}>
-                        <h4>Somme TVA: {item.totalTVA} $</h4>
-                        <h4>Somme Hors Taxe: {item.totalHT} $ </h4>
-                        <h1>Montant Total: {item.totalTVA + item.totalHT} $</h1>
-                        {setSommeTVA(item.totalTVA)}
-                        {setSommeHT(item.totalHT)}
-                    </div>))}
+           
 
+            <h4>Somme TVA: {totalTVA} $</h4>
+            <h4>Somme Hors Taxe: {totalHT} $ </h4>
+            <h1>Montant Total: {totalTVA + totalHT} $</h1>
+            
+                  
+            <button type="button" className="btn btn-primary" onClick={calculTotal}> calculTotal </button>
+            <button type="button" className="btn btn-primary" onClick={GoSuivant}> Suivant </button>
+         
         </div>
     );
 }
