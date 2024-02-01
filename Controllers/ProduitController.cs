@@ -90,7 +90,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
         {
 
             var res = "Erreur, votre produit n'a pas pu être modifier, veuillez recommencer.";
-            var ancien = _context.ProduitModel.AsNoTracking().Where(e => e.Id == id).First();
+            var ancien = _context.ProduitModel.AsNoTracking().Where(e => e.Id == id).FirstOrDefault();
 
             if (data.Quantite == 0) { data.Quantite = ancien.Quantite; }
             if (data.Designation == null) { data.Designation = ancien.Designation; }

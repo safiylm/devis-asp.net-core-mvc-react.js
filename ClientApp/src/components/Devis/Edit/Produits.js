@@ -194,47 +194,7 @@ const EditProduits = ({ tempid_, changeNumEtape}) => {
     const clientId_param = arrayURL[5];
     const entrepriseId_param = arrayURL[6];
   
-    const sauvegarderLesProduits = () => {
-     
-        formdevis.Id = id; 
-        formdevis.tempId = tempid_;
-        formdevis.clientId = clientId_param;
-        formdevis.entrepriseId = entrepriseId_param;
-        formdevis.userId = 22;
-        devis.forEach((i) => {
-
-            formdevis.totalTVA = i.totalTVA;
-            formdevis.totalHT = i.totalHT;
-
-        })
-        let formData = new FormData();
-        Object.keys(formdevis).forEach(function (key) {
-            formData.append(key, formdevis[key]);
-        });
-
-        var request;
-        if (window.XMLHttpRequest) {
-            //New browsers.
-            request = new XMLHttpRequest();
-        }
-        else if (window.ActiveXObject) {
-            //Old IE Browsers.
-            request = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        if (request != null) {
-
-            request.open("POST", `Devis/Edit?id=${id}`, false);
-            request.onload = function () {
-                if (request.readyState == 4 && request.status == 200) {
-                    var response = JSON.parse(request.responseText);
-                    setMessage(response);
-                    changeNumEtape(4);
-               }
-            }.bind(this);
-            request.send(formData);
-        }
-    }
-
+  
     return (
         <div>
             <h3>Liste des produits</h3>
@@ -306,7 +266,6 @@ const EditProduits = ({ tempid_, changeNumEtape}) => {
                         <h1>Montant Total: {item.totalTVA + item.totalHT} $</h1>
                        
                     </div>))}
-            <button type="button" className="btn btn-primary" onClick={ sauvegarderLesProduits}> Terminer et sauvegarder </button>
 
         </div>
     );
