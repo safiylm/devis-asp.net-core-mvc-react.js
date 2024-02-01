@@ -21,56 +21,10 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             _context = context;
         }
 
-        private static readonly IEnumerable<ProduitModel> Produits = new[]
-        {
-             new ProduitModel
-            {
-                 Id = 1,
-                Quantite = 2,
-                Designation = "Iphone 11" ,
-                DateCreation = DateTime.Now,
-                PrixUnitaireHT = 500 ,
-                TVA = 20,
-            },
-              new ProduitModel
-            {
-                 Id = 2,
-                Quantite = 2,
-                Designation = "Iphone 12" ,
-                DateCreation = DateTime.Now,
-                PrixUnitaireHT = 650 ,
-                TVA = 20,
-            },
-                 new ProduitModel
-            {
-                 Id = 3,
-                Quantite = 2,
-                Designation = "Iphone 14" ,
-                DateCreation = DateTime.Now,
-                PrixUnitaireHT = 950 ,
-                TVA = 20,
-            }
-            ,
-                   new ProduitModel
-            {
-                 Id = 4,
-                Quantite = 2,
-                Designation = "Iphone 15" ,
-                DateCreation = DateTime.Now,
-                PrixUnitaireHT = 1250 ,
-                TVA = 20,
-            }
-    };
-
       
         public IActionResult GetAll()
         {
-            // ProduitModel[] listeProduit = Produits.ToArray();
-            ///  System.Threading.Thread.Sleep(2000);
-            //return Json(listeProduit);
-            ///  
             return Json( _context.ProduitModel.ToList());
-
         }
 
       
@@ -79,39 +33,9 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return Json(_context.ProduitModel.Where((prod)=>prod.DevisId== id  ).ToList());
         }
 
-        // GET: Produit
-        public async Task<IActionResult> Index()
-        {
-            return _context.ProduitModel != null ?
-                        View(await _context.ProduitModel.ToListAsync()) :
-                        Problem("Entity set 'DevisContext.ProduitModel'  is null.");
-        }
+   
 
-
-     
-
-
-        // GET: Produit/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.ProduitModel == null)
-            {
-                return NotFound();
-            }
-
-            var produitModel = await _context.ProduitModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (produitModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(produitModel);
-        }
-
-
-
-
+        //calcule la somme total HT
         public  int CalculHT(string idDevis)
         {
             int somme = 0;
@@ -123,7 +47,8 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return somme;
 
         }
-
+      
+        //calcule la somme total TVA
         public int CalculTVA(string idDevis)
         {
             int somme = 0;
@@ -136,8 +61,11 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         }
 
+
+
         [HttpPost]
         [Route("Produit/Create_")]
+        //Devis non crée encore,  
         public object Create_([FromForm][Bind("DevisId,Quantite,Designation,PrixUnitaireHT,TVA")] ProduitModel produitModel)
         {
             var res = "Erreur, votre produit n'a pas pu être enregistrer, veuillez recommencer.";
@@ -147,15 +75,86 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
                 produitModel.DateCreation = DateTime.Now;
                 _context.ProduitModel.Add(produitModel);
-                    _context.SaveChangesAsync();
-                    res = "Votre produit a été enregistré avec succès!";
-                
+                _context.SaveChangesAsync();
+                res = "Votre produit a été enregistré avec succès!";
+
             }
             return Json(res);
         }
 
+
+        [HttpPost]
+        [Route("Produit/Edit_")]
+        //Devis non crée encore,  
+        public object Edit_(int? id, [FromForm] ProduitModel data)
+        {
+
+            var res = "Erreur, votre produit n'a pas pu être modifier, veuillez recommencer.";
+            var ancien = _context.ProduitModel.AsNoTracking().Where(e => e.Id == id).First();
+
+            if (data.Quantite == 0) { data.Quantite = ancien.Quantite; }
+            if (data.Designation == null) { data.Designation = ancien.Designation; }
+            if (data.PrixUnitaireHT == 0) { data.PrixUnitaireHT = ancien.PrixUnitaireHT; }
+            if (data.TVA == 0) { data.TVA = ancien.TVA; }
+            if (data.DevisId == null) { data.DevisId = ancien.DevisId; }
+
+            data.DateCreation = DateTime.Now;
+
+            if (data != null && data.TVA != 0 && data.Designation != null
+            && data.Quantite != 0 && data.PrixUnitaireHT != 0)
+            {
+
+                try
+                {
+                    _context.ProduitModel.Update(data);
+                    _context.SaveChanges();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProduitModelExists(data.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+            }
+            return Json(res);
+        }
+
+
+        [HttpPost]
+        [Route("Produit/Delete_")]
+        //Devis non crée encore,  
+        public async Task<IActionResult> DeleteConfirmed_(int id)
+        {
+            var res = "Erreur Suprrimer Produit ";
+
+            if (_context.ProduitModel == null)
+            {
+                return Problem("Entity set 'DevisContext.ProduitModel'  is null.");
+            }
+            var produitModel = await _context.ProduitModel.FindAsync(id);
+            if (produitModel != null)
+            {
+                _context.ProduitModel.Remove(produitModel);
+                await _context.SaveChangesAsync();
+            }
+
+            await _context.SaveChangesAsync();
+            return Json(res);
+        }
+        
+        
+   
+
         [HttpPost]
         [Route("Produit/Create")]
+        //Devis déjà crée, on le modifie en ajoute de nouveau produit, donc on modifie le prix total du devis 
         public object Create([FromForm][Bind("DevisId,Quantite,Designation,PrixUnitaireHT,TVA")] ProduitModel produitModel)
         {
             var res = "Erreur, votre produit n'a pas pu être enregistrer, veuillez recommencer.";
@@ -185,6 +184,7 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
 
         [HttpPost]
         [Route("Produit/Edit")]
+        //Devis déjà crée, on le modifie en modifiant un produit, donc on modifie le prix total du devis 
         public object Edit(int? id, [FromForm] ProduitModel data)
         {
 
@@ -236,27 +236,10 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             return Json(res);
         }
 
-        // GET: Produit/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.ProduitModel == null)
-            {
-                return NotFound();
-            }
 
-            var produitModel = await _context.ProduitModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (produitModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(produitModel);
-        }
-
-        // POST: Produit/Delete/5
         [HttpPost]
         [Route("Produit/Delete")]
+        //Devis déjà crée, on le modifie en supprimant un produit, donc on modifie le prix total du devis 
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var res = "Erreur Suprrimer Produit ";
@@ -269,14 +252,24 @@ namespace devis_asp.net_core_mvc_react.js.Controllers
             if (produitModel != null)
             {
                 _context.ProduitModel.Remove(produitModel);
+                await _context.SaveChangesAsync();
+
+                var devis = _context.DevisModel.AsNoTracking().Where(e => e.TempId == produitModel.DevisId).First();
+
+                if (devis != null)
+                {
+                    devis.TotalHT = CalculHT(produitModel.DevisId);
+                    devis.TotalTVA = CalculTVA(produitModel.DevisId);
+
+                    _context.DevisModel.Update(devis);
+
+                    _context.SaveChanges();
+                }
             }
             
             await _context.SaveChangesAsync();
             return Json(res);
         }
-
-
-
 
 
 
