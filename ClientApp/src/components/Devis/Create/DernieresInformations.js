@@ -64,19 +64,19 @@ const CreateDerniersInformations = ({ idDevis, idClient, idEntreprise, totalHT, 
                 <form onSubmit={handleSubmit}>
                 
                     <label>Motif du devis :
-                        <input type="text" name="motif" className="form-control" onChange={changeHandler} style={{ width: "420px" }} value="Achat ..." />
+                        <input type="text" name="motif" className="form-control" onChange={changeHandler} style={{ width: "420px" }}  />
                     </label><br/>
                     <label>Accompte pourcentage :
-                        <input name="accomptePourcentage" className="form-control" onChange={changeHandler} value="0" />
+                        <input name="accomptePourcentage" className="form-control" onChange={changeHandler}  />
                     </label><br />
                     <label>Accompte quantitée :
-                        <input name="accompteQuantite" className="form-control" onChange={changeHandler} value="0" />
+                        <input name="accompteQuantite" className="form-control" onChange={changeHandler}  />
                     </label><br />
                     <label>Accompte informations :
-                        <input name="accompteInformations" className="form-control" onChange={changeHandler} value="Aucun accompte" />
+                        <input name="accompteInformations" className="form-control" onChange={changeHandler}  />
                     </label><br />
                     <label>Informations suplémentaires :
-                        <input name="informationSuplementaire" className="form-control" onChange={changeHandler} value="..." />
+                        <input name="informationSuplementaire" className="form-control" onChange={changeHandler}  />
                     </label><br />
                     <p>Mode de paiement </p>
                     <button type="submit" className="btn btn-primary">Enregistrer et terminer</button>
